@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Input, Button } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom';
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from '../actions/searchBarActions';
 
@@ -18,15 +19,19 @@ class SearchBar extends Component {
 
     handleSearchClick(event){
         console.log("Search button clicked.")
+        // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
         this.props.dispatch(getName(this.props.searchText))
         this.props.dispatch(getPollType(this.props.searchText))
         this.props.dispatch(getVoterBaseLogic(this.props.searchText))
         this.props.dispatch(getProposalsWithVotes(this.props.searchText))
+        this.props.history.push({pathname:`/contract`, search: '?contract='+this.props.searchText });
     }
 
     render() {
         return (
             <div>
+                <br/>
+                <br/>
                 <Input 
                 value={this.props.searchText} 
                 placeholder='Enter Poll Address...' 
@@ -34,6 +39,8 @@ class SearchBar extends Component {
                 iconPosition='left' 
                 onChange={this.handleSearchTextChange}/>
                 <Button  content='Search' onClick={this.handleSearchClick} />
+                <br/>
+                <br/>
             </div>
         )
     }
@@ -47,4 +54,4 @@ function mapStatesToProps(globalData) {
 
 const myConnector = connect(mapStatesToProps);
 
-export default myConnector(SearchBar)
+export default withRouter(myConnector(SearchBar)) 

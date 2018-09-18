@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import PollScan from './containers/pollScan'
 
+
 class App extends Component {
   render() {
     return (
@@ -9,7 +10,7 @@ class App extends Component {
         <header>
           <h1 className="App-title">Pollscan.io</h1>
         </header>
-        <PollScan />
+        <PollScan history={this.props.history}/>
       </div>
     );
   }

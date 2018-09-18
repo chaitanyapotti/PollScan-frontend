@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactPaginate from 'react-paginate';
+import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import { Table, Icon, Button } from 'semantic-ui-react';
+
+import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from '../actions/searchBarActions';
+import { getAllActivities } from '../actions/allActivitiesActions';
 
 import '../styles/tableFooter.css';
 const Limit = 5;
 
 class AllActivities extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    componentWillMount(){
+        console.log(window.location.href, this.props.searchText)
+        const queryUrl = queryString.parseUrl(window.location.href)
+        if ('contract' in queryUrl.query && this.props.searchText===''){
+            this.props.dispatch({type: 'SEARCH_TEXT_CHANGED', payload: queryUrl.query.contract})
+            this.props.dispatch(getName(queryUrl.query.contract))
+            this.props.dispatch(getPollType(queryUrl.query.contract))
+            this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract))
+            this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract))
+            this.props.dispatch(getAllActivities(queryUrl.query.contract))
+
+        }
+    }
+
     addPageNumbers() {
         return <Table.Footer>
             <Table.Row key={10000000}>
@@ -53,7 +76,8 @@ class AllActivities extends Component {
         return (
             <div>
                 <span>
-                    <Icon name='long arrow alternate left' /> Back to the Poll
+                    <Icon name='long arrow alternate left' onClick={()=>{
+                        this.props.history.push({pathname:`/contract`, search: '?contract='+this.props.searchText})}} /> Back to the Poll
                 </span>
 
                 <h4>Activity Log</h4>
@@ -82,10 +106,11 @@ class AllActivities extends Component {
 function mapStatesToProps(globalData) {
     return {
         allActivities: globalData.allActivities.allActivities,
-        currentActivityPage: globalData.allActivities.currentActivityPage
+        currentActivityPage: globalData.allActivities.currentActivityPage,
+        searchText: globalData.searchBarData.searchText
     };
 }
 
 const myConnector = connect(mapStatesToProps);
 
-export default myConnector(AllActivities)
+export default withRouter(myConnector(AllActivities))

@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from '../config';
 
 export function getName(address) {
+    console.log("get name called")
     return function (dispatch) {
         axios.get(config.api_base_url + "/name", { params: { address: address } })
             .then((response) => {
@@ -15,6 +16,9 @@ export function getName(address) {
             .catch((err) => {
                 dispatch({
                     type: "POLL_NAME_FAILED", payload: err
+                })
+                dispatch({
+                    type: "API_ERROR", payload: err
                 })
             })
     }

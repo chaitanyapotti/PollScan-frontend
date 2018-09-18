@@ -1,7 +1,8 @@
 import axios from 'axios';
 import config from '../config';
 
-export function getAllActivities(address) {
+export function getAllActivities(address, proposalid, proposalname) {
+    console.log("getting all activities", address, proposalid, proposalname)
     return function (dispatch) {
         axios.get(config.api_base_url + "/events", { params: { address: address } })
             .then((response) => {
@@ -10,6 +11,17 @@ export function getAllActivities(address) {
                     dispatch({
                         type: "ALL_ACTIVITIES_SUCCESS", payload: response.data.data.events
                     })
+                    if (proposalid === undefined){
+                        dispatch({ 
+                            type: 'PROPOSAL_SELECTED', payload: {}
+                        })
+                    }else{
+                        console.log("dispatching", proposalid, proposalname)
+                        dispatch({ 
+                            type: 'PROPOSAL_SELECTED', proposalid: proposalid, proposalname: proposalname
+                        })
+                    }
+                    
                 }
             })
             .catch((err) => {

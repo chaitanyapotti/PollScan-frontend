@@ -17,7 +17,7 @@ export default function reducer(state = {
             let tempAllActivities = state.allActivities
             let tempAllUnVoters = []
             for (let activity of tempAllActivities){
-                if(parseInt(activity.value)===state.selectedProposalId){
+                if(parseInt(activity.value)===parseInt(state.selectedProposalId)){
                     if(activity.type==='CastVote') {
                         tempAllVoters.push({address: activity.address, datetime: activity.datetime, weight: activity.weight})
                     }else if(activity.type==='RevokedVote'){
@@ -30,8 +30,13 @@ export default function reducer(state = {
 
             //     } 
             // }
+            if ('proposalid' in action){
+                return { ...state, allVoters: tempAllVoters, selectedProposalId: action.proposalid, selectedProposalName: action.proposalname }
+            }else{
+                return { ...state, allVoters: tempAllVoters }
+            }
 
-            return { ...state, allVoters: tempAllVoters, selectedProposalId: action.proposalid, selectedProposalName: action.proposalname }
+            
         }
         case "VOTERS_PAGE_CHANGED": {
             return { ...state, currentVoterPage: action.payload }
