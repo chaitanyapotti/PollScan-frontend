@@ -47,9 +47,9 @@ class SearchBar extends Component {
 }
 
 function mapStatesToProps(globalData) {
-    return {
-        searchText: globalData.searchBarData.searchText,
-    };
+  return {
+    searchText: globalData.searchBarData.searchText
+  };
 }
 
 const myConnector = connect(mapStatesToProps);

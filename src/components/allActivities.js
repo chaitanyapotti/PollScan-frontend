@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
 
-import { Table, Icon, Button } from 'semantic-ui-react';
+import { Table, Icon, Button } from "semantic-ui-react";
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from '../actions/searchBarActions';
 import { getAllActivities } from '../actions/allActivitiesActions';
@@ -57,20 +57,26 @@ class AllActivities extends Component {
         </Table.Footer>
     }
 
-    addTableRowsDynamically() {
-        if (this.props.allActivities.length > 0) {
-            return this.props.allActivities.slice((this.props.currentActivityPage) * Limit, (this.props.currentActivityPage + 1) * Limit).map((voter, index) => {
-                return <Table.Row
-                    key={index}>
-                    <Table.Cell>{voter.address}</Table.Cell>
-                    <Table.Cell>{voter.type}</Table.Cell>
-                    <Table.Cell>{voter.datetime}</Table.Cell>
-                    <Table.Cell>{voter.weight}</Table.Cell>
-                    <Table.Cell>{voter.value}</Table.Cell>
-                </Table.Row>
-            })
-        }
+  addTableRowsDynamically() {
+    if (this.props.allActivities.length > 0) {
+      return this.props.allActivities
+        .slice(
+          this.props.currentActivityPage * Limit,
+          (this.props.currentActivityPage + 1) * Limit
+        )
+        .map((voter, index) => {
+          return (
+            <Table.Row key={index}>
+              <Table.Cell>{voter.address}</Table.Cell>
+              <Table.Cell>{voter.type}</Table.Cell>
+              <Table.Cell>{voter.datetime}</Table.Cell>
+              <Table.Cell>{voter.weight}</Table.Cell>
+              <Table.Cell>{voter.value}</Table.Cell>
+            </Table.Row>
+          );
+        });
     }
+  }
 
     render() {
         return (
@@ -80,27 +86,27 @@ class AllActivities extends Component {
                         this.props.history.push({pathname:`/contract`, search: '?contract='+this.props.searchText})}} /> Back to the Poll
                 </span>
 
-                <h4>Activity Log</h4>
-                <Table celled>
-                    <Table.Header>
-                        <Table.Row>
-                            <Table.HeaderCell>Address</Table.HeaderCell>
-                            <Table.HeaderCell>Type</Table.HeaderCell>
-                            <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
-                            <Table.HeaderCell>Size</Table.HeaderCell>
-                            <Table.HeaderCell>Value</Table.HeaderCell>
-                        </Table.Row>
-                    </Table.Header>
-                    {/* {this.addTableRows()} */}
-                    <Table.Body>
-                        {this.addTableRowsDynamically()}
-                    </Table.Body>
-                    {(Math.ceil(this.props.allActivities.length / Limit) > 1.0) ? this.addPageNumbers() : null}
-                </Table>
-                <Button>Download CSV</Button>
-            </div>
-        )
-    }
+        <h4>Activity Log</h4>
+        <Table celled>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Address</Table.HeaderCell>
+              <Table.HeaderCell>Type</Table.HeaderCell>
+              <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
+              <Table.HeaderCell>Size</Table.HeaderCell>
+              <Table.HeaderCell>Value</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+          {/* {this.addTableRows()} */}
+          <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+          {Math.ceil(this.props.allActivities.length / Limit) > 1.0
+            ? this.addPageNumbers()
+            : null}
+        </Table>
+        <Button>Download CSV</Button>
+      </div>
+    );
+  }
 }
 
 function mapStatesToProps(globalData) {
