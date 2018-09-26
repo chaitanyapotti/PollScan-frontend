@@ -75,6 +75,13 @@ class AllActivities extends Component {
             </Table.Row>
           );
         });
+    }else {
+        return (
+            <Table.Row key={145}>
+                Activities could not be retrieved, please try reloading the page.
+            </Table.Row>
+        )
+         
     }
   }
 

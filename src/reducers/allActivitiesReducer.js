@@ -47,6 +47,11 @@ export default function reducer(state = {
         case "ALL_ACTIVITIES_SUCCESS": {
             return { ...state, allActivities: action.payload }
         }
+
+        case "ALL_ACTIVITIES_LOG_FAILED": {
+            return { ...state, allActivities: []}
+        }
+
         default: {
             return { ...state }
         }

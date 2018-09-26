@@ -22,6 +22,10 @@ export function getAllActivities(address, proposalid, proposalname) {
                         })
                     }
                     
+                }else{
+                    dispatch({
+                        type: "ALL_ACTIVITIES_LOG_FAILED", payload: 'Logs could not be retrieved, please try reloading the page.'
+                    })
                 }
             })
             .catch((err) => {
