@@ -30,7 +30,8 @@
 }
 
 .search-input {
-  width: 70% !important;
+  width: 80% !important;
+  height: 66px !important;
 }
 
 .ui.button {
@@ -40,6 +41,9 @@
   color: #ffffff !important;
   font-weight: 400 !important;
   border-radius: 1.25em !important;
+  height: 46px !important;
+  width: 195px;
+  margin: 0.75 em -15em !important;
 }
 .ui.input > input {
   border-radius: 1.25em !important;
