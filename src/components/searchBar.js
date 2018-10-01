@@ -1,49 +1,55 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Input, Button } from 'semantic-ui-react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Input, Button } from "semantic-ui-react";
+import { withRouter } from "react-router-dom";
 
-import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from '../actions/searchBarActions';
-
+import {
+  getName,
+  getPollType,
+  getVoterBaseLogic,
+  getProposalsWithVotes
+} from "../actions/searchBarActions";
 
 class SearchBar extends Component {
-    constructor(props) {
-        super(props)
-        this.handleSearchTextChange = this.handleSearchTextChange.bind(this)
-        this.handleSearchClick = this.handleSearchClick.bind(this)
-    }
+  constructor(props) {
+    super(props);
+    this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
+  }
 
-    handleSearchTextChange(event){
-        this.props.dispatch({type: 'SEARCH_TEXT_CHANGED', payload: event.target.value})
-    }
+  handleSearchTextChange(event) {
+    this.props.dispatch({
+      type: "SEARCH_TEXT_CHANGED",
+      payload: event.target.value
+    });
+  }
 
-    handleSearchClick(event){
-        console.log("Search button clicked.")
-        // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
-        this.props.dispatch(getName(this.props.searchText))
-        this.props.dispatch(getPollType(this.props.searchText))
-        this.props.dispatch(getVoterBaseLogic(this.props.searchText))
-        this.props.dispatch(getProposalsWithVotes(this.props.searchText))
-        this.props.history.push({pathname:`/contract`, search: '?contract='+this.props.searchText });
-    }
+  handleSearchClick(event) {
+    console.log("Search button clicked.");
+    // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
+    this.props.dispatch(getName(this.props.searchText));
+    this.props.dispatch(getPollType(this.props.searchText));
+    this.props.dispatch(getVoterBaseLogic(this.props.searchText));
+    this.props.dispatch(getProposalsWithVotes(this.props.searchText));
+    this.props.history.push({
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
+    });
+  }
 
-    render() {
-        return (
-            <div>
-                <br/>
-                <br/>
-                <Input 
-                value={this.props.searchText} 
-                placeholder='Enter Poll Address...' 
-                labelPosition='right' 
-                iconPosition='left' 
-                onChange={this.handleSearchTextChange}/>
-                <Button  content='Search' onClick={this.handleSearchClick} />
-                <br/>
-                <br/>
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div className="search">
+          <Input
+            value={this.props.searchText}
+            placeholder="Enter Poll Address..."
+            onChange={this.handleSearchTextChange}
+            className="search-input"
+          />
+          <Button content="Search" onClick={this.handleSearchClick} />
+      </div>
+    );
+  }
 }
 
 function mapStatesToProps(globalData) {
@@ -54,4 +60,4 @@ function mapStatesToProps(globalData) {
 
 const myConnector = connect(mapStatesToProps);
 
-export default withRouter(myConnector(SearchBar)) 
+export default withRouter(myConnector(SearchBar));

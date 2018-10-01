@@ -44,7 +44,7 @@ class TokenWeightedPoll extends Component {
                         <Route exact path="/" render={() => (
                             <div>
                                 <SearchBar />
-                                <Image src= {logo} size='large' centered='true'/>
+                                {/* <Image src= {logo} size='large' centered='true'/> */}
                             </div>
                         )} />
 
