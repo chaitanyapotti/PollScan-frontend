@@ -15,14 +15,43 @@
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 2.375em;
+  color: #777777;
+  font-weight: bold;
+  font-family: "PT Sans", sans-serif;
 }
 
 .App-intro {
   font-size: large;
 }
 
+.search {
+  position: relative;
+}
+
+.search-input {
+  width: 70% !important;
+}
+
+.ui.button {
+  position: absolute !important;
+  background-image: linear-gradient(150deg, #66e8e4 0%, #00aeff 100%) !important;
+  font-family: "PT Sans" !important;
+  color: #ffffff !important;
+  font-weight: 400 !important;
+  border-radius: 1.25em !important;
+}
+.ui.input > input {
+  border-radius: 1.25em !important;
+  background-color: #e8e8e8 !important;
+  font-family: "PT Sans" !important;
+  font-weight: 400 !important;
+}
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

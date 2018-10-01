@@ -13,7 +13,10 @@ class SearchBar extends Component {
   }
 
   handleSearchTextChange(event) {
-    this.props.dispatch({ type: "SEARCH_TEXT_CHANGED", payload: event.target.value });
+    this.props.dispatch({
+      type: "SEARCH_TEXT_CHANGED",
+      payload: event.target.value
+    });
   }
 
   handleSearchClick(event) {
@@ -28,19 +31,9 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div>
-        <br />
-        <br />
-        <Input
-          value={this.props.searchText}
-          placeholder="Enter Poll Address..."
-          labelPosition="right"
-          iconPosition="left"
-          onChange={this.handleSearchTextChange}
-        />
+      <div className="search">
+        <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
         <Button content="Search" onClick={this.handleSearchClick} />
-        <br />
-        <br />
       </div>
     );
   }
