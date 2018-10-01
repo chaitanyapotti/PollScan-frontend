@@ -33,7 +33,7 @@ class SearchBar extends Component {
     return (
       <div className="search">
         <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
-        <Button content="Search" onClick={this.handleSearchClick} />
+        <Button content="Search" onClick={this.handleSearchClick} className="search-button"/>
       </div>
     );
   }
