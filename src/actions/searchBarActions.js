@@ -2,26 +2,30 @@ import axios from "axios";
 import config from "../config";
 
 export function getName(address) {
-    console.log("get name called")
-    return function (dispatch) {
-        axios.get(config.api_base_url + "/name", { params: { address: address } })
-            .then((response) => {
-                console.log('name received', response.data)
-                if (response.data.message === 'Success') {
-                    dispatch({
-                        type: "POLL_NAME_SUCCESS", payload: response.data.data.name
-                    })
-                }
-            })
-            .catch((err) => {
-                dispatch({
-                    type: "POLL_NAME_FAILED", payload: err
-                })
-                dispatch({
-                    type: "API_ERROR", payload: err
-                })
-            })
-    }
+  console.log("get name called");
+  return function(dispatch) {
+    axios
+      .get(config.api_base_url + "/name", { params: { address: address } })
+      .then(response => {
+        console.log("name received", response.data);
+        if (response.data.message === "Success") {
+          dispatch({
+            type: "POLL_NAME_SUCCESS",
+            payload: response.data.data.name
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: "POLL_NAME_FAILED",
+          payload: err
+        });
+        dispatch({
+          type: "API_ERROR",
+          payload: err
+        });
+      });
+  };
 }
 
 export function getPollType(address) {

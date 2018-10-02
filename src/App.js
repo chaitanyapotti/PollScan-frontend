@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import './App.css';
-import PollScan from './containers/pollScan'
-
+import React, { Component } from "react";
+import "./App.css";
+import PollScan from "./containers/pollScan";
+import "./index.css";
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
         <header>
           <h1 className="App-title">Pollscan.io</h1>
         </header>
-        <PollScan history={this.props.history}/>
+        <PollScan history={this.props.history} />
       </div>
     );
   }
