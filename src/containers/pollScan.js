@@ -41,6 +41,7 @@ class TokenWeightedPoll extends Component {
               render={() => (
                 <div>
                   <SearchBar />
+                  {/* <Image src={logo} size="large" centered="true" /> */}
                 </div>
               )}
             />

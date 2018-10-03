@@ -11,10 +11,7 @@ import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "
 class PollStats extends Component {
   handleAllActivities = () => {
     this.props.dispatch(getAllActivities(this.props.searchText));
-    this.props.history.push({
-      pathname: `/events`,
-      search: "?contract=" + this.props.searchText
-    });
+    this.props.history.push({ pathname: `/events`, search: "?contract=" + this.props.searchText });
   };
 
   // handleAllActivities() {
@@ -30,19 +27,12 @@ class PollStats extends Component {
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
-      this.props.dispatch({
-        type: "SEARCH_TEXT_CHANGED",
-        payload: queryUrl.query.contract
-      });
+      this.props.dispatch({ type: "SEARCH_TEXT_CHANGED", payload: queryUrl.query.contract });
     }
   }
 
   handleDetailedVoters(proposalId) {
-    this.props.dispatch({
-      type: "PROPOSAL_SELECTED",
-      proposalid: proposalId,
-      proposalname: this.props.proposals[proposalId].name
-    });
+    this.props.dispatch({ type: "PROPOSAL_SELECTED", proposalid: proposalId, proposalname: this.props.proposals[proposalId].name });
     this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
       pathname: `/voters`,
