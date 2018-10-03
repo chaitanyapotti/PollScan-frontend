@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
@@ -32,8 +31,10 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="search">
-        <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
-        <Button content="Search" onClick={this.handleSearchClick} className="search-button"/>
+        <input className="search-input" value={this.props.searchText} placeholder="Enter Poll Address" onChange={this.handleSearchTextChange} />
+        <button className="search-button" onClick={this.handleSearchClick}>
+          Search
+        </button>
       </div>
     );
   }
