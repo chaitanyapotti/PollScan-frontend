@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Input, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 
@@ -31,10 +32,16 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div className="search">
-        <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
-        <Button content="Search" onClick={this.handleSearchClick} className="search-button"/>
-      </div>
+      <Grid>
+        <Row>
+          <Col lg={12} xs={12}>
+            <div className="search">
+              <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
+              <Button content="Search" onClick={this.handleSearchClick} className="search-button"/>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }
