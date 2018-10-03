@@ -1,4 +1,7 @@
 .App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .App-logo {
@@ -18,7 +21,7 @@
   color: #777777;
   font-weight: bold;
   font-family: "PT Sans", sans-serif;
-  margin-right: 19.2em;
+  margin-right: 16.4em;
 }
 
 .search-input {
@@ -30,6 +33,28 @@
   border: None;
   border-radius: 2.5em;
   padding-left: 1.6em;
+  height: 66px;
+}
+
+input {
+  flex-grow: 2 !important;
+}
+
+.search {
+  background-color: #e8e8e8;
+  width: 900px;
+  height: 66px;
+  border-radius: 2.5em;
+  display: flex;
+  flex-direction: row;
+}
+
+input:focus {
+  outline: 0;
+}
+
+button:focus {
+  outline: 0;
 }
 
 .search-button {
@@ -42,6 +67,8 @@
   font-family: "PT Sans";
   font-size: 2.43em;
   font-weight: 400;
+  margin-top: 0.3em;
+  margin-right: 0.3em;
 }
 
 .voter-logic {
@@ -56,6 +83,9 @@
   font-family: "PT Sans";
   font-size: 1.35em;
   font-weight: 400;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 3.8em;
 }
 
 .poll-start-time {
@@ -65,10 +95,12 @@
   font-weight: 400;
 }
 
-/* .voter-poll {
+.voter-poll {
   display: flex;
-  justify-content: space-around;
-} */
+  justify-content: space-between;
+  margin-right: 5em;
+  margin-left: 4em;
+}
 
 .poll-text-start {
 }
@@ -87,6 +119,7 @@ a {
   font-family: "PT Sans";
   font-size: 1.78em;
   font-weight: 400;
+  margin-top: 0.3em;
 }
 
 .poll-end {
@@ -101,6 +134,7 @@ a {
   font-family: "PT Sans";
   font-size: 1.92em;
   font-weight: 400;
+  margin-left: 0.4em;
 }
 
 .total-voters {
@@ -163,8 +197,23 @@ a {
   height: 12px !important;
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
 }
+.poll-name-type {
+  display: flex;
+  flex-direction: column;
+}
 .App-intro {
   font-size: large;
+}
+.poll-end-timer {
+  display: flex;
+  align-items: flex-end;
+}
+.poll-name-type-end {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 4em;
+  margin-right: 5em;
 }
 @keyframes App-logo-spin {
   from {

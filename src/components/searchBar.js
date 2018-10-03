@@ -25,7 +25,10 @@ class SearchBar extends Component {
     this.props.dispatch(getPollType(this.props.searchText));
     this.props.dispatch(getVoterBaseLogic(this.props.searchText));
     this.props.dispatch(getProposalsWithVotes(this.props.searchText));
-    this.props.history.push({ pathname: `/contract`, search: "?contract=" + this.props.searchText });
+    this.props.history.push({
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
+    });
   }
 
   render() {
