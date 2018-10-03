@@ -54,12 +54,14 @@ class PollStats extends Component {
     if (this.props.proposals.length > 0) {
       return this.props.proposals.map((proposal, index) => {
         return (
-          <div key={1000 + index}>
-            <div className="proposal-name">{proposal.name}</div>
-            <div>
-              <div className="proposal-percent">{proposal.percent}%</div>
-              <div className="voters-count">
-                <a onClick={this.handleDetailedVoters.bind(this, index)}>({proposal.votes} Voters)</a>
+          <div key={1000 + index} className="proposal-total-data">
+            <div className="proposal-data">
+              <div className="proposal-name">{proposal.name}</div>
+              <div className="percent-voters">
+                <div className="proposal-percent">{proposal.percent}%</div>
+                <div className="voters-count">
+                  <a onClick={this.handleDetailedVoters.bind(this, index)}>({proposal.votes} Voters)</a>
+                </div>
               </div>
             </div>
             <Progress percent={proposal.percent} size="small" />
@@ -71,7 +73,7 @@ class PollStats extends Component {
   //Need to change days counter to hr,min,ss
   render() {
     return (
-      <div>
+      <div className="poll-stats">
         <div className="poll-text">Poll started at</div>
         <div className="voter-poll">
           <div className="voter-logic">{this.props.voterBaseLogic}</div>
@@ -92,15 +94,15 @@ class PollStats extends Component {
             </div>
           </div>
         </div>
-        <div>{this.populateProposals()}</div>
-        {/* <div className="total-voters">
-          Total Voters: {this.props.totalVoteCast}
+        <div className="proposals-progress">{this.populateProposals()}</div>
+        <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
+        <div className="poll-leader">
+          <div className="poll-leader-text">Poll Leader</div>
+          <div className="poll-leader-vote-share">
+            <div className="poll-leader-name">{this.props.pollLeader.name} </div>
+            <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
+          </div>
         </div>
-        <div className="poll-leader">Poll Leader</div>
-        <div className="poll-leader-name">{this.props.pollLeader.name} </div>
-        <div className="vote-share">
-          ({this.props.pollLeader.percent}% Vote Share)
-        </div> */}
       </div>
     );
   }

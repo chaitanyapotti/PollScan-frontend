@@ -85,7 +85,7 @@ button:focus {
   font-weight: 400;
   display: flex;
   justify-content: flex-end;
-  margin-right: 3.8em;
+  margin-top: 3em;
 }
 
 .poll-start-time {
@@ -97,9 +97,8 @@ button:focus {
 
 .voter-poll {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  margin-right: 5em;
-  margin-left: 4em;
 }
 
 .poll-text-start {
@@ -143,9 +142,12 @@ a {
   font-size: 1.79em;
   font-weight: 400;
   text-decoration: underline !important;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.24em;
 }
 
-.poll-leader {
+.poll-leader-text {
   color: #777777;
   font-family: "PT Sans";
   font-size: 1.79em;
@@ -164,6 +166,7 @@ a {
   font-family: "PT Sans";
   font-size: 1.79em;
   font-weight: 400;
+  margin-left: 0.2em;
 }
 
 .proposal-name {
@@ -189,10 +192,18 @@ a {
 
 .ui.progress {
   background: #777777 !important;
-  width: 1069px;
+  width: 900;
   height: 12px;
+  /* margin-left: 4.5em !important;
+  margin-right: 5.2em !important; */
+  margin-top: 0.5em !important;
 }
 
+.poll-leader {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
 .ui.progress .bar {
   height: 12px !important;
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
@@ -212,8 +223,37 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-left: 4em;
-  margin-right: 5em;
+  margin-top: 2.2em;
+}
+.percent-voters {
+  display: flex;
+}
+.voters-count {
+  margin-left: 0.2em;
+}
+.proposal-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.proposal-total-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.poll-leader-vote-share {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.6em;
+}
+
+.poll-stats {
+  margin-left: 4.2em;
+  margin-right: 4.9em;
+}
+
+.proposals-progress {
+  margin-top: 2.5em;
 }
 @keyframes App-logo-spin {
   from {
