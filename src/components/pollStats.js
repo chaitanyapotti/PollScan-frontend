@@ -74,25 +74,35 @@ class PollStats extends Component {
   render() {
     return (
       <Grid>
-        <div className="poll-text">Poll started at</div>
+        <Row>
+          <Col lg={12}>
+            <div className="poll-text">Poll started at</div>
+          </Col>
+        </Row>
+
         {/* <div className="voter-poll"> */}
         <Row>
-          <Col lg={6} xs={12}>
+          <Col lg={6}>
             <div className="voter-logic">{this.props.voterBaseLogic}</div>
           </Col>
-          <Col lg={6} xs={12}>
+          <Col lg={6}>
             <div className="poll-start-time">{this.props.startTime}</div>
           </Col>
         </Row>
         {/* </div> */}
-        <div className="poll-name">
-          <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-        </div>
         <Row>
-          <Col lg={6} xs={12}>
+          <Col lg={12}>
+            <div className="poll-name">
+              <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
+            </div>
+          </Col>
+        </Row>
+
+        <Row>
+          <Col lg={6}>
             <div className="poll-type">{this.props.pollType}</div>
           </Col>
-          <Col lg={6} xs={12}>
+          <Col lg={6}>
             <div className="poll-end">
               Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
             </div>
@@ -117,15 +127,40 @@ class PollStats extends Component {
               </div>
             </div>
           </div> */}
-        <div className="proposals-progress">{this.populateProposals()}</div>
-        <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
-        <div className="poll-leader">
+        <Row>
+          <Col lg={12}>
+            <div className="proposals-progress">{this.populateProposals()}</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={12}>
+            <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={12}>
+            <div className="poll-leader-text">Poll Leader</div>
+          </Col>
+        </Row>
+        <Row>
+          <Col lg={12}>
+            <div className="poll-leader-vote-share">
+              <div className="poll-leader-name">{this.props.pollLeader.name}</div>
+              <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
+            </div>
+          </Col>
+        </Row>
+        {/* <div className="poll-leader">
           <div className="poll-leader-text">Poll Leader</div>
           <div className="poll-leader-vote-share">
-            <div className="poll-leader-name">{this.props.pollLeader.name} </div>
-            <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
+            <div className="poll-leader-name">
+              {this.props.pollLeader.name}{" "}
+            </div>
+            <div className="vote-share">
+              ({this.props.pollLeader.percent}% Vote Share)
+            </div>
           </div>
-        </div>
+        </div> */}
       </Grid>
     );
   }
