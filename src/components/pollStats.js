@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
-
+import { Grid, Row, Col } from "react-flexbox-grid";
 import { Progress } from "semantic-ui-react";
 
 import { getAllActivities } from "../actions/allActivitiesActions";
@@ -73,27 +73,50 @@ class PollStats extends Component {
   //Need to change days counter to hr,min,ss
   render() {
     return (
-      <div className="poll-stats">
+      <Grid>
         <div className="poll-text">Poll started at</div>
-        <div className="voter-poll">
-          <div className="voter-logic">{this.props.voterBaseLogic}</div>
-          <div className="poll-start-time">{this.props.startTime}</div>
+        {/* <div className="voter-poll"> */}
+        <Row>
+          <Col lg={6} xs={12}>
+            <div className="voter-logic">{this.props.voterBaseLogic}</div>
+          </Col>
+          <Col lg={6} xs={12}>
+            <div className="poll-start-time">{this.props.startTime}</div>
+          </Col>
+        </Row>
+        {/* </div> */}
+        <div className="poll-name">
+          <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
         </div>
-        <div className="poll-name-type-end">
-          <div className="poll-name-type">
-            <div className="poll-name">
-              <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-            </div>
+        <Row>
+          <Col lg={6} xs={12}>
             <div className="poll-type">{this.props.pollType}</div>
-          </div>
-          <div className="poll-end-timer">
-            <div className="poll-end">Poll ends in:</div>
-            <div className="poll-timer">
-              {" "}
-              {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
+          </Col>
+          <Col lg={6} xs={12}>
+            <div className="poll-end">
+              Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
             </div>
-          </div>
-        </div>
+            {/* <div className="poll-timer">
+                {" "}
+                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
+              </div> */}
+          </Col>
+        </Row>
+        {/* <div className="poll-name-type-end">
+            <div className="poll-name-type">
+              <div className="poll-name">
+                <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
+              </div>
+              <div className="poll-type">{this.props.pollType}</div>
+            </div>
+            <div className="poll-end-timer">
+              <div className="poll-end">Poll ends in:</div>
+              <div className="poll-timer">
+                {" "}
+                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
+              </div>
+            </div>
+          </div> */}
         <div className="proposals-progress">{this.populateProposals()}</div>
         <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
         <div className="poll-leader">
@@ -103,7 +126,7 @@ class PollStats extends Component {
             <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
           </div>
         </div>
-      </div>
+      </Grid>
     );
   }
 }
