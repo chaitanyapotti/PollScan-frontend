@@ -74,58 +74,15 @@ class PollStats extends Component {
   render() {
     return (
       <Grid>
-        <div className="poll-text">Poll started at</div>
-        {/* <div className="voter-poll"> */}
+        <div>Poll started at</div>
         <Row>
-          <Col lg={6} xs={12}>
-            <div className="voter-logic">{this.props.voterBaseLogic}</div>
+          <Col xs={6} lg={6}>
+            Wanchain | US & China | Developers
           </Col>
-          <Col lg={6} xs={12}>
-            <div className="poll-start-time">{this.props.startTime}</div>
+          <Col xs={6} lg={6}>
+            20 Aug 2018 | 20:26
           </Col>
         </Row>
-        {/* </div> */}
-        <div className="poll-name">
-          <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-        </div>
-        <Row>
-          <Col lg={6} xs={12}>
-            <div className="poll-type">{this.props.pollType}</div>
-          </Col>
-          <Col lg={6} xs={12}>
-            <div className="poll-end">
-              Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
-            </div>
-            {/* <div className="poll-timer">
-                {" "}
-                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
-              </div> */}
-          </Col>
-        </Row>
-        {/* <div className="poll-name-type-end">
-            <div className="poll-name-type">
-              <div className="poll-name">
-                <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-              </div>
-              <div className="poll-type">{this.props.pollType}</div>
-            </div>
-            <div className="poll-end-timer">
-              <div className="poll-end">Poll ends in:</div>
-              <div className="poll-timer">
-                {" "}
-                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
-              </div>
-            </div>
-          </div> */}
-        <div className="proposals-progress">{this.populateProposals()}</div>
-        <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
-        <div className="poll-leader">
-          <div className="poll-leader-text">Poll Leader</div>
-          <div className="poll-leader-vote-share">
-            <div className="poll-leader-name">{this.props.pollLeader.name} </div>
-            <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
-          </div>
-        </div>
       </Grid>
     );
   }

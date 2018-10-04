@@ -1,7 +1,7 @@
 .App {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 .App-logo {
@@ -32,21 +32,17 @@
   background-color: #e8e8e8;
   border: None;
   border-radius: 2.5em;
-  padding-left: 1.6em;
+  padding-left: 25px;
   height: 66px;
-}
-
-input {
-  flex-grow: 2 !important;
+  width: 70%;
 }
 
 .search {
   background-color: #e8e8e8;
-  width: 900px;
+  width: 80%;
   height: 66px;
   border-radius: 2.5em;
-  /* display: flex; */
-  /* flex-direction: row; */
+  margin: 0 auto;
 }
 
 input:focus {
@@ -65,10 +61,16 @@ button:focus {
   border: None;
   color: #ffffff;
   font-family: "PT Sans";
-  font-size: 2.43em;
+  font-size: 30px;
   font-weight: 400;
-  margin-top: 0.3em;
-  margin-right: 0.3em;
+  position: absolute;
+  top: 7.2%;
+  right: 19%;
+}
+
+.srch-btn-cnt {
+  text-align: center;
+  margin-top: 20px;
 }
 
 .voter-logic {
@@ -264,5 +266,17 @@ a {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .search {
+    width: 100% !important;
+  }
+  .search-button {
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100% !important;
   }
 }

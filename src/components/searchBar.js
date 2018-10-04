@@ -35,9 +35,12 @@ class SearchBar extends Component {
     return (
       <div className="search">
         <input className="search-input" value={this.props.searchText} placeholder="Enter Poll Address" onChange={this.handleSearchTextChange} />
-        <button className="search-button" onClick={this.handleSearchClick}>
-          Search
-        </button>
+
+        <div className="srch-btn-cnt">
+          <button className="search-button" onClick={this.handleSearchClick}>
+            Search
+          </button>
+        </div>
       </div>
     );
   }
