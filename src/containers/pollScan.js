@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Route, withRouter, Switch } from "react-router-dom";
 
 import { Modal } from "semantic-ui-react";
-
+import { Grid, Row, Col } from "react-flexbox-grid";
 import SearchBar from "../components/searchBar";
 import DetailedVoters from "../components/detailedVoters";
 import AllActivities from "../components/allActivities";
@@ -41,7 +41,6 @@ class TokenWeightedPoll extends Component {
               render={() => (
                 <div>
                   <SearchBar />
-                  {/* <Image src={logo} size="large" centered="true" /> */}
                 </div>
               )}
             />

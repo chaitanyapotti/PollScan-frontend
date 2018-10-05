@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import { Progress } from "semantic-ui-react";
-
 import { getAllActivities } from "../actions/allActivitiesActions";
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 
@@ -59,9 +58,7 @@ class PollStats extends Component {
               <div className="proposal-name">{proposal.name}</div>
               <div className="percent-voters">
                 <div className="proposal-percent">{proposal.percent}%</div>
-                <div className="voters-count">
-                  <a onClick={this.handleDetailedVoters.bind(this, index)}>({proposal.votes} Voters)</a>
-                </div>
+                <div className="voters-count">({proposal.votes} Voters)</div>
               </div>
             </div>
             <Progress percent={proposal.percent} size="small" />
@@ -74,93 +71,55 @@ class PollStats extends Component {
   render() {
     return (
       <Grid>
-        <Row>
-          <Col lg={12}>
-            <div className="poll-text">Poll started at</div>
-          </Col>
-        </Row>
-
-        {/* <div className="voter-poll"> */}
-        <Row>
-          <Col lg={6}>
-            <div className="voter-logic">{this.props.voterBaseLogic}</div>
-          </Col>
-          <Col lg={6}>
-            <div className="poll-start-time">{this.props.startTime}</div>
-          </Col>
-        </Row>
-        {/* </div> */}
-        <Row>
-          <Col lg={12}>
-            <div className="poll-name">
-              <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-            </div>
-          </Col>
-        </Row>
-
-        <Row>
-          <Col lg={6}>
-            <div className="poll-type">{this.props.pollType}</div>
-          </Col>
-          <Col lg={6}>
-            <div className="poll-end">
-              Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
-            </div>
-            {/* <div className="poll-timer">
-                {" "}
-                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
-              </div> */}
-          </Col>
-        </Row>
-        {/* <div className="poll-name-type-end">
-            <div className="poll-name-type">
-              <div className="poll-name">
-                <a onClick={this.handleAllActivities}>{this.props.pollName}</a>
-              </div>
+        <div className="pollstats-grid">
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12} order-xs-1>
+              <div className="poll-started-text">Poll started at</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={6} md={8} lg={8} order-xs-2>
+              <div className="voter-logic">{this.props.voterBaseLogic}</div>
+            </Col>
+            <Col xs={12} sm={6} md={4} lg={4} order-xs-1>
+              <div className="poll-start-time">{this.props.startTime}</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <div className="poll-name">{this.props.pollName}</div>
+            </Col>
+          </Row>
+          <Row className="poll-type-end">
+            <Col xs={12} sm={6} md={6} lg={6}>
               <div className="poll-type">{this.props.pollType}</div>
-            </div>
-            <div className="poll-end-timer">
-              <div className="poll-end">Poll ends in:</div>
-              <div className="poll-timer">
-                {" "}
-                {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
+            </Col>
+            <Col xs={12} sm={6} md={6} lg={6}>
+              <div className="poll-end">
+                Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
               </div>
-            </div>
-          </div> */}
-        <Row>
-          <Col lg={12}>
-            <div className="proposals-progress">{this.populateProposals()}</div>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={12}>
-            <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={12}>
-            <div className="poll-leader-text">Poll Leader</div>
-          </Col>
-        </Row>
-        <Row>
-          <Col lg={12}>
-            <div className="poll-leader-vote-share">
-              <div className="poll-leader-name">{this.props.pollLeader.name}</div>
-              <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
-            </div>
-          </Col>
-        </Row>
-        {/* <div className="poll-leader">
-          <div className="poll-leader-text">Poll Leader</div>
-          <div className="poll-leader-vote-share">
-            <div className="poll-leader-name">
-              {this.props.pollLeader.name}{" "}
-            </div>
-            <div className="vote-share">
-              ({this.props.pollLeader.percent}% Vote Share)
-            </div>
-          </div>
-        </div> */}
+            </Col>
+          </Row>
+          <div className="proposals">{this.populateProposals()}</div>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <div className="poll-leader-text">Poll Leader</div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
+              <div className="poll-leader-vote-share">
+                <div className="poll-leader-name">{this.props.pollLeader.name}</div>
+                <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Grid>
     );
   }

@@ -1,6 +1,3 @@
-.App {
-}
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -14,11 +11,14 @@
 }
 
 .App-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   font-size: 2.7em;
   color: #777777;
   font-weight: bold;
   font-family: "PT Sans", sans-serif;
-  /* margin-right: 16.4em; */
+  margin-right: 640px;
 }
 
 .search-input {
@@ -29,21 +29,18 @@
   background-color: #e8e8e8;
   border: None;
   border-radius: 2.5em;
-  padding-left: 1.6em;
+  padding-left: 58px;
   height: 66px;
-}
-
-input {
-  flex-grow: 2 !important;
+  width: 75%;
 }
 
 .search {
   background-color: #e8e8e8;
-  width: 900px;
+  width: 80%;
   height: 66px;
   border-radius: 2.5em;
-  /* display: flex; */
-  /* flex-direction: row; */
+  margin: 0 auto;
+  position: relative;
 }
 
 input:focus {
@@ -62,133 +59,187 @@ button:focus {
   border: None;
   color: #ffffff;
   font-family: "PT Sans";
-  font-size: 2.43em;
+  font-size: 30px;
   font-weight: 400;
-  margin-top: 0.3em;
-  margin-right: 0.3em;
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 26px;
 }
 
-.voter-logic {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 2.22em;
-  font-weight: 400;
-}
+/* .srch-btn-cnt {
+  text-align: center;
+  margin-top: 20px;
+} */
 
-.poll-text {
+.poll-started-text {
   color: #777777;
   font-family: "PT Sans";
   font-size: 19px;
   font-weight: 400;
-  margin-top: 57px;
   text-align: right;
+  margin-top: 57px;
+}
+.voter-logic {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 31px;
+  font-weight: 400;
+  line-height: 31px;
 }
 
 .poll-start-time {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.5em;
+  font-size: 21px;
   font-weight: 400;
   text-align: right;
 }
 
-.voter-poll {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+::selection {
+  color: None !important;
 }
 
-.poll-text-start {
+.pollstats-grid {
+  width: 70% !important;
+  margin: 0 auto !important;
 }
 
 .poll-name {
+  color: #777777;
   font-family: "PT Sans";
-  font-size: 2.22em;
+  font-size: 31px;
   font-weight: 400;
   margin-top: 30px;
+  line-height: 31px;
 }
-a {
-  color: #777777 !important;
+
+.s-b {
+  display: None;
+  border: None;
+  border-radius: 20px;
+  width: 221px;
+  height: 41px;
+  color: #32cbf2;
+  font-family: "PT Sans";
+  font-size: 18px;
+  font-weight: 400;
+  position: relative;
+  /* background-color: #ffffff; */
+}
+
+.poll-name:hover {
+  margin-top: 39px;
 }
 
 .poll-type {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.78em;
+  font-size: 25px;
   font-weight: 400;
-  /* margin-top: 0.7em; */
+  line-height: 25px;
 }
 
 .poll-end {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.71em;
+  font-size: 24px;
   font-weight: 400;
   text-align: right;
-  /* margin-top: 0.7em; */
 }
 
 .poll-timer {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.92em;
+  font-size: 27px;
   font-weight: 400;
-  margin-left: 0.4em;
+  margin-left: 5px;
 }
 
-.total-voters {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 1.79em;
-  font-weight: 400;
-  text-decoration: underline !important;
-  text-align: right;
-  margin-top: 1.24em;
+.poll-type-end {
+  margin-top: 15px;
 }
 
-.poll-leader-text {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 1.79em;
-  font-weight: 400;
-  margin-top: 1em;
-}
-
-.poll-leader-name {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 2.22em;
-  font-weight: 400;
-}
-
-.vote-share {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 1.79em;
-  font-weight: 400;
-  margin-left: 0.2em;
-}
-
-.proposal-name {
-  color: #777777;
-  font-family: "PT Sans";
-  font-size: 1.78em;
-  font-weight: 400;
-  float: left;
+.percent-voters {
+  display: flex;
 }
 
 .proposal-percent {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.5em;
+  font-size: 21px;
   font-weight: bold;
 }
 
 .voters-count {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 1.5em;
+  font-size: 21px;
   font-weight: 400;
+  margin-left: 4px;
+}
+
+.proposal-name {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 25px;
+}
+
+.proposal-data {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.proposal-total-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.proposals {
+  margin-top: 35px;
+}
+
+.total-voters {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  text-decoration: underline !important;
+  text-align: right;
+  margin-top: 31px;
+}
+
+.poll-leader-text {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 8px;
+  text-align: left;
+}
+
+.poll-leader-name {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 31px;
+  font-weight: 400;
+}
+
+.vote-share {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  margin-left: 6px;
+  line-height: 25px;
+}
+
+.poll-leader-vote-share {
+  display: flex;
+  text-align: start;
+  margin-top: 8px;
 }
 
 .ui.progress {
@@ -199,62 +250,12 @@ a {
   margin-right: 5.2em !important; */
   margin-top: 0.5em !important;
 }
-
-.poll-leader {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1em;
-}
 .ui.progress .bar {
   height: 12px !important;
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
 }
-.poll-name-type {
-  display: flex;
-  flex-direction: column;
-}
 .App-intro {
   font-size: large;
-}
-.poll-end-timer {
-  display: flex;
-  align-items: flex-end;
-}
-.poll-name-type-end {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 2.2em;
-}
-.percent-voters {
-  display: flex;
-}
-.voters-count {
-  margin-left: 0.2em;
-}
-.proposal-data {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.proposal-total-data {
-  display: flex;
-  flex-direction: column;
-}
-
-.poll-leader-vote-share {
-  display: flex;
-  flex-direction: row;
-  margin-top: 0.6em;
-}
-
-.poll-stats {
-  margin-left: 4.2em;
-  margin-right: 4.9em;
-}
-
-.proposals-progress {
-  margin-top: 2.5em;
 }
 @keyframes App-logo-spin {
   from {
@@ -262,5 +263,78 @@ a {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .search {
+    width: 100% !important;
+  }
+  .search-button {
+    margin-left: 30px;
+  }
+  .App-title {
+    margin-right: 665px !important;
+  }
+  .pollstats-grid {
+    width: 87% !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .search {
+    width: 100% !important;
+  }
+  .search-button {
+    margin-left: -24px;
+  }
+  .App-title {
+    margin-right: 445px !important;
+  }
+  .pollstats-grid {
+    width: 84% !important;
+  }
+}
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  .search {
+    width: 100% !important;
+  }
+  .search-button {
+    margin-left: -71px;
+  }
+  .App-title {
+    margin-right: 250px !important;
+  }
+  .pollstats-grid {
+    width: 79% !important;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .search {
+    width: 100% !important;
+  }
+  .search-input {
+    width: 90%;
+  }
+  .search-button {
+    margin-left: -310px;
+    margin-top: 70px;
+  }
+  .App-title {
+    margin-right: 270px !important;
+  }
+  .poll-started-text {
+    text-align: start;
+  }
+  .total-voters {
+    text-align: start;
+  }
+  .poll-leader-text {
+    margin-top: 25px;
+  }
+  .poll-end {
+    text-align: start;
+    margin-top: 15px;
+  }
+  .poll-start-time {
+    text-align: start;
   }
 }
