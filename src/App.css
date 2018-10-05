@@ -77,14 +77,24 @@ button:focus {
   font-size: 19px;
   font-weight: 400;
   text-align: right;
+}
+
+.push-top--57 {
   margin-top: 57px;
 }
+
+.pos-rel {
+  position: relative;
+}
+
 .voter-logic {
   color: #777777;
   font-family: "PT Sans";
   font-size: 31px;
   font-weight: 400;
   line-height: 31px;
+  position: absolute;
+  top: 10px;
 }
 
 .poll-start-time {
@@ -336,5 +346,9 @@ button:focus {
   }
   .poll-start-time {
     text-align: start;
+  }
+  .voter-logic {
+    position: relative;
+    top: 0px;
   }
 }

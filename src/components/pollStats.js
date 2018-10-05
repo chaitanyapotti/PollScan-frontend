@@ -72,16 +72,12 @@ class PollStats extends Component {
     return (
       <Grid>
         <div className="pollstats-grid">
-          <Row>
-            <Col xs={12} sm={12} md={12} lg={12} order-xs-1>
-              <div className="poll-started-text">Poll started at</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={6} md={8} lg={8} order-xs-2>
+          <Row className="push-top--57">
+            <Col xs={12} sm={6} md={8} lg={8} order-xs-2 className="pos-rel">
               <div className="voter-logic">{this.props.voterBaseLogic}</div>
             </Col>
             <Col xs={12} sm={6} md={4} lg={4} order-xs-1>
+              <div className="poll-started-text">Poll started at</div>
               <div className="poll-start-time">{this.props.startTime}</div>
             </Col>
           </Row>
