@@ -17,7 +17,7 @@
   font-size: 2.7em;
   color: #777777;
   font-weight: bold;
-  font-family: "PT Sans", sans-serif;
+  font-family: "PT Sans";
   margin-right: 640px;
 }
 
@@ -45,6 +45,10 @@
 
 input:focus {
   outline: 0;
+}
+
+input {
+  text-decoration: None !important;
 }
 
 button:focus {
@@ -76,6 +80,16 @@ button:focus {
   font-family: "PT Sans";
   font-size: 25px;
   font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.button-float {
+  float: right;
+}
+
+.button-grid {
+  width: 80%;
+  margin: 0 auto;
 }
 
 /* .srch-btn-cnt {
@@ -159,7 +173,7 @@ button:focus {
 }
 
 .poll-name:hover {
-  margin-top: 70px;
+  /* margin-top: 70px; */
   text-decoration: underline !important;
 }
 
@@ -221,9 +235,12 @@ button:focus {
   border: none;
 }
 .pagination li a {
-  border-radius: 60px;
+  border-radius: 50px;
   margin: 10px;
   border: None !important;
+  font-family: "PT Sans";
+  font-size: 17px;
+  font-weight: 400;
 }
 .pagination li a:hover {
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
@@ -234,6 +251,7 @@ button:focus {
 }
 .active a {
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  color: #ffffff !important;
 }
 .proposal-percent {
   color: #777777;
@@ -283,9 +301,6 @@ button:focus {
   text-align: right;
   margin-top: 31px;
 }
-.total-voters:hover {
-  margin-top: 41px;
-}
 .poll-leader-text {
   color: #777777;
   font-family: "PT Sans";
@@ -325,6 +340,21 @@ button:focus {
   height: 12px !important;
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
 }
+.ui.positive.button {
+  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
+  font-family: "PT Sans" !important;
+  font-size: 16px !important;
+}
+.ui.modal > .content {
+  font-family: "PT Sans" !important;
+  font-size: 16px !important;
+}
+.ui.modal > .header:not(.ui) {
+  font-family: "PT Sans" !important;
+
+  font-size: 20px !important;
+}
+
 .large {
   color: #32cbf2 !important;
   font-family: "PT Sans" !important;
@@ -340,6 +370,7 @@ button:focus {
   font-weight: 400;
   margin-top: 42px;
 }
+
 .back-to-poll:hover {
   text-decoration: underline !important;
 }
@@ -385,6 +416,11 @@ button:focus {
 .App-intro {
   font-size: large;
 }
+.reload {
+  font-family: "PT Sans";
+  font-size: 18px;
+  font-weight: 400;
+}
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search {
     width: 100% !important;
@@ -397,6 +433,15 @@ button:focus {
   }
   .pollstats-grid {
     width: 87% !important;
+  }
+  .activities-grid {
+    width: 88% !important;
+  }
+  .button-grid {
+    width: 97% !important;
+  }
+  .detailed-voters-grid {
+    width: 88% !important;
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -412,6 +457,15 @@ button:focus {
   .pollstats-grid {
     width: 84% !important;
   }
+  .activities-grid {
+    width: 84% !important;
+  }
+  .button-grid {
+    width: 98% !important;
+  }
+  .detailed-voters-grid {
+    width: 84% !important;
+  }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .search {
@@ -425,6 +479,15 @@ button:focus {
   }
   .pollstats-grid {
     width: 79% !important;
+  }
+  .activities-grid {
+    width: 75% !important;
+  }
+  .button-grid {
+    width: 98% !important;
+  }
+  .detailed-voters-grid {
+    width: 78% !important;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -456,5 +519,8 @@ button:focus {
   }
   .poll-start-time {
     text-align: start;
+  }
+  .back-to-poll {
+    margin-top: 70px !important;
   }
 }

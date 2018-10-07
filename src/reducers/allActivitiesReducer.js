@@ -1,13 +1,15 @@
 export default function reducer(
   state = {
-    selectedProposalName: "",
+    selectedProposalName: "All",
     selectedProposalId: 0,
     currentVoterPage: 0,
     allVoters: [
       // { 'address': '0x908OBjsVGduUI2645o2134sd390453fgH0897', 'datetime': '4th Aug 2018 | 23:14', 'weight': 0.8 },
     ],
     currentActivityPage: 0,
-    allActivities: [
+    allActivities: [],
+    showActivityLoader: true,
+    allActivitiesTemp: [
       {
         address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
         datetime: "4th Aug 2018 | 23:14",
@@ -671,8 +673,7 @@ export default function reducer(
       }
       return {
         ...state,
-        allVoters: tempAllVoters,
-        selectedProposalName: "All"
+        allVoters: tempAllVoters
       };
     }
     case "PROPOSAL_SELECTED": {
@@ -712,6 +713,9 @@ export default function reducer(
         return { ...state, allVoters: tempAllVoters };
       }
     }
+    case "PROPOSAL_NAME_SELECTED": {
+      return { ...state, selectedProposalName: action.payload };
+    }
     case "VOTERS_PAGE_CHANGED": {
       return { ...state, currentVoterPage: action.payload };
     }
@@ -719,11 +723,15 @@ export default function reducer(
       return { ...state, currentActivityPage: action.payload };
     }
     case "ALL_ACTIVITIES_SUCCESS": {
-      return { ...state, allActivities: action.payload };
+      return {
+        ...state,
+        allActivities: action.payload,
+        showActivityLoader: false
+      };
     }
 
     case "ALL_ACTIVITIES_LOG_FAILED": {
-      return { ...state, allActivities: [] };
+      return { ...state, allActivities: [], showActivityLoader: false };
     }
 
     default: {

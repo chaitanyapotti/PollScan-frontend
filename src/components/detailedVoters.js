@@ -5,7 +5,7 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 
-import { Table, Icon, Button } from "semantic-ui-react";
+import { Table, Loader } from "semantic-ui-react";
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 import { getAllActivities } from "../actions/allActivitiesActions";
@@ -45,10 +45,14 @@ class DetailedVoters extends Component {
   componentWillMount() {
     console.log(window.location.href, this.props.selectedProposalName);
     const queryUrl = queryString.parseUrl(window.location.href);
-    if ("contract" in queryUrl.query && "id" in queryUrl.query && "name" in queryUrl.query && this.props.selectedProposalName === "") {
+    if ("contract" in queryUrl.query && "id" in queryUrl.query && "name" in queryUrl.query && this.props.selectedProposalName === "All") {
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
         payload: queryUrl.query.contract
+      });
+      this.props.dispatch({
+        type: "PROPOSAL_NAME_SELECTED",
+        payload: queryUrl.query.name
       });
       this.props.dispatch(getName(queryUrl.query.contract));
       this.props.dispatch(getPollType(queryUrl.query.contract));
@@ -69,9 +73,6 @@ class DetailedVoters extends Component {
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
-      // this.props.dispatch({
-      //   type: "SHOW_ALL_VOTES"
-      // });
       this.props.dispatch(getAllActivities(queryUrl.query.contract));
     }
   }
@@ -94,31 +95,48 @@ class DetailedVoters extends Component {
           </Table.Row>
         );
       });
+    } else {
+      return this.props.showActivityLoader ? null : (
+        <Table.Row key={145} className="reload">
+          Voters list could not be retrieved, please try reloading the page.
+        </Table.Row>
+      );
     }
   }
 
   render() {
     return (
-      <Grid>
-        <div className="detailed-voters-grid">
-          <div className="back-to-poll">Back to the Poll</div>
-          <div className="proposal-voters">'{this.props.selectedProposalName}' Voters</div>
-          <Table basic>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Address</Table.HeaderCell>
-                <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
-                <Table.HeaderCell>Vote Weight</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-            {Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}
-          </Table>
-          <button className="csv-button" onClick={this.handleSearchClick}>
-            Download CSV
-          </button>
-        </div>
-      </Grid>
+      <div>
+        <Loader active={this.props.showActivityLoader} />
+        <Grid>
+          <div className="detailed-voters-grid">
+            <div className="back-to-poll">Back to the Poll</div>
+            <div className="proposal-voters">'{this.props.selectedProposalName}' Voters</div>
+            <Table basic>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Address</Table.HeaderCell>
+                  <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
+                  <Table.HeaderCell>Vote Weight</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+            </Table>
+            <Row>
+              <Col>{Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
+            </Row>
+          </div>
+        </Grid>
+        <Grid>
+          <div className="button-grid">
+            <div className="button-float">
+              <button className="csv-button" onClick={this.handleSearchClick}>
+                Download CSV
+              </button>
+            </div>
+          </div>
+        </Grid>
+      </div>
     );
   }
 }
@@ -128,7 +146,8 @@ function mapStatesToProps(globalData) {
     allVoters: globalData.allActivities.allVoters,
     selectedProposalName: globalData.allActivities.selectedProposalName,
     currentVoterPage: globalData.allActivities.currentVoterPage,
-    searchText: globalData.searchBarData.searchText
+    searchText: globalData.searchBarData.searchText,
+    showActivityLoader: globalData.allActivities.showActivityLoader
   };
 }
 

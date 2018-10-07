@@ -5,13 +5,13 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 
-import { Table, Icon, Button } from "semantic-ui-react";
+import { Table, Loader } from "semantic-ui-react";
 
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
-const Limit = 5;
+const Limit = 10;
 
 class AllActivities extends Component {
   componentWillMount() {
@@ -39,7 +39,7 @@ class AllActivities extends Component {
         initialPage={this.props.currentActivityPage}
         forcePage={this.props.currentActivityPage}
         marginPagesDisplayed={2}
-        pageRangeDisplayed={3}
+        pageRangeDisplayed={5}
         onPageChange={data => {
           this.props.dispatch({
             type: "ACTIVITIES_PAGE_CHANGED",
@@ -70,40 +70,50 @@ class AllActivities extends Component {
           );
         });
     } else {
-      return <Table.Row key={145}>Activities could not be retrieved, please try reloading the page.</Table.Row>;
+      return this.props.showActivityLoader ? null : (
+        <Table.Row key={145} className="reload">
+          Activities could not be retrieved, please try reloading the page.
+        </Table.Row>
+      );
     }
   }
 
   render() {
     return (
-      <Grid>
-        <div className="activities-grid">
-          <div className="back-to-poll">Back to the Poll</div>
-          <div className="activity-log">Activity Log</div>
-          <Table basic>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell>Address</Table.HeaderCell>
-                <Table.HeaderCell>Type</Table.HeaderCell>
-                <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
-                <Table.HeaderCell>Size</Table.HeaderCell>
-                <Table.HeaderCell>Value</Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-          </Table>
-          <Grid>
+      <div>
+        <Loader active={this.props.showActivityLoader} />
+
+        <Grid>
+          <div className="activities-grid">
+            <div className="back-to-poll">Back to the Poll</div>
+            <div className="activity-log">Activity Log</div>
+            <Table basic>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Address</Table.HeaderCell>
+                  <Table.HeaderCell>Type</Table.HeaderCell>
+                  <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
+                  <Table.HeaderCell>Size</Table.HeaderCell>
+                  <Table.HeaderCell>Value</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+            </Table>
             <Row>
               <Col>{Math.ceil(this.props.allActivities.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
-              <Col>
-                <button className="csv-button" onClick={this.handleSearchClick}>
-                  Download CSV
-                </button>
-              </Col>
             </Row>
-          </Grid>
-        </div>
-      </Grid>
+          </div>
+        </Grid>
+        <Grid>
+          <div className="button-grid">
+            <div className="button-float">
+              <button className="csv-button" onClick={this.handleSearchClick}>
+                Download CSV
+              </button>
+            </div>
+          </div>
+        </Grid>
+      </div>
     );
   }
 }
@@ -112,7 +122,8 @@ function mapStatesToProps(globalData) {
   return {
     allActivities: globalData.allActivities.allActivities,
     currentActivityPage: globalData.allActivities.currentActivityPage,
-    searchText: globalData.searchBarData.searchText
+    searchText: globalData.searchBarData.searchText,
+    showActivityLoader: globalData.allActivities.showActivityLoader
   };
 }
 

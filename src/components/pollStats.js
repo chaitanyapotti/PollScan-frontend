@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import { Progress, Popup } from "semantic-ui-react";
+import { Progress, Popup, Loader } from "semantic-ui-react";
 import { getAllActivities } from "../actions/allActivitiesActions";
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 
@@ -103,7 +103,7 @@ class PollStats extends Component {
   }
   //Need to change days counter to hr,min,ss
   render() {
-    return (
+    return !this.props.showPollStatsLoader && !this.props.showWrongAddressModal ? (
       <Grid>
         <div className="pollstats-grid">
           <Row>
@@ -178,6 +178,8 @@ class PollStats extends Component {
           </Row>
         </div>
       </Grid>
+    ) : (
+      <Loader active={this.props.showPollStatsLoader} />
     );
   }
 }
@@ -192,7 +194,9 @@ function mapStatesToProps(globalData) {
     voterBaseLogic: globalData.pollStats.voterBaseLogic,
     totalVoteCast: globalData.pollStats.totalVoteCast,
     pollLeader: globalData.pollStats.pollLeader,
-    searchText: globalData.searchBarData.searchText
+    searchText: globalData.searchBarData.searchText,
+    showPollStatsLoader: globalData.pollStats.showPollStatsLoader,
+    showWrongAddressModal: globalData.searchBarData.showWrongAddressModals
   };
 }
 
