@@ -66,6 +66,18 @@ button:focus {
   margin-left: 26px;
 }
 
+.csv-button {
+  width: 275px;
+  height: 47px;
+  background-image: linear-gradient(150deg, #66e8e4 0%, #00aeff 100%);
+  border-radius: 2.25em;
+  border: None;
+  color: #ffffff;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+}
+
 /* .srch-btn-cnt {
   text-align: center;
   margin-top: 20px;
@@ -77,6 +89,7 @@ button:focus {
   font-size: 19px;
   font-weight: 400;
   text-align: right;
+  margin-top: 57px;
 }
 
 .push-top--57 {
@@ -93,8 +106,6 @@ button:focus {
   font-size: 31px;
   font-weight: 400;
   line-height: 31px;
-  position: absolute;
-  top: 10px;
 }
 
 .poll-start-time {
@@ -114,6 +125,16 @@ button:focus {
   margin: 0 auto !important;
 }
 
+.activities-grid {
+  width: 70% !important;
+  margin: 0 auto !important;
+}
+
+.detailed-voters-grid {
+  width: 70% !important;
+  margin: 0 auto !important;
+}
+
 .poll-name {
   color: #777777;
   font-family: "PT Sans";
@@ -127,7 +148,7 @@ button:focus {
   display: None;
   border: None;
   border-radius: 20px;
-  width: 221px;
+  width: 321px;
   height: 41px;
   color: #32cbf2;
   font-family: "PT Sans";
@@ -138,8 +159,24 @@ button:focus {
 }
 
 .poll-name:hover {
-  margin-top: 39px;
+  margin-top: 70px;
+  text-decoration: underline !important;
 }
+
+/* .ui.popup :after {
+  margin-top: 30px !important
+} */
+
+/* .popup {
+  width: 221px;
+  height: 41px;
+  background-color: #ffffff;
+  color: #32cbf2 !important;
+  font-family: "PT Sans" !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  border-radius: 30px !important;
+} */
 
 .poll-type {
   color: #777777;
@@ -173,13 +210,44 @@ button:focus {
   display: flex;
 }
 
+.paginate {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.previous {
+  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  border: none;
+}
+.pagination li a {
+  border-radius: 60px;
+  margin: 10px;
+  border: None !important;
+}
+.pagination li a:hover {
+  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  color: #ffffff !important;
+}
+.pagination li a:focus {
+  outline: None !important;
+}
+.active a {
+  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+}
 .proposal-percent {
   color: #777777;
   font-family: "PT Sans";
   font-size: 21px;
   font-weight: bold;
 }
-
+.proposal-voters {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 24px;
+}
 .voters-count {
   color: #777777;
   font-family: "PT Sans";
@@ -187,7 +255,6 @@ button:focus {
   font-weight: 400;
   margin-left: 4px;
 }
-
 .proposal-name {
   color: #777777;
   font-family: "PT Sans";
@@ -195,22 +262,18 @@ button:focus {
   font-weight: 400;
   line-height: 25px;
 }
-
 .proposal-data {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-
 .proposal-total-data {
   display: flex;
   flex-direction: column;
 }
-
 .proposals {
   margin-top: 35px;
 }
-
 .total-voters {
   color: #777777;
   font-family: "PT Sans";
@@ -220,7 +283,9 @@ button:focus {
   text-align: right;
   margin-top: 31px;
 }
-
+.total-voters:hover {
+  margin-top: 41px;
+}
 .poll-leader-text {
   color: #777777;
   font-family: "PT Sans";
@@ -229,14 +294,12 @@ button:focus {
   margin-top: 8px;
   text-align: left;
 }
-
 .poll-leader-name {
   color: #777777;
   font-family: "PT Sans";
   font-size: 31px;
   font-weight: 400;
 }
-
 .vote-share {
   color: #777777;
   font-family: "PT Sans";
@@ -245,13 +308,11 @@ button:focus {
   margin-left: 6px;
   line-height: 25px;
 }
-
 .poll-leader-vote-share {
   display: flex;
   text-align: start;
   margin-top: 8px;
 }
-
 .ui.progress {
   background: #777777 !important;
   width: 900;
@@ -264,16 +325,65 @@ button:focus {
   height: 12px !important;
   background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
 }
+.large {
+  color: #32cbf2 !important;
+  font-family: "PT Sans" !important;
+  font-size: 18px !important;
+  font-weight: 400 !important;
+  /* margin-bottom: 5px !important; */
+  /* padding-bottom: 40px !important; */
+}
+.back-to-poll {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 42px;
+}
+.back-to-poll:hover {
+  text-decoration: underline !important;
+}
+.icon {
+  width: 50px !important;
+  height: 20px !important;
+}
+.go-back {
+  display: inline;
+}
+.ui.table tr td {
+  border-top: 0px !important;
+  color: #777777 !important;
+  font-family: "PT Sans" !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  padding-left: 0px !important;
+  padding-bottom: 0px !important;
+}
+.ui.table {
+  margin-top: 27px !important;
+  border: None !important;
+}
+.ui.table thead th {
+  font-family: "PT Sans" !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  color: #777777 !important;
+  padding: 0px !important;
+  border-bottom: hidden !important;
+}
+.activity-log {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 20px;
+}
+.arrow {
+  width: 50px !important;
+  height: 20px !important;
+}
 .App-intro {
   font-size: large;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .search {
@@ -346,9 +456,5 @@ button:focus {
   }
   .poll-start-time {
     text-align: start;
-  }
-  .voter-logic {
-    position: relative;
-    top: 0px;
   }
 }

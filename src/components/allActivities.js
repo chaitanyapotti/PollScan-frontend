@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
+import { Grid, Row, Col } from "react-flexbox-grid";
 
 import { Table, Icon, Button } from "semantic-ui-react";
 
@@ -10,14 +11,17 @@ import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
-const Limit = 5;
+const Limit = 1;
 
 class AllActivities extends Component {
   componentWillMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && this.props.searchText === "") {
-      this.props.dispatch({ type: "SEARCH_TEXT_CHANGED", payload: queryUrl.query.contract });
+      this.props.dispatch({
+        type: "SEARCH_TEXT_CHANGED",
+        payload: queryUrl.query.contract
+      });
       this.props.dispatch(getName(queryUrl.query.contract));
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
@@ -28,30 +32,27 @@ class AllActivities extends Component {
 
   addPageNumbers() {
     return (
-      <Table.Footer>
-        <Table.Row key={10000000}>
-          <Table.HeaderCell colSpan="5">
-            {/*You can change the css by looking into the corresponding classes in the css file */}
-            <ReactPaginate
-              previousLabel={"previous"}
-              nextLabel={"next"}
-              breakLabel={<a href="">...</a>}
-              breakClassName={"BreakView"}
-              pageCount={Math.ceil(this.props.allActivities.length / Limit)}
-              initialPage={this.props.currentActivityPage}
-              forcePage={this.props.currentActivityPage}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={data => {
-                this.props.dispatch({ type: "ACTIVITIES_PAGE_CHANGED", payload: parseInt(data.selected) });
-              }}
-              containerClassName={"pagination"}
-              subContainerClassName={"paginationPage"}
-              activeClassName={"active"}
-            />
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Footer>
+      <div className="paginate">
+        <ReactPaginate
+          breakLabel={<a href="">...</a>}
+          breakClassName={"BreakView"}
+          pageCount={Math.ceil(this.props.allActivities.length / Limit)}
+          initialPage={this.props.currentActivityPage}
+          forcePage={this.props.currentActivityPage}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={3}
+          onPageChange={data => {
+            this.props.dispatch({
+              type: "ACTIVITIES_PAGE_CHANGED",
+              payload: parseInt(data.selected)
+            });
+          }}
+          containerClassName={"pagination"}
+          subContainerClassName={"paginationPage"}
+          activeClassName={"active"}
+          previousClassName={"previous"}
+        />
+      </div>
     );
   }
 
@@ -77,34 +78,28 @@ class AllActivities extends Component {
 
   render() {
     return (
-      <div>
-        <span>
-          <Icon
-            name="long arrow alternate left"
-            onClick={() => {
-              this.props.history.push({ pathname: `/contract`, search: "?contract=" + this.props.searchText });
-            }}
-          />{" "}
-          Back to the Poll
-        </span>
-
-        <h4>Activity Log</h4>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Address</Table.HeaderCell>
-              <Table.HeaderCell>Type</Table.HeaderCell>
-              <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
-              <Table.HeaderCell>Size</Table.HeaderCell>
-              <Table.HeaderCell>Value</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          {/* {this.addTableRows()} */}
-          <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-          {Math.ceil(this.props.allActivities.length / Limit) > 1.0 ? this.addPageNumbers() : null}
-        </Table>
-        <Button>Download CSV</Button>
-      </div>
+      <Grid>
+        <div className="activities-grid">
+          <div className="back-to-poll">Back to the Poll</div>
+          <div className="activity-log">Activity Log</div>
+          <Table basic>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Address</Table.HeaderCell>
+                <Table.HeaderCell>Type</Table.HeaderCell>
+                <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
+                <Table.HeaderCell>Size</Table.HeaderCell>
+                <Table.HeaderCell>Value</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+            {Math.ceil(this.props.allActivities.length / Limit) > 1.0 ? this.addPageNumbers() : null}
+          </Table>
+          <button className="csv-button" onClick={this.handleSearchClick}>
+            Download CSV
+          </button>
+        </div>
+      </Grid>
     );
   }
 }

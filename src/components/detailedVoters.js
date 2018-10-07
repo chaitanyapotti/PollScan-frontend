@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
+import { Grid, Row, Col } from "react-flexbox-grid";
 
 import { Table, Icon, Button } from "semantic-ui-react";
 
@@ -11,38 +12,33 @@ import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
 
-const Limit = 5;
+const Limit = 1;
 
 class DetailedVoters extends Component {
   addPageNumbers() {
     return (
-      <Table.Footer>
-        <Table.Row key={10000000}>
-          <Table.HeaderCell colSpan="3">
-            {/*You can change the css by looking into the corresponding classes in the css file */}
-            <ReactPaginate
-              previousLabel={"previous"}
-              nextLabel={"next"}
-              breakLabel={<a href="">...</a>}
-              breakClassName={"BreakView"}
-              pageCount={Math.ceil(this.props.allVoters.length / Limit)}
-              initialPage={this.props.currentVoterPage}
-              forcePage={this.props.currentVoterPage}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={data => {
-                this.props.dispatch({
-                  type: "VOTERS_PAGE_CHANGED",
-                  payload: parseInt(data.selected)
-                });
-              }}
-              containerClassName={"pagination"}
-              subContainerClassName={"paginationPage"}
-              activeClassName={"active"}
-            />
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Footer>
+      <div>
+        <ReactPaginate
+          previousLabel={"previous"}
+          nextLabel={"next"}
+          breakLabel={<a href="">...</a>}
+          breakClassName={"BreakView"}
+          pageCount={Math.ceil(this.props.allVoters.length / Limit)}
+          initialPage={this.props.currentVoterPage}
+          forcePage={this.props.currentVoterPage}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={data => {
+            this.props.dispatch({
+              type: "VOTERS_PAGE_CHANGED",
+              payload: parseInt(data.selected)
+            });
+          }}
+          containerClassName={"pagination"}
+          subContainerClassName={"paginationPage"}
+          activeClassName={"active"}
+        />
+      </div>
     );
   }
 
@@ -50,47 +46,28 @@ class DetailedVoters extends Component {
     console.log(window.location.href, this.props.selectedProposalName);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && "id" in queryUrl.query && "name" in queryUrl.query && this.props.selectedProposalName === "") {
-      this.props.dispatch({ type: "SEARCH_TEXT_CHANGED", payload: queryUrl.query.contract });
+      this.props.dispatch({
+        type: "SEARCH_TEXT_CHANGED",
+        payload: queryUrl.query.contract
+      });
       this.props.dispatch(getName(queryUrl.query.contract));
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
-      this.props.dispatch({ type: "PROPOSAL_SELECTED", proposalid: queryUrl.query.id, proposalname: queryUrl.query.name });
+      this.props.dispatch({
+        type: "PROPOSAL_SELECTED",
+        proposalid: queryUrl.query.id,
+        proposalname: queryUrl.query.name
+      });
       this.props.dispatch(getAllActivities(queryUrl.query.contract, queryUrl.query.id, queryUrl.query.name));
     }
   }
 
-  addPageNumbers() {
-    return (
-      <Table.Footer>
-        <Table.Row key={10000000}>
-          <Table.HeaderCell colSpan="3">
-            {/*You can change the css by looking into the corresponding classes in the css file */}
-            <ReactPaginate
-              previousLabel={"previous"}
-              nextLabel={"next"}
-              breakLabel={<a href="">...</a>}
-              breakClassName={"BreakView"}
-              pageCount={Math.ceil(this.props.allVoters.length / Limit)}
-              initialPage={this.props.currentVoterPage}
-              forcePage={this.props.currentVoterPage}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={data => {
-                this.props.dispatch({ type: "VOTERS_PAGE_CHANGED", payload: parseInt(data.selected) });
-              }}
-              containerClassName={"pagination"}
-              subContainerClassName={"paginationPage"}
-              activeClassName={"active"}
-            />
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Footer>
-    );
-  }
-
   handleSearchTextChange(event) {
-    this.props.dispatch({ type: "SEARCH_TEXT_CHANGED", payload: event.target.value });
+    this.props.dispatch({
+      type: "SEARCH_TEXT_CHANGED",
+      payload: event.target.value
+    });
   }
 
   addTableRowsDynamically() {
@@ -109,32 +86,26 @@ class DetailedVoters extends Component {
 
   render() {
     return (
-      <div>
-        <span>
-          <Icon
-            name="long arrow alternate left"
-            onClick={() => {
-              this.props.history.push({ pathname: "/contract", search: "?contract=" + this.props.searchText });
-            }}
-          />{" "}
-          Back to the Poll
-        </span>
-
-        <h4>'{this.props.selectedProposalName}' Voters</h4>
-        <Table celled>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Address</Table.HeaderCell>
-              <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
-              <Table.HeaderCell>Vote Weight</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          {/* {this.addTableRows()} */}
-          <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-          {Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}
-        </Table>
-        <Button>Download CSV</Button>
-      </div>
+      <Grid>
+        <div className="detailed-voters-grid">
+          <div className="back-to-poll">Back to the Poll</div>
+          <div className="proposal-voters">'{this.props.selectedProposalName}' Voters</div>
+          <Table basic>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Address</Table.HeaderCell>
+                <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
+                <Table.HeaderCell>Vote Weight</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+            {Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}
+          </Table>
+          <button className="csv-button" onClick={this.handleSearchClick}>
+            Download CSV
+          </button>
+        </div>
+      </Grid>
     );
   }
 }

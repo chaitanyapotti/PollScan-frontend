@@ -8,7 +8,83 @@ export default function reducer(
     ],
     currentActivityPage: 0,
     allActivities: [
-      // {'address': '0x908OBjsVGduUI2645o2134sd390453fgH0897', 'datetime': '4th Aug 2018 | 23:14', 'weight': 0.6, 'type':'Failed Vote', 'value': 0},
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      },
+      {
+        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
+        datetime: "4th Aug 2018 | 23:14",
+        weight: 0.6,
+        type: "Failed Vote",
+        value: 0
+      }
     ]
   },
   action
@@ -21,9 +97,17 @@ export default function reducer(
       for (let activity of tempAllActivities) {
         if (parseInt(activity.value) === parseInt(state.selectedProposalId)) {
           if (activity.type === "CastVote") {
-            tempAllVoters.push({ address: activity.address, datetime: activity.datetime, weight: activity.weight });
+            tempAllVoters.push({
+              address: activity.address,
+              datetime: activity.datetime,
+              weight: activity.weight
+            });
           } else if (activity.type === "RevokedVote") {
-            tempAllUnVoters.push({ address: activity.address, datetime: activity.datetime, weight: activity.weight });
+            tempAllUnVoters.push({
+              address: activity.address,
+              datetime: activity.datetime,
+              weight: activity.weight
+            });
           }
         }
       }
@@ -33,7 +117,12 @@ export default function reducer(
       //     }
       // }
       if ("proposalid" in action) {
-        return { ...state, allVoters: tempAllVoters, selectedProposalId: action.proposalid, selectedProposalName: action.proposalname };
+        return {
+          ...state,
+          allVoters: tempAllVoters,
+          selectedProposalId: action.proposalid,
+          selectedProposalName: action.proposalname
+        };
       } else {
         return { ...state, allVoters: tempAllVoters };
       }

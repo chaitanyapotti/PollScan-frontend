@@ -3,9 +3,18 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import { Progress } from "semantic-ui-react";
+import { Progress, Popup } from "semantic-ui-react";
 import { getAllActivities } from "../actions/allActivitiesActions";
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+
+const style = {
+  width: "221px",
+  height: "41px",
+  color: "#32cbf2",
+  backgroundColor: "#ffffff",
+  borderRadius: "32px",
+  textAlign: "center"
+};
 
 class PollStats extends Component {
   handleAllActivities = () => {
@@ -58,7 +67,20 @@ class PollStats extends Component {
               <div className="proposal-name">{proposal.name}</div>
               <div className="percent-voters">
                 <div className="proposal-percent">{proposal.percent}%</div>
-                <div className="voters-count">({proposal.votes} Voters)</div>
+                <div>
+                  <Popup
+                    hoverable
+                    on={["hover", "click"]}
+                    style={style}
+                    trigger={<div className="voters-count">({proposal.votes} Voters)</div>}
+                    position="top center"
+                    content={
+                      <a className="large" onClick={this.handleDetailedVoters.bind(this, index)}>
+                        View All Voters
+                      </a>
+                    }
+                  />
+                </div>
               </div>
             </div>
             <Progress percent={proposal.percent} size="small" />
@@ -72,20 +94,33 @@ class PollStats extends Component {
     return (
       <Grid>
         <div className="pollstats-grid">
-          <Row className="push-top--57">
-            <Col xs={12} sm={6} md={8} lg={8} order-xs-2 className="pos-rel">
-              <div className="voter-logic">{this.props.voterBaseLogic}</div>
-            </Col>
-            <Col xs={12} sm={6} md={4} lg={4} order-xs-1>
+          <Row>
+            <Col xs={12} sm={12} md={12} lg={12}>
               <div className="poll-started-text">Poll started at</div>
-              <div className="poll-start-time">{this.props.startTime}</div>
             </Col>
           </Row>
           <Row>
-            <Col xs={12} sm={12} md={12} lg={12}>
-              <div className="poll-name">{this.props.pollName}</div>
+            <Col xs={12} sm={6} md={8} lg={8}>
+              <div className="voter-logic">{this.props.voterBaseLogic}</div>
+            </Col>
+            <Col xs={12} sm={6} md={4} lg={4}>
+              <div className="poll-start-time">{this.props.startTime}</div>
             </Col>
           </Row>
+          <div>
+            <Popup
+              hoverable
+              on={["hover", "click"]}
+              style={style}
+              trigger={<div className="poll-name">{this.props.pollName}</div>}
+              content={
+                <a onClick={this.handleAllActivities} className="large">
+                  View Activiy Log
+                </a>
+              }
+              position="top center"
+            />
+          </div>
           <Row className="poll-type-end">
             <Col xs={12} sm={6} md={6} lg={6}>
               <div className="poll-type">{this.props.pollType}</div>
@@ -98,10 +133,20 @@ class PollStats extends Component {
           </Row>
           <div className="proposals">{this.populateProposals()}</div>
           <Row>
-            <Col xs={12} sm={12} md={12} lg={12}>
-              <div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>
+            <Col lg={12}>
+              <div>
+                <Popup
+                  hoverable
+                  on={["hover", "click"]}
+                  style={style}
+                  position="top-right"
+                  trigger={<div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>}
+                  content={<a className="large">View All Voters</a>}
+                />
+              </div>
             </Col>
           </Row>
+
           <Row>
             <Col xs={12} sm={12} md={12} lg={12}>
               <div className="poll-leader-text">Poll Leader</div>
