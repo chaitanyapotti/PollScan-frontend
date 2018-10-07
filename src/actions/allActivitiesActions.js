@@ -18,6 +18,10 @@ export function getAllActivities(address, proposalid, proposalname) {
               type: "PROPOSAL_SELECTED",
               payload: {}
             });
+            dispatch({
+              type: "SHOW_ALL_VOTES",
+              payload: {}
+            });
           } else {
             console.log("dispatching", proposalid, proposalname);
             dispatch({

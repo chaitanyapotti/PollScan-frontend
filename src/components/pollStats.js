@@ -58,6 +58,18 @@ class PollStats extends Component {
     });
   }
 
+  handleAllDetailedVoters() {
+    this.props.dispatch({
+      type: "SHOW_ALL_VOTES",
+      proposalname: "All"
+    });
+    this.props.dispatch(getAllActivities(this.props.searchText));
+    this.props.history.push({
+      pathname: `/voters`,
+      search: "?contract=" + this.props.searchText
+    });
+  }
+
   populateProposals() {
     if (this.props.proposals.length > 0) {
       return this.props.proposals.map((proposal, index) => {
@@ -139,9 +151,13 @@ class PollStats extends Component {
                   hoverable
                   on={["hover", "click"]}
                   style={style}
-                  position="top-right"
+                  position="top right"
                   trigger={<div className="total-voters">Total Voters: {this.props.totalVoteCast}</div>}
-                  content={<a className="large">View All Voters</a>}
+                  content={
+                    <a className="large" onClick={this.handleAllDetailedVoters.bind(this)}>
+                      View All Voters
+                    </a>
+                  }
                 />
               </div>
             </Col>

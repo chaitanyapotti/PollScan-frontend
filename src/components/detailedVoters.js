@@ -54,12 +54,25 @@ class DetailedVoters extends Component {
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
-      this.props.dispatch({
-        type: "PROPOSAL_SELECTED",
-        proposalid: queryUrl.query.id,
-        proposalname: queryUrl.query.name
-      });
+      // this.props.dispatch({
+      //   type: "PROPOSAL_SELECTED",
+      //   proposalid: queryUrl.query.id,
+      //   proposalname: queryUrl.query.name
+      // });
       this.props.dispatch(getAllActivities(queryUrl.query.contract, queryUrl.query.id, queryUrl.query.name));
+    } else if ("contract" in queryUrl.query) {
+      this.props.dispatch({
+        type: "SEARCH_TEXT_CHANGED",
+        payload: queryUrl.query.contract
+      });
+      this.props.dispatch(getName(queryUrl.query.contract));
+      this.props.dispatch(getPollType(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
+      this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
+      // this.props.dispatch({
+      //   type: "SHOW_ALL_VOTES"
+      // });
+      this.props.dispatch(getAllActivities(queryUrl.query.contract));
     }
   }
 
