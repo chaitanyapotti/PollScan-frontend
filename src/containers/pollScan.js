@@ -1,16 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Route, withRouter, Switch } from "react-router-dom";
-// import { Divider } from 'semantic-ui-react';
 
 import { Modal } from "semantic-ui-react";
-
+import { Grid, Row, Col } from "react-flexbox-grid";
 import SearchBar from "../components/searchBar";
 import DetailedVoters from "../components/detailedVoters";
 import AllActivities from "../components/allActivities";
 import PollStats from "../components/pollStats";
-import { Image, Button } from "semantic-ui-react";
-import * as logo from "../logo.svg";
 
 class TokenWeightedPoll extends Component {
   constructor(props) {
@@ -44,7 +41,6 @@ class TokenWeightedPoll extends Component {
               render={() => (
                 <div>
                   <SearchBar />
-                  {/* <Image src={logo} size="large" centered="true" /> */}
                 </div>
               )}
             />

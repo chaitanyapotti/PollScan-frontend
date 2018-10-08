@@ -7,8 +7,8 @@ export function getAllActivities(address, proposalid, proposalname) {
     axios
       .get(config.api_base_url + "/events", { params: { address: address } })
       .then(response => {
-        console.log(response.data);
-        if (response.data.message === "Success") {
+        console.log(response.status);
+        if (response.status === 200 && response.data.message === "Success") {
           dispatch({
             type: "ALL_ACTIVITIES_SUCCESS",
             payload: response.data.data.events
@@ -16,6 +16,10 @@ export function getAllActivities(address, proposalid, proposalname) {
           if (proposalid === undefined) {
             dispatch({
               type: "PROPOSAL_SELECTED",
+              payload: {}
+            });
+            dispatch({
+              type: "SHOW_ALL_VOTES",
               payload: {}
             });
           } else {
@@ -34,8 +38,9 @@ export function getAllActivities(address, proposalid, proposalname) {
         }
       })
       .catch(err => {
+        console.log("API error occurred.", err);
         dispatch({
-          type: "ALL_ACTIVITIES_FAILED",
+          type: "ALL_ACTIVITIES_LOG_FAILED",
           payload: err
         });
       });

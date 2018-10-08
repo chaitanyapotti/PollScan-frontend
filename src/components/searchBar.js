@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Button } from "semantic-ui-react";
 import { withRouter } from "react-router-dom";
-import { Grid, Row, Col } from 'react-flexbox-grid';
-
+import { Grid } from "react-flexbox-grid";
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
 
 class SearchBar extends Component {
@@ -27,20 +25,21 @@ class SearchBar extends Component {
     this.props.dispatch(getPollType(this.props.searchText));
     this.props.dispatch(getVoterBaseLogic(this.props.searchText));
     this.props.dispatch(getProposalsWithVotes(this.props.searchText));
-    this.props.history.push({ pathname: `/contract`, search: "?contract=" + this.props.searchText });
+    this.props.history.push({
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
+    });
   }
 
   render() {
     return (
       <Grid>
-        <Row>
-          <Col lg={12} xs={12}>
-            <div className="search">
-              <Input value={this.props.searchText} placeholder="Enter Poll Address..." onChange={this.handleSearchTextChange} className="search-input" />
-              <Button content="Search" onClick={this.handleSearchClick} className="search-button"/>
-            </div>
-          </Col>
-        </Row>
+        <div className="search">
+          <input className="search-input" value={this.props.searchText} placeholder="Enter Poll Address" onChange={this.handleSearchTextChange} />
+          <button className="search-button" onClick={this.handleSearchClick}>
+            Search
+          </button>
+        </div>
       </Grid>
     );
   }

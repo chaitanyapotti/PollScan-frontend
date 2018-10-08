@@ -5,6 +5,7 @@ export default function reducer(
     pollName: "",
     pollType: "",
     endTime: "2018-09-30",
+    showPollStatsLoader: true,
     proposals: [
       // {name: 'Jacob Radhakrishnan', votes: 1646, percent: 5.98},
       // {name: 'Alex Jonnes', votes: 12652, percent: 50.14},
@@ -13,7 +14,7 @@ export default function reducer(
     ],
     totalVoteCast: 0,
     pollLeader: { name: "", votes: 0, percent: 0 },
-    showModal: false
+    showModal: true
   },
   action
 ) {
@@ -31,7 +32,13 @@ export default function reducer(
       return { ...state, voterBaseLogic: action.payload };
     }
     case "PROPOSALS_WITH_VOTES_SUCCESS": {
-      return { ...state, proposals: action.proposals, totalVoteCast: action.totalvotescasted, pollLeader: action.pollleader };
+      return {
+        ...state,
+        proposals: action.proposals,
+        totalVoteCast: action.totalvotescasted,
+        pollLeader: action.pollleader,
+        showPollStatsLoader: false
+      };
     }
     default: {
       return { ...state };
