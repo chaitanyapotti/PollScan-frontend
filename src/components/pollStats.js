@@ -9,11 +9,12 @@ import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "
 
 const style = {
   width: "221px",
-  height: "41px",
+  height: "40px",
   color: "#32cbf2",
   backgroundColor: "#ffffff",
   borderRadius: "32px",
-  textAlign: "center"
+  textAlign: "center",
+  paddingTop: "10px",
 };
 
 class PollStats extends Component {
@@ -130,7 +131,7 @@ class PollStats extends Component {
                   View Activiy Log
                 </a>
               }
-              position="top center"
+              position="top left"
             />
           </div>
           <Row className="poll-type-end">

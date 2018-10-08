@@ -11,6 +11,7 @@
 }
 
 .App-title {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -19,25 +20,26 @@
   font-weight: bold;
   font-family: "PT Sans";
   margin-right: 640px;
+  margin-bottom: 10px !important;
 }
 
 .search-input {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 2.4em;
+  font-size: 1.8em;
   font-weight: 400;
   background-color: #e8e8e8;
   border: None;
   border-radius: 2.5em;
   padding-left: 58px;
-  height: 66px;
+  height: 50px;
   width: 75%;
 }
 
 .search {
   background-color: #e8e8e8;
   width: 80%;
-  height: 66px;
+  height: 50px;
   border-radius: 2.5em;
   margin: 0 auto;
   position: relative;
@@ -57,23 +59,24 @@ button:focus {
 
 .search-button {
   width: 195px;
-  height: 46px;
-  background-image: linear-gradient(150deg, #66e8e4 0%, #00aeff 100%);
-  border-radius: 2.25em;
+  height: 40px;
+  background-color: #4ca9fc;
+  border-radius: 1.8em;
   border: None;
   color: #ffffff;
   font-family: "PT Sans";
-  font-size: 30px;
+  font-size: 1.8em;
   font-weight: 400;
   position: absolute;
-  margin-top: 10px;
-  margin-left: 26px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 30px;
 }
 
 .csv-button {
   width: 275px;
   height: 47px;
-  background-image: linear-gradient(150deg, #66e8e4 0%, #00aeff 100%);
+  background-color: #4ca9fc;
   border-radius: 2.25em;
   border: None;
   color: #ffffff;
@@ -81,6 +84,10 @@ button:focus {
   font-size: 25px;
   font-weight: 400;
   margin-bottom: 10px;
+}
+
+.csv-button:hover{
+  size: 1.1em !important;
 }
 
 .button-float {
@@ -100,7 +107,7 @@ button:focus {
 .poll-started-text {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 400;
   text-align: right;
   margin-top: 57px;
@@ -117,7 +124,7 @@ button:focus {
 .voter-logic {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 31px;
+  font-size: 28px;
   font-weight: 400;
   line-height: 31px;
 }
@@ -125,7 +132,7 @@ button:focus {
 .poll-start-time {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 21px;
+  font-size: 20px;
   font-weight: 400;
   text-align: right;
 }
@@ -152,10 +159,11 @@ button:focus {
 .poll-name {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 31px;
+  font-size: 28px;
   font-weight: 400;
-  margin-top: 30px;
+  margin-top: 15px;
   line-height: 31px;
+  transition: all 0.3s;
 }
 
 .s-b {
@@ -195,7 +203,7 @@ button:focus {
 .poll-type {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   line-height: 25px;
 }
@@ -203,7 +211,7 @@ button:focus {
 .poll-end {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 400;
   text-align: right;
 }
@@ -217,7 +225,7 @@ button:focus {
 }
 
 .poll-type-end {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .percent-voters {
@@ -231,7 +239,7 @@ button:focus {
 }
 
 .previous {
-  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  background-color: #4ca9fc !important ;
   border: none;
 }
 .pagination li a {
@@ -243,20 +251,20 @@ button:focus {
   font-weight: 400;
 }
 .pagination li a:hover {
-  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  background-color: #4ca9fc !important ;
   color: #ffffff !important;
 }
 .pagination li a:focus {
   outline: None !important;
 }
 .active a {
-  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important ;
+  background-color: #4ca9fc !important ;
   color: #ffffff !important;
 }
 .proposal-percent {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 21px;
+  font-size: 18px;
   font-weight: bold;
 }
 .proposal-voters {
@@ -269,7 +277,7 @@ button:focus {
 .voters-count {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 400;
   margin-left: 4px;
 }
@@ -295,16 +303,16 @@ button:focus {
 .total-voters {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   text-decoration: underline !important;
   text-align: right;
-  margin-top: 31px;
+  margin-top: 15px;
 }
 .poll-leader-text {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   margin-top: 8px;
   text-align: left;
@@ -312,13 +320,13 @@ button:focus {
 .poll-leader-name {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 31px;
+  font-size: 28px;
   font-weight: 400;
 }
 .vote-share {
   color: #777777;
   font-family: "PT Sans";
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 400;
   margin-left: 6px;
   line-height: 25px;
@@ -338,10 +346,10 @@ button:focus {
 }
 .ui.progress .bar {
   height: 12px !important;
-  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
+  background-color: #4ca9fc !important;
 }
 .ui.positive.button {
-  background-image: linear-gradient(to right, #66e8e4 0%, #00aeff 100%) !important;
+  background-color: #4ca9fc !important;
   font-family: "PT Sans" !important;
   font-size: 16px !important;
 }
