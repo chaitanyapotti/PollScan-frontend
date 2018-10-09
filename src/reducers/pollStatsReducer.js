@@ -22,6 +22,9 @@ export default function reducer(
     case "POLL_NAME_SUCCESS": {
       return { ...state, pollName: action.payload };
     }
+    case "SHOW_POLLSTAT_LOADER": {
+      return { ...state, showPollStatsLoader: true };
+    }
     case "POLL_NAME_FAILED": {
       return { ...state, showModal: true };
     }

@@ -476,6 +476,9 @@ button:focus {
   .detailed-voters-grid {
     width: 88% !important;
   }
+  .back-to-poll {
+    margin-right: 725px;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search {
@@ -498,6 +501,9 @@ button:focus {
   }
   .detailed-voters-grid {
     width: 84% !important;
+  }
+  .back-to-poll {
+    margin-right: 500px;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -522,6 +528,9 @@ button:focus {
   .detailed-voters-grid {
     width: 78% !important;
   }
+  .back-to-poll {
+    margin-right: 290px;
+  }
 }
 @media only screen and (max-width: 575px) {
   .search {
@@ -532,7 +541,7 @@ button:focus {
   }
   .search-button {
     margin-left: -310px;
-    margin-top: 70px;
+    margin-top: 55px;
   }
   .App-title {
     margin-right: 270px !important;
@@ -555,5 +564,6 @@ button:focus {
   }
   .back-to-poll {
     margin-top: 70px !important;
+    margin-right: 240px;
   }
 }

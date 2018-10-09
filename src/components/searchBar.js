@@ -21,6 +21,10 @@ class SearchBar extends Component {
   enterPressed(event) {
     var code = event.keyCode || event.which;
     if (code === 13) {
+      this.props.dispatch({
+        type: "SHOW_POLLSTAT_LOADER",
+        payload: null
+      });
       this.props.dispatch(getName(this.props.searchText));
       this.props.dispatch(getPollType(this.props.searchText));
       this.props.dispatch(getVoterBaseLogic(this.props.searchText));
@@ -35,6 +39,10 @@ class SearchBar extends Component {
   handleSearchClick(event) {
     console.log("Search button clicked.");
     // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
+    this.props.dispatch({
+      type: "SHOW_POLLSTAT_LOADER",
+      payload: null
+    });
     this.props.dispatch(getName(this.props.searchText));
     this.props.dispatch(getPollType(this.props.searchText));
     this.props.dispatch(getVoterBaseLogic(this.props.searchText));
