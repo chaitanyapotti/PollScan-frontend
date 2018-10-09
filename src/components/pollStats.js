@@ -14,12 +14,16 @@ const style = {
   backgroundColor: "#ffffff",
   borderRadius: "32px",
   textAlign: "center",
-  paddingTop: "6px",
+  paddingTop: "6px"
 };
 
 class PollStats extends Component {
   handleAllActivities = () => {
     this.props.dispatch(getAllActivities(this.props.searchText));
+    this.props.dispatch({
+      type: "SHOW_ACTIVITY_LOADER",
+      payload: ""
+    });
     this.props.history.push({
       pathname: `/events`,
       search: "?contract=" + this.props.searchText
@@ -78,21 +82,19 @@ class PollStats extends Component {
           <div key={1000 + index} className="proposal-total-data">
             <div className="proposal-data">
               <div className="proposal-name">{proposal.name}</div>
-                  <Popup
-                    hoverable
-                    on={["hover", "click"]}
-                    style={style}
-                    trigger={<div onClick={this.handleDetailedVoters.bind(this, index)} className="percent-voters">
+              <Popup
+                hoverable
+                on={["hover", "click"]}
+                style={style}
+                trigger={
+                  <div onClick={this.handleDetailedVoters.bind(this, index)} className="percent-voters">
                     <div className="proposal-percent">{proposal.percent}%</div>
                     <div className="voters-count">({proposal.votes} Voters)</div>
-                  </div>}
-                    position="top center"
-                    content={
-                      <h1 className="large">
-                        View All Voters
-                      </h1>
-                    }
-                  /> 
+                  </div>
+                }
+                position="top center"
+                content={<h1 className="large">View All Voters</h1>}
+              />
             </div>
             <Progress percent={proposal.percent} size="small" />
           </div>
@@ -120,20 +122,20 @@ class PollStats extends Component {
           </Row>
           <Row>
             <Col lg={6}>
-            <Popup
-              hoverable
-              on={["hover", "click"]}
-              style={style}
-              trigger={<div onClick={this.handleAllActivities} className="poll-name">{this.props.pollName}</div>}
-              content={
-                <h1 className="large">
-                  View Activiy Log
-                </h1>
-              }
-              position="top center"
-            />
-              </Col>
-              <Col lg={6}></Col>
+              <Popup
+                hoverable
+                on={["hover", "click"]}
+                style={style}
+                trigger={
+                  <div onClick={this.handleAllActivities} className="poll-name">
+                    {this.props.pollName}
+                  </div>
+                }
+                content={<h1 className="large">View Activiy Log</h1>}
+                position="top center"
+              />
+            </Col>
+            <Col lg={6} />
           </Row>
           <Row className="poll-type-end">
             <Col xs={12} sm={6} md={6} lg={6}>
@@ -147,7 +149,7 @@ class PollStats extends Component {
           </Row>
           <div className="proposals">{this.populateProposals()}</div>
           <Row>
-            <Col lg={9}></Col>
+            <Col lg={9} />
             <Col lg={3}>
               <div>
                 <Popup
@@ -155,12 +157,12 @@ class PollStats extends Component {
                   on={["hover", "click"]}
                   style={style}
                   position="top center"
-                  trigger={<div onClick={this.handleAllDetailedVoters.bind(this)} className="total-voters">Total Voters: {this.props.totalVoteCast}</div>}
-                  content={
-                    <h1 className="large" >
-                      View All Voters
-                    </h1>
+                  trigger={
+                    <div onClick={this.handleAllDetailedVoters.bind(this)} className="total-voters">
+                      Total Voters: {this.props.totalVoteCast}
+                    </div>
                   }
+                  content={<h1 className="large">View All Voters</h1>}
                 />
               </div>
             </Col>

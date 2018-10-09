@@ -11,10 +11,15 @@ import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
+import back from "../assets/back.png";
 
 const Limit = 1;
 
 class DetailedVoters extends Component {
+  constructor(props) {
+    super(props);
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
   addPageNumbers() {
     return (
       <div>
@@ -43,7 +48,6 @@ class DetailedVoters extends Component {
   }
 
   componentWillMount() {
-    console.log(window.location.href, this.props.selectedProposalName);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && "id" in queryUrl.query && "name" in queryUrl.query && this.props.selectedProposalName === "All") {
       this.props.dispatch({
@@ -104,38 +108,58 @@ class DetailedVoters extends Component {
     }
   }
 
+  handleOnClick() {
+    this.props.history.push({
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
+    });
+    this.props.dispatch({
+      type: "SHOW_ACTIVITY_LOADER",
+      payload: ""
+    });
+  }
+
   render() {
     return (
       <div>
-        <Loader active={this.props.showActivityLoader} />
-        <Grid>
-          <div className="detailed-voters-grid">
-            <div className="back-to-poll">Back to the Poll</div>
-            <div className="proposal-voters">'{this.props.selectedProposalName}' Voters</div>
-            <Table basic>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Address</Table.HeaderCell>
-                  <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
-                  <Table.HeaderCell>Vote Weight</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-            </Table>
-            <Row>
-              <Col>{Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
-            </Row>
+        <div className="back-to-poll" onClick={this.handleOnClick}>
+          <img src={back} /> Back to the Poll
+        </div>
+        {this.props.showActivityLoader ? (
+          <Loader active={this.props.showActivityLoader} />
+        ) : this.props.allActivitesRetrievedSuccessfully ? (
+          <div>
+            <Grid>
+              <div className="detailed-voters-grid">
+                <div className="proposal-voters">'{this.props.selectedProposalName}' Voters</div>
+                <Table basic>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Address</Table.HeaderCell>
+                      <Table.HeaderCell>Vote Date & Time</Table.HeaderCell>
+                      <Table.HeaderCell>Vote Weight</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+                </Table>
+                <Row>
+                  <Col>{Math.ceil(this.props.allVoters.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
+                </Row>
+              </div>
+            </Grid>
+            <Grid>
+              <div className="button-grid">
+                <div className="button-float">
+                  <button className="csv-button" onClick={this.handleSearchClick}>
+                    Download CSV
+                  </button>
+                </div>
+              </div>
+            </Grid>
           </div>
-        </Grid>
-        <Grid>
-          <div className="button-grid">
-            <div className="button-float">
-              <button className="csv-button" onClick={this.handleSearchClick}>
-                Download CSV
-              </button>
-            </div>
-          </div>
-        </Grid>
+        ) : (
+          <div className="reload-page">Voters could not be retrieved, please try reloading the page.</div>
+        )}
       </div>
     );
   }
@@ -147,7 +171,8 @@ function mapStatesToProps(globalData) {
     selectedProposalName: globalData.allActivities.selectedProposalName,
     currentVoterPage: globalData.allActivities.currentVoterPage,
     searchText: globalData.searchBarData.searchText,
-    showActivityLoader: globalData.allActivities.showActivityLoader
+    showActivityLoader: globalData.allActivities.showActivityLoader,
+    allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
   };
 }
 

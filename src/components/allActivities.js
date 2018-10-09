@@ -13,10 +13,14 @@ import { getAllActivities } from "../actions/allActivitiesActions";
 import "../styles/tableFooter.css";
 
 import back from "../assets/back.png";
-import blue_back from "../assets/back_on_hover.png";
+
 const Limit = 10;
 
 class AllActivities extends Component {
+  constructor(props) {
+    super(props);
+    this.handleOnClick = this.handleOnClick.bind(this);
+  }
   componentWillMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
@@ -73,7 +77,7 @@ class AllActivities extends Component {
           );
         });
     } else {
-      return this.props.showActivityLoader ? null : (
+      return (
         <Table.Row key={145} className="reload">
           Activities could not be retrieved, please try reloading the page.
         </Table.Row>
@@ -81,40 +85,60 @@ class AllActivities extends Component {
     }
   }
 
+  handleOnClick() {
+    this.props.history.push({
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
+    });
+    this.props.dispatch({
+      type: "SHOW_ACTIVITY_LOADER",
+      payload: ""
+    });
+  }
+
   render() {
     return (
       <div>
-        <Loader active={this.props.showActivityLoader} />
-        <div className="back-to-poll" onClick> <img src={back}/>  Back to the Poll</div>
-        <Grid>
-          <div className="activities-grid">
-            <div className="activity-log">Activity Log</div>
-            <Table basic>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>Address</Table.HeaderCell>
-                  <Table.HeaderCell>Type</Table.HeaderCell>
-                  <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
-                  <Table.HeaderCell>Size</Table.HeaderCell>
-                  <Table.HeaderCell>Value</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
-            </Table>
-            <Row>
-              <Col>{Math.ceil(this.props.allActivities.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
-            </Row>
+        <div className="back-to-poll" onClick={this.handleOnClick}>
+          <img src={back} /> Back to the Poll
+        </div>
+        {this.props.showActivityLoader ? (
+          <Loader active={this.props.showActivityLoader} />
+        ) : this.props.allActivitesRetrievedSuccessfully ? (
+          <div>
+            <Grid>
+              <div className="activities-grid">
+                <div className="activity-log">Activity Log</div>
+                <Table basic>
+                  <Table.Header>
+                    <Table.Row>
+                      <Table.HeaderCell>Address</Table.HeaderCell>
+                      <Table.HeaderCell>Type</Table.HeaderCell>
+                      <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
+                      <Table.HeaderCell>Size</Table.HeaderCell>
+                      <Table.HeaderCell>Value</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
+                </Table>
+                <Row>
+                  <Col>{Math.ceil(this.props.allActivities.length / Limit) > 1.0 ? this.addPageNumbers() : null}</Col>
+                </Row>
+              </div>
+            </Grid>
+            <Grid>
+              <div className="button-grid">
+                <div className="button-float">
+                  <button className="csv-button" onClick={this.handleSearchClick}>
+                    Download CSV
+                  </button>
+                </div>
+              </div>
+            </Grid>
           </div>
-        </Grid>
-        <Grid>
-          <div className="button-grid">
-            <div className="button-float">
-              <button className="csv-button" onClick={this.handleSearchClick}>
-                Download CSV
-              </button>
-            </div>
-          </div>
-        </Grid>
+        ) : (
+          <div className="reload-page">Activities could not be retrieved, please try reloading the page.</div>
+        )}
       </div>
     );
   }
@@ -125,7 +149,8 @@ function mapStatesToProps(globalData) {
     allActivities: globalData.allActivities.allActivities,
     currentActivityPage: globalData.allActivities.currentActivityPage,
     searchText: globalData.searchBarData.searchText,
-    showActivityLoader: globalData.allActivities.showActivityLoader
+    showActivityLoader: globalData.allActivities.showActivityLoader,
+    allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
   };
 }
 

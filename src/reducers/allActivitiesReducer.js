@@ -9,6 +9,7 @@ export default function reducer(
     currentActivityPage: 0,
     allActivities: [],
     showActivityLoader: true,
+    allActivitesRetrievedSuccessfully: false,
     allActivitiesTemp: [
       {
         address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
@@ -726,14 +727,22 @@ export default function reducer(
       return {
         ...state,
         allActivities: action.payload,
-        showActivityLoader: false
+        showActivityLoader: false,
+        allActivitesRetrievedSuccessfully: true
       };
     }
 
     case "ALL_ACTIVITIES_LOG_FAILED": {
-      return { ...state, allActivities: [], showActivityLoader: false };
+      return {
+        ...state,
+        allActivities: [],
+        showActivityLoader: false,
+        allActivitesRetrievedSuccessfully: false
+      };
     }
-
+    case "SHOW_ACTIVITY_LOADER": {
+      return { ...state, showActivityLoader: true };
+    }
     default: {
       return { ...state };
     }
