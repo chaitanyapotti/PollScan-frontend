@@ -18,6 +18,20 @@ class SearchBar extends Component {
     });
   }
 
+  enterPressed(event) {
+    var code = event.keyCode || event.which;
+    if (code === 13) {
+      this.props.dispatch(getName(this.props.searchText));
+      this.props.dispatch(getPollType(this.props.searchText));
+      this.props.dispatch(getVoterBaseLogic(this.props.searchText));
+      this.props.dispatch(getProposalsWithVotes(this.props.searchText));
+      this.props.history.push({
+        pathname: `/contract`,
+        search: "?contract=" + this.props.searchText
+      });
+    }
+  }
+
   handleSearchClick(event) {
     console.log("Search button clicked.");
     // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
@@ -41,6 +55,7 @@ class SearchBar extends Component {
             value={this.props.searchText}
             placeholder="Enter Poll Address"
             onChange={this.handleSearchTextChange}
+            onKeyPress={this.enterPressed.bind(this)}
           />
           <button className="search-button" onClick={this.handleSearchClick}>
             Search
