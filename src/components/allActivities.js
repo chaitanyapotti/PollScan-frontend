@@ -11,6 +11,9 @@ import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
+
+import back from "../assets/back.png";
+import blue_back from "../assets/back_on_hover.png";
 const Limit = 10;
 
 class AllActivities extends Component {
@@ -82,10 +85,9 @@ class AllActivities extends Component {
     return (
       <div>
         <Loader active={this.props.showActivityLoader} />
-
+        <div className="back-to-poll" onClick> <img src={back}/>  Back to the Poll</div>
         <Grid>
           <div className="activities-grid">
-            <div className="back-to-poll">Back to the Poll</div>
             <div className="activity-log">Activity Log</div>
             <Table basic>
               <Table.Header>

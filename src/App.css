@@ -387,6 +387,9 @@ button:focus {
   font-size: 25px;
   font-weight: 400;
   margin-top: 42px;
+  display:flex;
+  justify-content: center;
+  margin-right: 700px;
 }
 
 .back-to-poll:hover {
