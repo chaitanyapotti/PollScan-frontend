@@ -139,6 +139,7 @@ button:focus {
   font-size: 20px;
   font-weight: 400;
   text-align: right;
+  margin-top: 4px;
 }
 
 ::selection {
@@ -309,10 +310,15 @@ button:focus {
   font-family: "PT Sans";
   font-size: 22px;
   font-weight: 400;
-  text-decoration: underline !important;
   text-align: right;
   margin-top: 15px;
+  transition:200ms;
 }
+
+.total-voters:hover{
+  text-decoration: underline !important;
+} 
+
 .poll-leader-text {
   color: #777777;
   font-family: "PT Sans";
