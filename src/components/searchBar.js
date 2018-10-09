@@ -35,7 +35,13 @@ class SearchBar extends Component {
     return (
       <Grid>
         <div className="search">
-          <input className="search-input" value={this.props.searchText} placeholder="Enter Poll Address" onChange={this.handleSearchTextChange} />
+          <input
+            className="search-input"
+            spellcheck="false"
+            value={this.props.searchText}
+            placeholder="Enter Poll Address"
+            onChange={this.handleSearchTextChange}
+          />
           <button className="search-button" onClick={this.handleSearchClick}>
             Search
           </button>

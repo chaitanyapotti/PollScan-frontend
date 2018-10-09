@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import "./App.css";
 import PollScan from "./containers/pollScan";
 import "./index.css";
+import { connect } from "react-redux";
 
 class App extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class App extends Component {
   }
   handleOnClick() {
     this.props.history.push({ pathname: "/" });
+    this.props.dispatch({
+      type: "SEARCH_TEXT_CHANGED",
+      payload: ""
+    });
   }
   render() {
     return (
@@ -26,4 +31,12 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+function mapStatesToProps(globalData) {
+  return {
+    searchText: globalData.searchBarData.searchText
+  };
+}
+
+const myConnector = connect(mapStatesToProps);
+
+export default withRouter(myConnector(App));

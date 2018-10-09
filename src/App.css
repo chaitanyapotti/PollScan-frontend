@@ -21,6 +21,7 @@
   font-family: "PT Sans";
   margin-right: 640px;
   margin-bottom: 10px !important;
+  cursor: pointer;
 }
 
 .search-input {
@@ -71,6 +72,7 @@ button:focus {
   margin-top: 5px;
   margin-bottom: 5px;
   margin-left: 30px;
+  cursor: pointer;
 }
 
 .csv-button {
@@ -88,7 +90,7 @@ button:focus {
   transition: 200ms;
 }
 
-.csv-button:hover{
+.csv-button:hover {
   transform: scale(1.05) !important;
 }
 
