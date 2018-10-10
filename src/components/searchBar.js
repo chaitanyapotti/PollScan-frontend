@@ -3,18 +3,28 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid } from "react-flexbox-grid";
 import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+import logo from "../assets/logo.png";
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   handleSearchTextChange(event) {
     this.props.dispatch({
       type: "SEARCH_TEXT_CHANGED",
       payload: event.target.value
+    });
+  }
+
+  handleOnClick() {
+    this.props.history.push({ pathname: "/" });
+    this.props.dispatch({
+      type: "SEARCH_TEXT_CHANGED",
+      payload: ""
     });
   }
 
@@ -56,6 +66,10 @@ class SearchBar extends Component {
   render() {
     return (
       <Grid>
+        <div className="App-title">
+          {" "}
+          <img src={logo} onClick={this.handleOnClick} />{" "}
+        </div>
         <div className="search">
           <input
             className="search-input"

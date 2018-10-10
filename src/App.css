@@ -10,6 +10,10 @@
   color: white;
 }
 
+.homepage-searchbar {
+  margin-top: 20vh;
+}
+
 .App-title {
   margin-top: 20px;
   display: flex;
@@ -95,17 +99,17 @@ button:focus {
   float: right;
 }
 
-.foot{
+.foot {
   color: #777777;
   font-family: "PT Sans";
   font-size: 18px;
   font-weight: 400;
-  text-align: right;
-  margin-top:7px;
+  text-align: right !important;
+  margin-top: 7px;
 }
 
-.footer{
-  margin-top: 25vh;
+.footer {
+  margin-top: 30vh;
 }
 
 .button-grid {
@@ -425,27 +429,26 @@ button:focus {
   padding-bottom: 0px !important;
 }
 
-.homepage-grid{
+.homepage-grid {
   width: 76%;
-  margin:0 auto;
+  margin: 0 auto;
 }
 
-.innergrid{
+.innergrid {
   margin-top: 50px;
 }
 
-
-.copy{
+.copy {
   color: #777777 !important;
   font-family: "PT Sans" !important;
   font-size: 27px !important;
   font-weight: 400 !important;
-  margin-top:7px;
+  margin-top: 7px;
 }
 
-.arrow{
-  margin-right:30px;
-  margin-left:30px;
+.arrow {
+  margin-right: 30px;
+  margin-left: 30px;
   transform: scale(0.8);
 }
 
@@ -514,6 +517,17 @@ button:focus {
   .back-to-poll {
     margin-right: 725px;
   }
+
+  .homepage-grid {
+    width: 95% !important;
+  }
+  /* .copy {
+    font-size: 25px !important;
+  } */
+
+  .foot {
+    font-size: 20px;
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search {
@@ -539,6 +553,17 @@ button:focus {
   }
   .back-to-poll {
     margin-right: 500px;
+  }
+  .homepage-grid {
+    width: 95% !important;
+  }
+  .copy {
+    font-size: 23px !important;
+  }
+  .arrow {
+    margin-right: 10px;
+    margin-left: 10px;
+    transform: scale(0.7);
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
@@ -566,29 +591,45 @@ button:focus {
   .back-to-poll {
     margin-right: 290px;
   }
-}
-@media only screen and (max-width: 575px) {
-
-  .copy{
+  .homepage-grid {
+    width: 90% !important;
+  }
+  .copy {
     font-size: 20px !important;
   }
-
-  .arrow{
-    margin-left:0px;
+  .arrow {
+    margin-right: 6px;
+    margin-left: 6px;
+    transform: scale(0.7);
+  }
+  /* .foot {
+    font-size: 15px !important;
+  } */
+  .footer {
+    margin-top: 25vh;
+  }
+}
+@media only screen and (max-width: 575px) {
+  .copy {
+    margin-right: 110px;
+  }
+  .arrow {
+    margin-left: 0px;
     transform: scale(0.5);
-    margin-right:10px;
+    margin-right: 8px;
   }
 
-  .homepage-grid{
-    width: 85% !important;
+  .footer {
+    margin-top: 15vh;
   }
 
-  .innergrid{
+  .innergrid {
     margin-top: 75px !important;
   }
 
-  #enter{
+  #enter {
     margin-left: 60px !important;
+    margin-right: 80px !important;
   }
 
   .search {

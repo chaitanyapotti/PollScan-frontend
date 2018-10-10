@@ -41,8 +41,7 @@ class TokenWeightedPoll extends Component {
               path="/"
               render={() => (
                 <div>
-                  <SearchBar />
-                  <HomePage/>
+                  <HomePage />
                 </div>
               )}
             />
