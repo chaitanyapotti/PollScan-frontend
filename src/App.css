@@ -15,13 +15,10 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: 2.7em;
-  color: #777777;
-  font-weight: bold;
-  font-family: "PT Sans";
-  margin-right: 640px;
+  margin-right: 610px;
   margin-bottom: 10px !important;
   cursor: pointer;
+  transform: scale(0.8);
 }
 
 .search-input {
@@ -96,6 +93,19 @@ button:focus {
 
 .button-float {
   float: right;
+}
+
+.foot{
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 18px;
+  font-weight: 400;
+  text-align: right;
+  margin-top:7px;
+}
+
+.footer{
+  margin-top: 25vh;
 }
 
 .button-grid {
@@ -414,6 +424,31 @@ button:focus {
   padding-left: 0px !important;
   padding-bottom: 0px !important;
 }
+
+.homepage-grid{
+  width: 76%;
+  margin:0 auto;
+}
+
+.innergrid{
+  margin-top: 50px;
+}
+
+
+.copy{
+  color: #777777 !important;
+  font-family: "PT Sans" !important;
+  font-size: 27px !important;
+  font-weight: 400 !important;
+  margin-top:7px;
+}
+
+.arrow{
+  margin-right:30px;
+  margin-left:30px;
+  transform: scale(0.8);
+}
+
 .ui.table {
   margin-top: 27px !important;
   border: None !important;
@@ -462,7 +497,7 @@ button:focus {
     margin-left: 30px;
   }
   .App-title {
-    margin-right: 665px !important;
+    margin-right: 650px !important;
   }
   .pollstats-grid {
     width: 87% !important;
@@ -488,7 +523,7 @@ button:focus {
     margin-left: -24px;
   }
   .App-title {
-    margin-right: 445px !important;
+    margin-right: 430px !important;
   }
   .pollstats-grid {
     width: 84% !important;
@@ -514,7 +549,7 @@ button:focus {
     margin-left: -71px;
   }
   .App-title {
-    margin-right: 250px !important;
+    margin-right: 230px !important;
   }
   .pollstats-grid {
     width: 79% !important;
@@ -533,6 +568,29 @@ button:focus {
   }
 }
 @media only screen and (max-width: 575px) {
+
+  .copy{
+    font-size: 20px !important;
+  }
+
+  .arrow{
+    margin-left:0px;
+    transform: scale(0.5);
+    margin-right:10px;
+  }
+
+  .homepage-grid{
+    width: 85% !important;
+  }
+
+  .innergrid{
+    margin-top: 75px !important;
+  }
+
+  #enter{
+    margin-left: 60px !important;
+  }
+
   .search {
     width: 100% !important;
   }
@@ -540,11 +598,15 @@ button:focus {
     width: 90%;
   }
   .search-button {
-    margin-left: -310px;
-    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-left: 0px;
+    width: 100% !important;
   }
   .App-title {
-    margin-right: 270px !important;
+    margin-right: 200px !important;
   }
   .poll-started-text {
     text-align: start;

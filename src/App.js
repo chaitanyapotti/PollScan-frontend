@@ -4,6 +4,7 @@ import "./App.css";
 import PollScan from "./containers/pollScan";
 import "./index.css";
 import { connect } from "react-redux";
+import logo from "./assets/logo.png";
 
 class App extends Component {
   constructor(props) {
@@ -21,9 +22,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1 onClick={this.handleOnClick} className="App-title">
-            Pollscan.io
-          </h1>
+          <div className="App-title"> <img src={logo} onClick={this.handleOnClick} /> </div>
         </header>
         <PollScan history={this.props.history} />
       </div>

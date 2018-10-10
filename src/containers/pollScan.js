@@ -8,6 +8,7 @@ import SearchBar from "../components/searchBar";
 import DetailedVoters from "../components/detailedVoters";
 import AllActivities from "../components/allActivities";
 import PollStats from "../components/pollStats";
+import HomePage from "../components/homePage";
 
 class TokenWeightedPoll extends Component {
   constructor(props) {
@@ -41,6 +42,7 @@ class TokenWeightedPoll extends Component {
               render={() => (
                 <div>
                   <SearchBar />
+                  <HomePage/>
                 </div>
               )}
             />
