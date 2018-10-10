@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=PT+Sans");
 
 body {
-  margin: 25px !important; 
-  padding: auto;
+  margin: 0 auto;
   font-family: "PT Sans", sans-serif;
+  overflow: hidden;
 }

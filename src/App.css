@@ -104,12 +104,14 @@ button:focus {
   font-family: "PT Sans";
   font-size: 18px;
   font-weight: 400;
-  text-align: right !important;
   margin-top: 7px;
+  text-align: right;
 }
 
 .footer {
-  margin-top: 30vh;
+  position: fixed;
+  bottom: 20px;
+  margin-left: 190px;
 }
 
 .button-grid {
@@ -433,7 +435,9 @@ button:focus {
   width: 76%;
   margin: 0 auto;
 }
-
+.home {
+  position: relative;
+}
 .innergrid {
   margin-top: 50px;
 }
@@ -521,13 +525,17 @@ button:focus {
   .homepage-grid {
     width: 95% !important;
   }
+
+  .footer {
+    margin-left: 240px;
+  }
   /* .copy {
     font-size: 25px !important;
   } */
 
-  .foot {
+  /* .foot {
     font-size: 20px;
-  }
+  } */
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search {
@@ -565,6 +573,9 @@ button:focus {
     margin-left: 10px;
     transform: scale(0.7);
   }
+  .footer {
+    margin-left: 20px;
+  }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   .search {
@@ -594,19 +605,19 @@ button:focus {
   .homepage-grid {
     width: 90% !important;
   }
-  .copy {
+  /* .copy {
     font-size: 20px !important;
   }
   .arrow {
-    margin-right: 6px;
-    margin-left: 6px;
-    transform: scale(0.7);
-  }
+    margin-right: 4px !important;
+    margin-left: 4px !important;
+    transform: scale(0.7) !important;
+  } */
   /* .foot {
     font-size: 15px !important;
   } */
   .footer {
-    margin-top: 25vh;
+    margin-left: 0px !important;
   }
 }
 @media only screen and (max-width: 575px) {
@@ -616,7 +627,7 @@ button:focus {
   .arrow {
     margin-left: 0px;
     transform: scale(0.5);
-    margin-right: 8px;
+    margin-right: 40px;
   }
 
   .footer {
