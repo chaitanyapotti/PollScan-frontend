@@ -26,8 +26,8 @@ class HomePage extends Component {
               </Col>
               <Col className="copy">Audit Voter Stats</Col>
             </Row>
-            <Row>
-              <Col lg={12}>
+          </div>
+          <div className="footgrid"><Row>
                 <div className="footer">
                   <Row>
                     <Col lg={12}>
@@ -42,9 +42,7 @@ class HomePage extends Component {
                     </Col>
                   </Row>
                 </div>
-              </Col>
-            </Row>
-          </div>
+            </Row> </div>
         </Grid>
       </div>
     );

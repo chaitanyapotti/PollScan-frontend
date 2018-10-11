@@ -105,13 +105,13 @@ button:focus {
   font-size: 18px;
   font-weight: 400;
   margin-top: 7px;
-  text-align: right;
+  text-align: left;
 }
 
-.footer {
-  position: fixed;
-  bottom: 20px;
-  margin-left: 190px;
+.footgrid{
+  width:76%;
+  margin: 0 auto;
+  margin-top:45vh;
 }
 
 .button-grid {
@@ -497,6 +497,7 @@ button:focus {
   margin-top: 20px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
+
   .search {
     width: 100% !important;
   }
@@ -526,16 +527,12 @@ button:focus {
     width: 95% !important;
   }
 
-  .footer {
-    margin-left: 240px;
+  .footgrid{
+    width:100%;
+    margin: 0 auto;
+    margin-top:45vh;
   }
-  /* .copy {
-    font-size: 25px !important;
-  } */
 
-  /* .foot {
-    font-size: 20px;
-  } */
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search {
@@ -574,11 +571,21 @@ button:focus {
     transform: scale(0.7);
   
   }
-  .footer {
-    margin-left: 20px;
+
+  .footgrid{
+    width:100%;
+    margin: 0 auto;
+    margin-top:45vh;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+
+  .footgrid{
+    width:100%;
+    margin: 0 auto;
+    margin-top:30vh;
+  }
+
   .search {
     width: 100% !important;
   }
@@ -616,16 +623,16 @@ button:focus {
     margin-left: 0px !important;
   }
 }
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 575px ) and (min-width: 321px) {
   .App-title{
-
+    transform: scale(0.75);
   }
 
   .copy {
     margin-top: 15px;
     margin-right: 30px;
     transform: scale(0.95);
-    font-size: 25px !important;
+    font-size: 23px !important;
   }
   .arrow {
     opacity: 0;
@@ -633,8 +640,10 @@ button:focus {
     margin: 0 !important;
   }
 
-  .footer {
-    opacity: 0;
+  .footgrid{
+    width:80%;
+    margin: 0 auto;
+    margin-top:12vh;
   }
 
   .innergrid {
@@ -644,9 +653,11 @@ button:focus {
   .search {
     width: 100% !important;
   }
+
   .search-input {
     width: 90%;
   }
+
   .search-button {
     display: flex;
     justify-content: center;
@@ -655,11 +666,13 @@ button:focus {
     margin-left: 0px;
     width: 100% !important;
   }
+
   .App-title {
     display: flex;
     justify-content: center;
     margin:0px !important;
   }
+
   .poll-started-text {
     text-align: start;
   }
@@ -680,4 +693,83 @@ button:focus {
     margin-top: 70px !important;
     margin-right: 240px;
   }
+}
+
+@media only screen and (max-width: 320px ){
+
+  .App-title{
+    transform: scale(0.75);
+    margin-top:10vh !important; 
+  }
+
+  .copy {
+    margin-top: 15px;
+    margin-right: 30px;
+    transform: scale(0.95);
+    font-size: 20px !important;
+    font-weight: 500 !important;
+  }
+  .arrow {
+    opacity: 0;
+    width: 0 !important;
+    margin: 0 !important;
+  }
+
+  .footgrid{
+    width:80%;
+    margin: 0 auto;
+    margin-top:5vh;
+  }
+  .foot{
+    font-size: 14px !important;
+  }
+  .innergrid {
+    margin-top: 75px !important;
+  }
+
+  .search {
+    width: 100% !important;
+  }
+
+  .search-input {
+    width: 90%;
+  }
+
+  .search-button {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 15px;
+    margin-left: 0px;
+    width: 100% !important;
+  }
+
+  .App-title {
+    display: flex;
+    justify-content: center;
+    margin:0px !important;
+    transform: scale(0.6) !important;
+  }
+
+  .poll-started-text {
+    text-align: start;
+  }
+  .total-voters {
+    text-align: start;
+  }
+  .poll-leader-text {
+    margin-top: 25px;
+  }
+  .poll-end {
+    text-align: start;
+    margin-top: 15px;
+  }
+  .poll-start-time {
+    text-align: start;
+  }
+  .back-to-poll {
+    margin-top: 70px !important;
+    margin-right: 240px;
+  }
+  
 }
