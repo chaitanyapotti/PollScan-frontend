@@ -93,6 +93,14 @@ button:focus {
 
 .csv-button:hover {
   transform: scale(1.05) !important;
+  transition: 100ms !important;
+  box-shadow: 0px 0px 30px #4caafc79;
+}
+
+.csv-button:active {
+  transform: scale(1) !important;
+  box-shadow: 0px 0px 0px !important;
+  background-color: #1e7aca;
 }
 
 .button-float {
@@ -108,10 +116,10 @@ button:focus {
   text-align: left;
 }
 
-.footgrid{
-  width:76%;
+.footgrid {
+  width: 76%;
   margin: 0 auto;
-  margin-top:45vh;
+  margin-top: 30vh;
 }
 
 .button-grid {
@@ -497,7 +505,6 @@ button:focus {
   margin-top: 20px;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
-
   .search {
     width: 100% !important;
   }
@@ -527,12 +534,11 @@ button:focus {
     width: 95% !important;
   }
 
-  .footgrid{
-    width:100%;
+  .footgrid {
+    width: 100%;
     margin: 0 auto;
-    margin-top:45vh;
+    margin-top: 30vh;
   }
-
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .search {
@@ -569,21 +575,19 @@ button:focus {
     margin-right: 10px;
     margin-left: 10px;
     transform: scale(0.7);
-  
   }
 
-  .footgrid{
-    width:100%;
+  .footgrid {
+    width: 100%;
     margin: 0 auto;
-    margin-top:45vh;
+    margin-top: 28vh;
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
-
-  .footgrid{
-    width:100%;
+  .footgrid {
+    width: 100%;
     margin: 0 auto;
-    margin-top:30vh;
+    margin-top: 15vh;
   }
 
   .search {
@@ -613,18 +617,18 @@ button:focus {
   .homepage-grid {
     width: 90% !important;
   }
-  .arrow{
-    opacity: 0.0 ;
+  .arrow {
+    opacity: 0;
   }
-  .copy{
+  .copy {
     margin-top: 15px;
   }
   .footer {
     margin-left: 0px !important;
   }
 }
-@media only screen and (max-width: 575px ) and (min-width: 321px) {
-  .App-title{
+@media only screen and (max-width: 575px) and (min-width: 321px) {
+  .App-title {
     transform: scale(0.75);
   }
 
@@ -640,10 +644,10 @@ button:focus {
     margin: 0 !important;
   }
 
-  .footgrid{
-    width:80%;
+  .footgrid {
+    width: 80%;
     margin: 0 auto;
-    margin-top:12vh;
+    margin-top: 12vh;
   }
 
   .innergrid {
@@ -670,7 +674,7 @@ button:focus {
   .App-title {
     display: flex;
     justify-content: center;
-    margin:0px !important;
+    margin: 0px !important;
   }
 
   .poll-started-text {
@@ -695,11 +699,10 @@ button:focus {
   }
 }
 
-@media only screen and (max-width: 320px ){
-
-  .App-title{
+@media only screen and (max-width: 320px) {
+  .App-title {
     transform: scale(0.75);
-    margin-top:10vh !important; 
+    margin-top: 10vh !important;
   }
 
   .copy {
@@ -715,12 +718,12 @@ button:focus {
     margin: 0 !important;
   }
 
-  .footgrid{
-    width:80%;
+  .footgrid {
+    width: 80%;
     margin: 0 auto;
-    margin-top:5vh;
+    margin-top: 5vh;
   }
-  .foot{
+  .foot {
     font-size: 14px !important;
   }
   .innergrid {
@@ -747,7 +750,7 @@ button:focus {
   .App-title {
     display: flex;
     justify-content: center;
-    margin:0px !important;
+    margin: 0px !important;
     transform: scale(0.6) !important;
   }
 
@@ -771,5 +774,4 @@ button:focus {
     margin-top: 70px !important;
     margin-right: 240px;
   }
-  
 }
