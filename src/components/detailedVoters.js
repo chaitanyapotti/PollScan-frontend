@@ -7,13 +7,22 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 
 import { Table, Loader } from "semantic-ui-react";
 
-import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+import {
+  getName,
+  getPollType,
+  getVoterBaseLogic,
+  getProposalsWithVotes,
+  getStartTime,
+  getEndTime,
+  getVoterBaseDenominator,
+  getVoteTalliesWeighted
+} from "../actions/searchBarActions";
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
 import back from "../assets/back.png";
 
-const Limit = 1;
+const Limit = 10;
 
 class DetailedVoters extends Component {
   constructor(props) {
@@ -62,12 +71,30 @@ class DetailedVoters extends Component {
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
+      this.props.dispatch(getStartTime(queryUrl.query.contract));
+      this.props.dispatch(getEndTime(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
+      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
       // this.props.dispatch({
       //   type: "PROPOSAL_SELECTED",
       //   proposalid: queryUrl.query.id,
       //   proposalname: queryUrl.query.name
       // });
       this.props.dispatch(getAllActivities(queryUrl.query.contract, queryUrl.query.id, queryUrl.query.name));
+    } else if ("contract" in queryUrl.query && "id" in queryUrl.query && "name" in queryUrl.query) {
+      this.props.dispatch({
+        type: "SEARCH_TEXT_CHANGED",
+        payload: queryUrl.query.contract
+      });
+      this.props.dispatch(getName(queryUrl.query.contract));
+      this.props.dispatch(getPollType(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
+      this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
+      this.props.dispatch(getAllActivities(queryUrl.query.contract, queryUrl.query.id, queryUrl.query.name));
+      this.props.dispatch(getStartTime(queryUrl.query.contract));
+      this.props.dispatch(getEndTime(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
+      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
     } else if ("contract" in queryUrl.query) {
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
@@ -78,6 +105,10 @@ class DetailedVoters extends Component {
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
       this.props.dispatch(getAllActivities(queryUrl.query.contract));
+      this.props.dispatch(getStartTime(queryUrl.query.contract));
+      this.props.dispatch(getEndTime(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
+      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
     }
   }
 
@@ -94,7 +125,7 @@ class DetailedVoters extends Component {
         return (
           <Table.Row key={index}>
             <Table.Cell>{voter.address}</Table.Cell>
-            <Table.Cell>{voter.datetime}</Table.Cell>
+            <Table.Cell>{new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
             <Table.Cell>{voter.weight}</Table.Cell>
           </Table.Row>
         );

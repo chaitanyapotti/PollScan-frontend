@@ -2,12 +2,10 @@ import axios from "axios";
 import config from "../config";
 
 export function getAllActivities(address, proposalid, proposalname) {
-  console.log("getting all activities", address, proposalid, proposalname);
   return function(dispatch) {
     axios
       .get(config.api_base_url + "/events", { params: { address: address } })
       .then(response => {
-        console.log(response.status);
         if (response.status === 200 && response.data.message === "Success") {
           dispatch({
             type: "ALL_ACTIVITIES_SUCCESS",
@@ -20,10 +18,9 @@ export function getAllActivities(address, proposalid, proposalname) {
             });
             dispatch({
               type: "SHOW_ALL_VOTES",
-              payload: {}
+              proposalname: "All"
             });
           } else {
-            console.log("dispatching", proposalid, proposalname);
             dispatch({
               type: "PROPOSAL_SELECTED",
               proposalid: proposalid,
@@ -38,10 +35,10 @@ export function getAllActivities(address, proposalid, proposalname) {
         }
       })
       .catch(err => {
-        console.log("API error occurred.", err);
+        console.log(err);
         dispatch({
           type: "ALL_ACTIVITIES_LOG_FAILED",
-          payload: err
+          payload: err.message
         });
       });
   };

@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, compose } from "redux";
 import thunk from "redux-thunk";
 import createHistory from "history/createBrowserHistory";
 import rootReducer from "./reducers";
@@ -8,8 +8,11 @@ const persistedState = loadState();
 
 const middleware = applyMiddleware(thunk);
 
-const store = createStore(rootReducer, persistedState, middleware);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+// const store = createStore(rootReducer, persistedState, middleware);
+
+const store = createStore(rootReducer, persistedState, composeEnhancers(middleware));
 // use throttle from iodash if you feel that state is getting stored too frequently
 store.subscribe(() => {
   saveState({

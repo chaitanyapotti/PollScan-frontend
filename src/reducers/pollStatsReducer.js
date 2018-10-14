@@ -1,17 +1,14 @@
 export default function reducer(
   state = {
     voterBaseLogic: "",
-    startTime: "20 Aug 2018 | 20:26",
+    startTime: "",
+    endTime: "",
     pollName: "",
     pollType: "",
-    endTime: "2018-09-30",
+    denominator: 1,
+    numerators: [],
     showPollStatsLoader: true,
-    proposals: [
-      // {name: 'Jacob Radhakrishnan', votes: 1646, percent: 5.98},
-      // {name: 'Alex Jonnes', votes: 12652, percent: 50.14},
-      // {name: 'N’gawa Tsotsobe', votes: 7707, percent: 33.60},
-      // {name: 'Chen Xing', votes: 2360, percent: 10.28}
-    ],
+    proposals: [],
     totalVoteCast: 0,
     pollLeader: { name: "", votes: 0, percent: 0 },
     showModal: true
@@ -35,14 +32,86 @@ export default function reducer(
       return { ...state, voterBaseLogic: action.payload };
     }
     case "PROPOSALS_WITH_VOTES_SUCCESS": {
+      let denominator = state.denominator;
+      let proposals = action.proposals;
+      let numerators = state.numerators;
+      let tempProposals = [];
+      for (let i = 0; i < proposals.length; i++) {
+        let proposal = proposals[i];
+        proposal["percent"] = ((numerators[i] / denominator) * 100).toFixed(2);
+        proposal["weight"] = numerators[i];
+        tempProposals.push(proposal);
+      }
+      let lastHigh = 0;
+      let pollLeader = {};
+      for (let proposal of tempProposals) {
+        if (parseInt(proposal.percent) > lastHigh) {
+          lastHigh = parseInt(proposal.percent);
+          pollLeader = proposal;
+        }
+      }
       return {
         ...state,
-        proposals: action.proposals,
+        proposals: tempProposals,
+        pollLeader: pollLeader,
         totalVoteCast: action.totalvotescasted,
-        pollLeader: action.pollleader,
         showPollStatsLoader: false
       };
     }
+
+    case "TOTAL_VOTES_SUCCESS": {
+      let denominator = parseInt(action.payload);
+      let proposals = state.proposals;
+      let numerators = state.numerators;
+      let tempProposals = [];
+      for (let i = 0; i < proposals.length; i++) {
+        let proposal = proposals[i];
+        if ("weight" in proposal) {
+          proposal["percent"] = (100 * (parseInt(numerators[i]) / denominator)).toFixed(2);
+        }
+        tempProposals.push(proposal);
+      }
+      let lastHigh = 0;
+      let pollLeader = {};
+      for (let proposal of tempProposals) {
+        if (parseInt(proposal.percent) > lastHigh) {
+          lastHigh = parseInt(proposal.percent);
+          pollLeader = proposal;
+        }
+      }
+      return { ...state, denominator: action.payload, proposals: tempProposals, pollLeader: pollLeader };
+    }
+
+    case "PROPOSAL_TALLIES_SUCCESS": {
+      let denominator = state.denominator;
+      let proposals = state.proposals;
+      let tempProposals = [];
+      let numerators = action.payload;
+      for (let i = 0; i < proposals.length; i++) {
+        let proposal = proposals[i];
+        proposal["percent"] = ((numerators[i] / denominator) * 100).toFixed(2);
+        proposal["weight"] = numerators[i];
+        tempProposals.push(proposal);
+      }
+      let lastHigh = 0;
+      let pollLeader = {};
+      for (let proposal of tempProposals) {
+        if (parseInt(proposal.percent) > lastHigh) {
+          lastHigh = parseInt(proposal.percent);
+          pollLeader = proposal;
+        }
+      }
+      return { ...state, proposals: tempProposals, numerators: action.payload, pollLeader: pollLeader };
+    }
+
+    case "POLL_START_TIME_SUCCESS": {
+      return { ...state, startTime: action.payload };
+    }
+
+    case "POLL_END_TIME_SUCCESS": {
+      return { ...state, endTime: action.payload };
+    }
+
     default: {
       return { ...state };
     }

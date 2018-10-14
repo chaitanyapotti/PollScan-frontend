@@ -7,7 +7,6 @@ export function getName(address) {
     axios
       .get(config.api_base_url + "/name", { params: { address: address } })
       .then(response => {
-        console.log("name received", response.data);
         if (response.data.message === "Success") {
           dispatch({
             type: "POLL_NAME_SUCCESS",
@@ -18,6 +17,84 @@ export function getName(address) {
       .catch(err => {
         dispatch({
           type: "POLL_NAME_FAILED",
+          payload: err
+        });
+        dispatch({
+          type: "API_ERROR",
+          payload: err
+        });
+      });
+  };
+}
+
+export function getStartTime(address) {
+  console.log("get starttimr called");
+  return function(dispatch) {
+    axios
+      .get(config.api_base_url + "/starttime", { params: { address: address } })
+      .then(response => {
+        if (response.data.message === "Success") {
+          dispatch({
+            type: "POLL_START_TIME_SUCCESS",
+            payload: response.data.data.starttime
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: "POLL_START_TIME_FAILED",
+          payload: err
+        });
+        dispatch({
+          type: "API_ERROR",
+          payload: err
+        });
+      });
+  };
+}
+
+export function getEndTime(address) {
+  console.log("get endtime called");
+  return function(dispatch) {
+    axios
+      .get(config.api_base_url + "/endtime", { params: { address: address } })
+      .then(response => {
+        if (response.data.message === "Success") {
+          dispatch({
+            type: "POLL_END_TIME_SUCCESS",
+            payload: response.data.data.endtime
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: "POLL_END_TIME_FAILED",
+          payload: err
+        });
+        dispatch({
+          type: "API_ERROR",
+          payload: err
+        });
+      });
+  };
+}
+
+export function getVoterBaseDenominator(address) {
+  console.log("get total votes called");
+  return function(dispatch) {
+    axios
+      .get(config.api_base_url + "/totalvotes", { params: { address: address } })
+      .then(response => {
+        if (response.data.message === "Success") {
+          dispatch({
+            type: "TOTAL_VOTES_SUCCESS",
+            payload: response.data.data.totalvotes
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: "TOTAL_VOTES_FAILED",
           payload: err
         });
         dispatch({
@@ -81,25 +158,39 @@ export function getProposalsWithVotes(address) {
       .then(response => {
         if (response.data.message === "Success") {
           console.log("proposals", response.data);
-          let lastHigh = 0;
-          let pollLeader = {};
-          for (let proposal of response.data.data.proposalswithvotes) {
-            if (proposal.votes > lastHigh) {
-              lastHigh = proposal.votes;
-              pollLeader = proposal;
-            }
-          }
           dispatch({
             type: "PROPOSALS_WITH_VOTES_SUCCESS",
             proposals: response.data.data.proposalswithvotes,
-            totalvotescasted: response.data.data.totalvotescasted,
-            pollleader: pollLeader
+            totalvotescasted: response.data.data.totalvotescasted
           });
         }
       })
       .catch(err => {
         dispatch({
           type: "PROPOSALS_WITH_VOTES_FAILED",
+          payload: err
+        });
+      });
+  };
+}
+
+export function getVoteTalliesWeighted(address) {
+  return function(dispatch) {
+    axios
+      .get(config.api_base_url + "/votetallies", {
+        params: { address: address }
+      })
+      .then(response => {
+        if (response.data.message === "Success") {
+          dispatch({
+            type: "PROPOSAL_TALLIES_SUCCESS",
+            payload: response.data.data.votetallies
+          });
+        }
+      })
+      .catch(err => {
+        dispatch({
+          type: "PROPOSAL_TALLIES_FAILED",
           payload: err
         });
       });

@@ -7,7 +7,16 @@ import { Grid, Row, Col } from "react-flexbox-grid";
 
 import { Table, Loader } from "semantic-ui-react";
 
-import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+import {
+  getName,
+  getPollType,
+  getVoterBaseLogic,
+  getProposalsWithVotes,
+  getStartTime,
+  getEndTime,
+  getVoterBaseDenominator,
+  getVoteTalliesWeighted
+} from "../actions/searchBarActions";
 import { getAllActivities } from "../actions/allActivitiesActions";
 
 import "../styles/tableFooter.css";
@@ -33,6 +42,10 @@ class AllActivities extends Component {
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
+      this.props.dispatch(getStartTime(queryUrl.query.contract));
+      this.props.dispatch(getEndTime(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
+      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
       this.props.dispatch(getAllActivities(queryUrl.query.contract));
     }
   }
@@ -70,7 +83,7 @@ class AllActivities extends Component {
             <Table.Row key={index}>
               <Table.Cell>{voter.address}</Table.Cell>
               <Table.Cell>{voter.type}</Table.Cell>
-              <Table.Cell>{voter.datetime}</Table.Cell>
+              <Table.Cell> {new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
               <Table.Cell>{voter.weight}</Table.Cell>
               <Table.Cell>{voter.value}</Table.Cell>
             </Table.Row>
@@ -112,11 +125,11 @@ class AllActivities extends Component {
                 <Table basic>
                   <Table.Header>
                     <Table.Row>
-                      <Table.HeaderCell>Address</Table.HeaderCell>
-                      <Table.HeaderCell>Type</Table.HeaderCell>
-                      <Table.HeaderCell>Transaction Date & Time</Table.HeaderCell>
-                      <Table.HeaderCell>Size</Table.HeaderCell>
-                      <Table.HeaderCell>Value</Table.HeaderCell>
+                      <Table.HeaderCell width={4}>Address</Table.HeaderCell>
+                      <Table.HeaderCell width={1}>Type</Table.HeaderCell>
+                      <Table.HeaderCell width={3}>Timestamp</Table.HeaderCell>
+                      <Table.HeaderCell width={1}>Size</Table.HeaderCell>
+                      <Table.HeaderCell width={1}>Value</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>{this.addTableRowsDynamically()}</Table.Body>

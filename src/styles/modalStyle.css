@@ -1,0 +1,61 @@
+.helperModalText {
+  margin: 20px !important;
+}
+
+ul {
+  list-style: none;
+}
+.address {
+  width: 400px;
+  height: 40px;
+  background-color: #4ca9fc !important;
+  border-radius: 2.25em !important;
+  border: None !important;
+  color: #ffffff !important;
+  font-family: "PT Sans" !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  margin-bottom: 5px !important;
+  margin-top: 5px !important;
+  transition: 200ms !important;
+}
+
+.address:hover {
+  transform: scale(1.05) !important;
+  transition: 100ms !important;
+  box-shadow: 0px 0px 30px #4caafc79 !important;
+}
+
+.address:active {
+  transform: scale(1) !important;
+  box-shadow: 0px 0px 0px !important;
+  background-color: #1e7aca !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 510px) {
+  .flex {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -30px;
+  }
+
+  .address {
+    width: 320px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .flex {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: -25px;
+  }
+
+  .address {
+    width: 280px !important;
+    font-size: 10px !important;
+  }
+}

@@ -5,7 +5,16 @@ import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import { Progress, Popup, Loader } from "semantic-ui-react";
 import { getAllActivities } from "../actions/allActivitiesActions";
-import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+import {
+  getName,
+  getPollType,
+  getVoterBaseLogic,
+  getProposalsWithVotes,
+  getStartTime,
+  getEndTime,
+  getVoterBaseDenominator,
+  getVoteTalliesWeighted
+} from "../actions/searchBarActions";
 
 const style = {
   width: "221px",
@@ -35,13 +44,17 @@ class PollStats extends Component {
   //   this.props.history.push({ pathname: `/events`, search: '?contract=' + this.props.searchText })
   // }
 
-  componentWillMount() {
+  componentDidMount() {
     console.log(window.location.href);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && this.props.searchText === "") {
       this.props.dispatch(getName(queryUrl.query.contract));
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
+      this.props.dispatch(getStartTime(queryUrl.query.contract));
+      this.props.dispatch(getEndTime(queryUrl.query.contract));
+      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
+      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
       this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
@@ -49,6 +62,9 @@ class PollStats extends Component {
       });
     }
   }
+  // componentWillMount() {
+
+  // }
 
   handleDetailedVoters(proposalId) {
     this.props.dispatch({
@@ -56,7 +72,7 @@ class PollStats extends Component {
       proposalid: proposalId,
       proposalname: this.props.proposals[proposalId].name
     });
-    this.props.dispatch(getAllActivities(this.props.searchText));
+    // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
       pathname: `/voters`,
       search: "?contract=" + this.props.searchText + "&id=" + proposalId.toString() + "&name=" + this.props.proposals[proposalId].name
@@ -68,7 +84,7 @@ class PollStats extends Component {
       type: "SHOW_ALL_VOTES",
       proposalname: "All"
     });
-    this.props.dispatch(getAllActivities(this.props.searchText));
+    // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
       pathname: `/voters`,
       search: "?contract=" + this.props.searchText
@@ -117,7 +133,7 @@ class PollStats extends Component {
               <div className="voter-logic">{this.props.voterBaseLogic}</div>
             </Col>
             <Col xs={12} sm={6} md={4} lg={4}>
-              <div className="poll-start-time">{this.props.startTime}</div>
+              <div className="poll-start-time">{new Date(parseInt(this.props.startTime) * 1000).toDateString()}</div>
             </Col>
           </Row>
           <Row>
@@ -143,7 +159,14 @@ class PollStats extends Component {
             </Col>
             <Col xs={12} sm={6} md={6} lg={6}>
               <div className="poll-end">
-                Poll ends in: {Math.ceil(Math.abs(new Date().getTime() - new Date(this.props.endTime).getTime()) / (1000 * 3600 * 24))} days
+                {new Date().getTime() > new Date(parseInt(this.props.endTime) * 1000).getTime() ? (
+                  <div>Ended on {new Date(parseInt(this.props.endTime) * 1000).toDateString()}</div>
+                ) : (
+                  <div>
+                    Poll ends in: {Math.ceil((new Date(parseInt(this.props.endTime) * 1000).getTime() - new Date().getTime()) / (1000 * 3600 * 24))}{" "}
+                    days
+                  </div>
+                )}
               </div>
             </Col>
           </Row>
@@ -168,19 +191,40 @@ class PollStats extends Component {
             </Col>
           </Row>
 
-          <Row>
-            <Col xs={12} sm={12} md={12} lg={12}>
-              <div className="poll-leader-text">Poll Leader</div>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} sm={12} md={12} lg={12}>
-              <div className="poll-leader-vote-share">
-                <div className="poll-leader-name">{this.props.pollLeader.name}</div>
-                <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
-              </div>
-            </Col>
-          </Row>
+          {this.props.proposals.length > 1 ? (
+            <div>
+              <Row>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  <div className="poll-leader-text">Poll Leader</div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  <div className="poll-leader-vote-share">
+                    <div className="poll-leader-name">{this.props.pollLeader.name}</div>
+                    <div className="vote-share">({this.props.pollLeader.percent}% Vote Share)</div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          ) : (
+            <div>
+              <Row>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  <div className="poll-leader-text">Status</div>
+                </Col>
+              </Row>
+              <Row>
+                <Col xs={12} sm={12} md={12} lg={12}>
+                  <div className="poll-leader-vote-share">
+                    <div className="poll-leader-name">
+                      Consensus in favour of {this.props.pollLeader.name} is {this.props.pollLeader.percent}%
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+          )}
         </div>
       </Grid>
     ) : (
@@ -190,11 +234,13 @@ class PollStats extends Component {
 }
 
 function mapStatesToProps(globalData) {
+  console.log(globalData);
   return {
     startTime: globalData.pollStats.startTime,
     pollName: globalData.pollStats.pollName,
     pollType: globalData.pollStats.pollType,
     endTime: globalData.pollStats.endTime,
+    denominator: globalData.pollStats.denominator,
     proposals: globalData.pollStats.proposals,
     voterBaseLogic: globalData.pollStats.voterBaseLogic,
     totalVoteCast: globalData.pollStats.totalVoteCast,

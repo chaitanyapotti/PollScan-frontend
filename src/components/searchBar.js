@@ -2,8 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid } from "react-flexbox-grid";
-import { getName, getPollType, getVoterBaseLogic, getProposalsWithVotes } from "../actions/searchBarActions";
+import { Modal, Button, Icon, Grid as SGrid } from "semantic-ui-react";
+import {
+  getName,
+  getPollType,
+  getVoterBaseLogic,
+  getProposalsWithVotes,
+  getStartTime,
+  getEndTime,
+  getVoterBaseDenominator,
+  getVoteTalliesWeighted
+} from "../actions/searchBarActions";
 import logo from "../assets/logo.png";
+import "../styles/modalStyle.css";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -11,6 +22,7 @@ class SearchBar extends Component {
     this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
     this.handleSearchClick = this.handleSearchClick.bind(this);
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleModalDoneAction = this.handleModalDoneAction.bind(this);
   }
 
   handleSearchTextChange(event) {
@@ -38,6 +50,10 @@ class SearchBar extends Component {
       this.props.dispatch(getName(this.props.searchText));
       this.props.dispatch(getPollType(this.props.searchText));
       this.props.dispatch(getVoterBaseLogic(this.props.searchText));
+      this.props.dispatch(getStartTime(this.props.searchText));
+      this.props.dispatch(getEndTime(this.props.searchText));
+      this.props.dispatch(getVoteTalliesWeighted(this.props.searchText));
+      this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
       this.props.dispatch(getProposalsWithVotes(this.props.searchText));
       this.props.history.push({
         pathname: `/contract`,
@@ -56,6 +72,10 @@ class SearchBar extends Component {
     this.props.dispatch(getName(this.props.searchText));
     this.props.dispatch(getPollType(this.props.searchText));
     this.props.dispatch(getVoterBaseLogic(this.props.searchText));
+    this.props.dispatch(getStartTime(this.props.searchText));
+    this.props.dispatch(getEndTime(this.props.searchText));
+    this.props.dispatch(getVoteTalliesWeighted(this.props.searchText));
+    this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
     this.props.dispatch(getProposalsWithVotes(this.props.searchText));
     this.props.history.push({
       pathname: `/contract`,
@@ -63,9 +83,63 @@ class SearchBar extends Component {
     });
   }
 
+  handleModalDoneAction(event) {
+    this.props.dispatch({ type: "CLOSE_HELPER_MODAL" });
+  }
+
+  handleCopyButtonClicked = (e, data) => {
+    var textField = document.createElement("textarea");
+    textField.innerText = data.children;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+  };
+
   render() {
     return (
       <Grid>
+        {true ? (
+          <Modal
+            open={this.props.helperModal === true}
+            header="Hello, welcome to PollScan test version on Rinkeby!"
+            content={
+              <div>
+                <h3 className="helperModalText">Please copy any of the sample poll addresses below in order to search for them on PollScan:</h3>
+
+                <ul className="flex">
+                  <li>
+                    <Button className="address" onClick={this.handleCopyButtonClicked.bind("0x95d0fFEa1400584d85ae2533917DB058059D8046")}>
+                      0x95d0fFEa1400584d85ae2533917DB058059D8046
+                    </Button>
+                  </li>
+                  <li>
+                    <Button className="address" onClick={this.handleCopyButtonClicked.bind("0x9FFaFa2618b92c68E38BaED7668E73484fda2E4d")}>
+                      0x9FFaFa2618b92c68E38BaED7668E73484fda2E4d
+                    </Button>
+                  </li>
+                  <li>
+                    <Button className="address" onClick={this.handleCopyButtonClicked.bind("0x0073db1d47047d2d0DbbbE7c2CeaFd059C3fde62")}>
+                      0x0073db1d47047d2d0DbbbE7c2CeaFd059C3fde62
+                    </Button>
+                  </li>
+                  <li>
+                    <Button className="address" onClick={this.handleCopyButtonClicked.bind("0xC1064Bc2Ed078A17dE2CdE99499B49C8343CaE0b")}>
+                      0xC1064Bc2Ed078A17dE2CdE99499B49C8343CaE0b
+                    </Button>
+                  </li>
+                  <li>
+                    <Button className="address" onClick={this.handleCopyButtonClicked.bind("0xbe67e58cd38081f42ccfd4e22452873ceb24d5d9")}>
+                      0xbe67e58cd38081f42ccfd4e22452873ceb24d5d9
+                    </Button>
+                  </li>
+                </ul>
+              </div>
+            }
+            actions={[{ key: "done", content: "Done", positive: true }]}
+            onActionClick={this.handleModalDoneAction}
+          />
+        ) : null}
         <div className="App-title">
           {" "}
           <img src={logo} onClick={this.handleOnClick} />{" "}
@@ -73,7 +147,7 @@ class SearchBar extends Component {
         <div className="search">
           <input
             className="search-input"
-            spellcheck="false"
+            spellCheck="false"
             value={this.props.searchText}
             placeholder="Enter Poll Address"
             onChange={this.handleSearchTextChange}
@@ -90,7 +164,8 @@ class SearchBar extends Component {
 
 function mapStatesToProps(globalData) {
   return {
-    searchText: globalData.searchBarData.searchText
+    searchText: globalData.searchBarData.searchText,
+    helperModal: globalData.searchBarData.helperModal
   };
 }
 

@@ -3,652 +3,11 @@ export default function reducer(
     selectedProposalName: "All",
     selectedProposalId: 0,
     currentVoterPage: 0,
-    allVoters: [
-      // { 'address': '0x908OBjsVGduUI2645o2134sd390453fgH0897', 'datetime': '4th Aug 2018 | 23:14', 'weight': 0.8 },
-    ],
+    allVoters: [],
     currentActivityPage: 0,
     allActivities: [],
     showActivityLoader: true,
-    allActivitesRetrievedSuccessfully: false,
-    allActivitiesTemp: [
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      },
-      {
-        address: "0x908OBjsVGduUI2645o2134sd390453fgH0897",
-        datetime: "4th Aug 2018 | 23:14",
-        weight: 0.6,
-        type: "Failed Vote",
-        value: 0
-      }
-    ]
+    allActivitesRetrievedSuccessfully: false
   },
   action
 ) {
@@ -656,66 +15,76 @@ export default function reducer(
     case "SHOW_ALL_VOTES": {
       let tempAllVoters = [];
       let tempAllActivities = state.allActivities;
-      let tempAllUnVoters = [];
+      let tempVotersDict = {};
       for (let activity of tempAllActivities) {
-        if (activity.type === "CastVote") {
-          tempAllVoters.push({
-            address: activity.address,
-            datetime: activity.datetime,
-            weight: activity.weight
-          });
-        } else if (activity.type === "RevokedVote") {
-          tempAllUnVoters.push({
-            address: activity.address,
-            datetime: activity.datetime,
-            weight: activity.weight
-          });
+        if (activity.type !== "TriedToVote") {
+          if (activity.address in tempVotersDict) {
+          } else {
+            tempVotersDict[activity.address] = {
+              address: activity.address,
+              datetime: activity.datetime,
+              weight: activity.weight,
+              type: activity.type,
+              value: activity.value
+            };
+          }
+        }
+      }
+      for (let key in tempVotersDict) {
+        if (tempVotersDict[key].type !== "RevokedVote") {
+          tempAllVoters.push(tempVotersDict[key]);
         }
       }
       return {
         ...state,
-        allVoters: tempAllVoters
+        allVoters: tempAllVoters,
+        currentActivityPage: 0,
+        currentVoterPage: 0,
+        selectedProposalName: "All"
       };
     }
     case "PROPOSAL_SELECTED": {
+      console.log("PROPOSAL_SELECTED: ", action);
       let tempAllVoters = [];
       let tempAllActivities = state.allActivities;
       let tempAllUnVoters = [];
-      for (let activity of tempAllActivities) {
-        if (parseInt(activity.value) === parseInt(state.selectedProposalId)) {
-          if (activity.type === "CastVote") {
-            tempAllVoters.push({
-              address: activity.address,
-              datetime: activity.datetime,
-              weight: activity.weight
-            });
-          } else if (activity.type === "RevokedVote") {
-            tempAllUnVoters.push({
-              address: activity.address,
-              datetime: activity.datetime,
-              weight: activity.weight
-            });
+      if ("proposalid" in action) {
+        let tempAllVoters = [];
+        let tempAllActivities = state.allActivities;
+        let tempVotersDict = {};
+        for (let activity of tempAllActivities) {
+          if (activity.type !== "TriedToVote") {
+            if (activity.address in tempVotersDict) {
+            } else {
+              tempVotersDict[activity.address] = {
+                address: activity.address,
+                datetime: activity.datetime,
+                weight: activity.weight,
+                type: activity.type,
+                value: activity.value
+              };
+            }
           }
         }
-      }
-      // for (let unvote of tempAllUnVoters){
-      //     for(let vote of tempAllVoters){
-
-      //     }
-      // }
-      if ("proposalid" in action) {
+        for (let key in tempVotersDict) {
+          if (tempVotersDict[key].type !== "RevokedVote" && tempVotersDict[key].value === action.proposalid.toString()) {
+            tempAllVoters.push(tempVotersDict[key]);
+          }
+        }
         return {
           ...state,
           allVoters: tempAllVoters,
           selectedProposalId: action.proposalid,
-          selectedProposalName: action.proposalname
+          selectedProposalName: action.proposalname,
+          currentActivityPage: 0,
+          currentVoterPage: 0
         };
       } else {
-        return { ...state, allVoters: tempAllVoters };
+        return { ...state, allVoters: tempAllVoters, currentActivityPage: 0, currentVoterPage: 0 };
       }
     }
     case "PROPOSAL_NAME_SELECTED": {
-      return { ...state, selectedProposalName: action.payload };
+      return { ...state, selectedProposalName: action.payload, currentActivityPage: 0, currentVoterPage: 0 };
     }
     case "VOTERS_PAGE_CHANGED": {
       return { ...state, currentVoterPage: action.payload };
@@ -724,9 +93,11 @@ export default function reducer(
       return { ...state, currentActivityPage: action.payload };
     }
     case "ALL_ACTIVITIES_SUCCESS": {
+      let allActivities = action.payload;
+      allActivities = allActivities.reverse();
       return {
         ...state,
-        allActivities: action.payload,
+        allActivities: allActivities,
         showActivityLoader: false,
         allActivitesRetrievedSuccessfully: true
       };
