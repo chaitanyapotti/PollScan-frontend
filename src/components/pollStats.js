@@ -162,7 +162,7 @@ class PollStats extends Component {
                 {new Date().getTime() > new Date(parseInt(this.props.endTime) * 1000).getTime() ? (
                   <div>Ended on {new Date(parseInt(this.props.endTime) * 1000).toDateString()}</div>
                 ) : (
-                  <div>
+                  <div className="poll-ends-in">
                     Poll ends in: {Math.ceil((new Date(parseInt(this.props.endTime) * 1000).getTime() - new Date().getTime()) / (1000 * 3600 * 24))}{" "}
                     days
                   </div>

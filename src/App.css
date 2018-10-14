@@ -1,3 +1,7 @@
+body {
+  overflow: scroll;
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -541,6 +545,12 @@ button:focus {
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
+  .search-input {
+    font-size: 22px;
+    padding-left: 12px;
+    padding-left: 20px;
+  }
+
   .search {
     width: 100% !important;
   }
@@ -584,6 +594,50 @@ button:focus {
   }
 }
 @media only screen and (min-width: 576px) and (max-width: 767px) {
+  .voter-logic {
+    font-size: 20px;
+    display: grid;
+    order: -1;
+  }
+
+  .proposal-name {
+    font-size: 16px;
+  }
+
+  .search-input {
+    font-size: 16px !important;
+    padding-left: 15px !important;
+  }
+
+  .poll-started-text {
+    font-size: 12px;
+    display: grid;
+    order: -0;
+  }
+
+  .poll-start-time {
+    font-size: 14px;
+    display: grid;
+  }
+
+  .poll-name,
+  .poll-type,
+  .poll-ends-in,
+  .total-voters,
+  .poll-leader-name {
+    font-size: 20px;
+  }
+
+  .proposal-percent,
+  .voters-count,
+  .vote-share {
+    font-size: 15px;
+  }
+
+  .poll-leader-text {
+    font-size: 20px;
+  }
+
   .footgrid {
     width: 100%;
     margin: 0 auto;
@@ -594,7 +648,8 @@ button:focus {
     width: 100% !important;
   }
   .search-button {
-    margin-left: -71px;
+    margin-left: -47px;
+    width: 175px;
   }
   .App-title {
     margin-right: 185px !important;
@@ -630,6 +685,54 @@ button:focus {
 @media only screen and (max-width: 575px) and (min-width: 321px) {
   .App-title {
     transform: scale(0.75);
+  }
+
+  .voter-logic {
+    font-size: 18px;
+    display: grid;
+    order: -1;
+    margin-top: 10px;
+  }
+
+  .proposal-name {
+    font-size: 14px;
+  }
+
+  .search-input {
+    font-size: 12px;
+    padding-left: 12px;
+    text-align: center;
+  }
+
+  .poll-started-text {
+    font-size: 12px;
+    margin-top: 70px;
+    display: grid;
+    order: -0;
+  }
+
+  .poll-start-time {
+    font-size: 14px;
+    display: grid;
+    margin-top: -46px;
+  }
+
+  .poll-name,
+  .poll-type,
+  .poll-ends-in,
+  .total-voters,
+  .poll-leader-name {
+    font-size: 18px;
+  }
+
+  .proposal-percent,
+  .voters-count,
+  .vote-share {
+    font-size: 15px;
+  }
+
+  .poll-leader-text {
+    font-size: 20px;
   }
 
   .copy {
@@ -703,6 +806,54 @@ button:focus {
   .App-title {
     transform: scale(0.75);
     margin-top: 10vh !important;
+  }
+
+  .voter-logic {
+    font-size: 18px;
+    display: grid;
+    order: -1;
+    margin-top: 10px;
+  }
+
+  .proposal-name {
+    font-size: 14px;
+  }
+
+  .search-input {
+    font-size: 12px;
+    padding-left: 12px;
+    text-align: center;
+  }
+
+  .poll-started-text {
+    font-size: 12px;
+    margin-top: 70px;
+    display: grid;
+    order: -0;
+  }
+
+  .poll-start-time {
+    font-size: 14px;
+    display: grid;
+    margin-top: -46px;
+  }
+
+  .poll-name,
+  .poll-type,
+  .poll-ends-in,
+  .total-voters,
+  .poll-leader-name {
+    font-size: 18px;
+  }
+
+  .proposal-percent,
+  .voters-count,
+  .vote-share {
+    font-size: 15px;
+  }
+
+  .poll-leader-text {
+    font-size: 20px;
   }
 
   .copy {

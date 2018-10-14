@@ -1,5 +1,6 @@
 .helperModalText {
   margin: 20px !important;
+  font-family: "PT Sans" !important;
 }
 
 ul {
@@ -44,6 +45,11 @@ ul {
     width: 320px !important;
     font-size: 12px !important;
   }
+
+  .helperModalText {
+    font-family: "PT Sans" !important;
+    font-size: 15px !important;
+  }
 }
 
 @media only screen and (max-width: 320px) {
@@ -57,5 +63,10 @@ ul {
   .address {
     width: 280px !important;
     font-size: 10px !important;
+  }
+
+  .helperModalText {
+    font-family: "PT Sans" !important;
+    font-size: 12px !important;
   }
 }
