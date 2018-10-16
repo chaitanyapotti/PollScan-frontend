@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
+import { CSVLink } from "react-csv";
 
 import { Table, Loader } from "semantic-ui-react";
 
@@ -150,7 +151,20 @@ class DetailedVoters extends Component {
     });
   }
 
+  prepareCSVData(allVoters) {
+    let data = [];
+    for (let i = 0; i < allVoters.length; i++) {
+      let row = {};
+      row["Address"] = allVoters[i].address;
+      row["Timestamp"] = new Date(parseInt(allVoters[i].datetime) * 1000).toLocaleString("en-GB");
+      row["Weight"] = allVoters[i].weight;
+      data.push(row);
+    }
+    return data;
+  }
+
   render() {
+    let csvData = this.prepareCSVData(this.props.allVoters);
     return (
       <div>
         <div className="back-to-poll" onClick={this.handleOnClick}>
@@ -183,6 +197,11 @@ class DetailedVoters extends Component {
                 <div className="button-float">
                   <button className="csv-button" onClick={this.handleSearchClick}>
                     Download CSV
+                  </button>
+                  <button className="csv-button">
+                    <CSVLink data={csvData} filename={`voters-${this.props.selectedProposalName}.csv`}>
+                      Download CSV
+                    </CSVLink>
                   </button>
                 </div>
               </div>

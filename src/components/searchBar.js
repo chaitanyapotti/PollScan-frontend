@@ -89,6 +89,9 @@ class SearchBar extends Component {
 
   handleCopyButtonClicked = (e, data) => {
     var textField = document.createElement("textarea");
+    textField.contentEditable = true;
+    textField.readOnly = false;
+    textField.setSelectionRange(0, 9999999);
     textField.innerText = data.children;
     document.body.appendChild(textField);
     textField.select();
