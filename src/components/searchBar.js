@@ -108,7 +108,7 @@ class SearchBar extends Component {
             header="Hello, welcome to PollScan test version on Rinkeby!"
             content={
               <div>
-                <h3 className="helperModalText">Please copy any of the sample poll addresses below in order to search for them on PollScan:</h3>
+                <h3 className="helperModalText">Please click on any of the sample poll addresses below in order to copy them, so that you can search for them on PollScan:</h3>
 
                 <ul className="flex">
                   <li>
