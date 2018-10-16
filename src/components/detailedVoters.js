@@ -195,12 +195,11 @@ class DetailedVoters extends Component {
             <Grid>
               <div className="button-grid">
                 <div className="button-float">
-                  <button className="csv-button" onClick={this.handleSearchClick}>
-                    Download CSV
-                  </button>
                   <button className="csv-button">
                     <CSVLink data={csvData} filename={`voters-${this.props.selectedProposalName}.csv`}>
-                      Download CSV
+                    <div className="white">
+                    Download CSV
+                    </div>
                     </CSVLink>
                   </button>
                 </div>

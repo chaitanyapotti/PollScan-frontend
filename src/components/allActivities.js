@@ -156,15 +156,13 @@ class AllActivities extends Component {
               </div>
             </Grid>
             <Grid>
-              <div className="button-grid">
+             <div className="button-grid">
                 <div className="button-float">
-                  <button className="csv-button" onClick={this.handleSearchClick}>
-                    Download CSV
-                  </button>
-                  <br />
-                  <button className="csv-button">
+                  <button className="csv-button"> 
                     <CSVLink data={csvData} filename={"all-activities.csv"}>
-                      Download CSV
+                    <div className="white">
+                    Download CSV
+                    </div>
                     </CSVLink>
                   </button>
                 </div>
