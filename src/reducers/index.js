@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import searchBarData from "./searchBarReducer";
-import allActivities from "./allActivitiesReducer";
+import allActivities from "./activitiesReducer";
 import pollStats from "./pollStatsReducer";
 
 const appReducer = combineReducers({
@@ -10,10 +10,7 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === "USER_LOGGED_OUT") {
-    state = undefined;
-  }
-
   return appReducer(state, action);
 };
+
 export default rootReducer;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid } from "react-flexbox-grid";
-import { Modal, Button, Icon, Grid as SGrid } from "semantic-ui-react";
+import { Modal, Button, Grid as SGrid } from "semantic-ui-react";
 import {
   getName,
   getPollType,
@@ -12,9 +12,9 @@ import {
   getEndTime,
   getVoterBaseDenominator,
   getVoteTalliesWeighted
-} from "../actions/searchBarActions";
-import logo from "../assets/logo.png";
-import "../styles/modalStyle.css";
+} from "../../../actions/searchBarActions";
+import logo from "../../../assets/logo.png";
+import "../../../styles/modalStyle.css";
 
 class SearchBar extends Component {
   constructor(props) {
@@ -108,7 +108,9 @@ class SearchBar extends Component {
             header="Hello, welcome to PollScan test version on Rinkeby!"
             content={
               <div>
-                <h3 className="helperModalText">Please click on any of the sample poll addresses below in order to copy them, so that you can search for them on PollScan:</h3>
+                <h3 className="helperModalText">
+                  Please click on any of the sample poll addresses below in order to copy them, so that you can search for them on PollScan:
+                </h3>
 
                 <ul className="flex">
                   <li>

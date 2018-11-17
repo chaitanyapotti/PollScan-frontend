@@ -17,16 +17,16 @@ import {
   getEndTime,
   getVoterBaseDenominator,
   getVoteTalliesWeighted
-} from "../actions/searchBarActions";
-import { getAllActivities } from "../actions/allActivitiesActions";
+} from "../../actions/searchBarActions";
+import { getAllActivities } from "../../actions/activitiesActions";
 
-import "../styles/tableFooter.css";
+import "../../styles/tableFooter.css";
 
-import back from "../assets/back.png";
+import back from "../../assets/back.png";
 
 const Limit = 10;
 
-class AllActivities extends Component {
+class Activities extends Component {
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -156,13 +156,11 @@ class AllActivities extends Component {
               </div>
             </Grid>
             <Grid>
-             <div className="button-grid">
+              <div className="button-grid">
                 <div className="button-float">
-                  <button className="csv-button"> 
+                  <button className="csv-button">
                     <CSVLink data={csvData} filename={"all-activities.csv"}>
-                    <div className="white">
-                    Download CSV
-                    </div>
+                      <div className="white">Download CSV</div>
                     </CSVLink>
                   </button>
                 </div>
@@ -189,4 +187,4 @@ function mapStatesToProps(globalData) {
 
 const myConnector = connect(mapStatesToProps);
 
-export default withRouter(myConnector(AllActivities));
+export default withRouter(myConnector(Activities));

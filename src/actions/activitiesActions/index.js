@@ -1,5 +1,5 @@
 import axios from "axios";
-import config from "../config";
+import config from "../../config";
 
 export function getAllActivities(address, proposalid, proposalname) {
   return function(dispatch) {

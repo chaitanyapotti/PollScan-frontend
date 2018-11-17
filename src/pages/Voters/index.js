@@ -17,15 +17,15 @@ import {
   getEndTime,
   getVoterBaseDenominator,
   getVoteTalliesWeighted
-} from "../actions/searchBarActions";
-import { getAllActivities } from "../actions/allActivitiesActions";
+} from "../../actions/searchBarActions";
+import { getAllActivities } from "../../actions/activitiesActions";
 
-import "../styles/tableFooter.css";
-import back from "../assets/back.png";
+import "../../styles/tableFooter.css";
+import back from "../../assets/back.png";
 
 const Limit = 10;
 
-class DetailedVoters extends Component {
+class Voters extends Component {
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -197,9 +197,7 @@ class DetailedVoters extends Component {
                 <div className="button-float">
                   <button className="csv-button">
                     <CSVLink data={csvData} filename={`voters-${this.props.selectedProposalName}.csv`}>
-                    <div className="white">
-                    Download CSV
-                    </div>
+                      <div className="white">Download CSV</div>
                     </CSVLink>
                   </button>
                 </div>
@@ -227,4 +225,4 @@ function mapStatesToProps(globalData) {
 
 const myConnector = connect(mapStatesToProps);
 
-export default withRouter(myConnector(DetailedVoters));
+export default withRouter(myConnector(Voters));

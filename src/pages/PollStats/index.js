@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import { Progress, Popup, Loader } from "semantic-ui-react";
-import { getAllActivities } from "../actions/allActivitiesActions";
+import { getAllActivities } from "../../actions/activitiesActions";
 import {
   getName,
   getPollType,
@@ -14,7 +14,7 @@ import {
   getEndTime,
   getVoterBaseDenominator,
   getVoteTalliesWeighted
-} from "../actions/searchBarActions";
+} from "../../actions/searchBarActions";
 
 const style = {
   width: "221px",
