@@ -66,7 +66,7 @@ class PollStats extends Component {
 
   // }
 
-  handleDetailedVoters(proposalId) {
+  handleDetailedVoters = proposalId => {
     this.props.dispatch({
       type: "PROPOSAL_SELECTED",
       proposalid: proposalId,
@@ -77,9 +77,9 @@ class PollStats extends Component {
       pathname: `/voters`,
       search: "?contract=" + this.props.searchText + "&id=" + proposalId.toString() + "&name=" + this.props.proposals[proposalId].name
     });
-  }
+  };
 
-  handleAllDetailedVoters() {
+  handleAllDetailedVoters = () => {
     this.props.dispatch({
       type: "SHOW_ALL_VOTES",
       proposalname: "All"
@@ -89,7 +89,7 @@ class PollStats extends Component {
       pathname: `/voters`,
       search: "?contract=" + this.props.searchText
     });
-  }
+  };
 
   populateProposals() {
     if (this.props.proposals.length > 0) {
@@ -103,7 +103,12 @@ class PollStats extends Component {
                 on={["hover", "click"]}
                 style={style}
                 trigger={
-                  <div onClick={this.handleDetailedVoters.bind(this, index)} className="percent-voters">
+                  <div
+                    onClick={() => {
+                      this.handleDetailedVoters(index);
+                    }}
+                    className="percent-voters"
+                  >
                     <div className="proposal-percent">{proposal.percent}%</div>
                     <div className="voters-count">({proposal.votes} Voters)</div>
                   </div>
@@ -181,7 +186,7 @@ class PollStats extends Component {
                   style={style}
                   position="top center"
                   trigger={
-                    <div onClick={this.handleAllDetailedVoters.bind(this)} className="total-voters">
+                    <div onClick={this.handleAllDetailedVoters} className="total-voters">
                       Total Voters: {this.props.totalVoteCast}
                     </div>
                   }
@@ -233,8 +238,7 @@ class PollStats extends Component {
   }
 }
 
-function mapStatesToProps(globalData) {
-  console.log(globalData);
+const mapStatesToProps = globalData => {
   return {
     startTime: globalData.pollStats.startTime,
     pollName: globalData.pollStats.pollName,
@@ -249,7 +253,7 @@ function mapStatesToProps(globalData) {
     showPollStatsLoader: globalData.pollStats.showPollStatsLoader,
     showWrongAddressModal: globalData.searchBarData.showWrongAddressModals
   };
-}
+};
 
 const myConnector = connect(mapStatesToProps);
 

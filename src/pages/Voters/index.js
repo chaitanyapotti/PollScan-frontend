@@ -26,10 +26,6 @@ import back from "../../assets/back.png";
 const Limit = 10;
 
 class Voters extends Component {
-  constructor(props) {
-    super(props);
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
   addPageNumbers() {
     return (
       <div>
@@ -140,7 +136,7 @@ class Voters extends Component {
     }
   }
 
-  handleOnClick() {
+  handleOnClick = () => {
     this.props.history.push({
       pathname: `/contract`,
       search: "?contract=" + this.props.searchText
@@ -149,7 +145,7 @@ class Voters extends Component {
       type: "SHOW_ACTIVITY_LOADER",
       payload: ""
     });
-  }
+  };
 
   prepareCSVData(allVoters) {
     let data = [];
@@ -212,7 +208,7 @@ class Voters extends Component {
   }
 }
 
-function mapStatesToProps(globalData) {
+const mapStatesToProps = globalData => {
   return {
     allVoters: globalData.allActivities.allVoters,
     selectedProposalName: globalData.allActivities.selectedProposalName,
@@ -221,7 +217,7 @@ function mapStatesToProps(globalData) {
     showActivityLoader: globalData.allActivities.showActivityLoader,
     allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
   };
-}
+};
 
 const myConnector = connect(mapStatesToProps);
 

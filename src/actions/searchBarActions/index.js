@@ -1,198 +1,257 @@
 import axios from "axios";
 import config from "../../config";
+import actionTypes from "../../action_types";
+import constants from "../../constants";
 
-export function getName(address) {
-  console.log("get name called");
-  return function(dispatch) {
+export const getName = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/name", { params: { address: address } })
+      .get(`${config.api_base_url}/name`, { params: { address: address } })
       .then(response => {
-        if (response.data.message === "Success") {
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "POLL_NAME_SUCCESS",
+            type: actionTypes.POLL_NAME_SUCCESS,
             payload: response.data.data.name
           });
+        } else {
+          dispatch({
+            type: actionTypes.POLL_NAME_FAILED,
+            payload: constants.POLL_NAME_FAILED_MESSAGE
+          });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "POLL_NAME_FAILED",
-          payload: err
+          type: actionTypes.POLL_NAME_FAILED,
+          payload: err.message
         });
         dispatch({
-          type: "API_ERROR",
-          payload: err
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
 
-export function getStartTime(address) {
-  console.log("get starttimr called");
-  return function(dispatch) {
+export const getStartTime = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/starttime", { params: { address: address } })
+      .get(`${config.api_base_url}/starttime`, { params: { address: address } })
       .then(response => {
-        if (response.data.message === "Success") {
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "POLL_START_TIME_SUCCESS",
+            type: actionTypes.POLL_START_TIME_SUCCESS,
             payload: response.data.data.starttime
           });
+        } else {
+          dispatch({
+            type: actionTypes.POLL_START_TIME_FAILED,
+            payload: constants.POLL_START_TIME_FAILED_MESSAGE
+          });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "POLL_START_TIME_FAILED",
-          payload: err
+          type: actionTypes.POLL_START_TIME_FAILED,
+          payload: err.message
         });
         dispatch({
-          type: "API_ERROR",
-          payload: err
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
 
-export function getEndTime(address) {
-  console.log("get endtime called");
-  return function(dispatch) {
+export const getEndTime = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/endtime", { params: { address: address } })
+      .get(`${config.api_base_url}/endtime`, { params: { address: address } })
       .then(response => {
-        if (response.data.message === "Success") {
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "POLL_END_TIME_SUCCESS",
+            type: actionTypes.POLL_END_TIME_SUCCESS,
             payload: response.data.data.endtime
           });
+        } else {
+          dispatch({
+            type: actionTypes.POLL_END_TIME_FAILED,
+            payload: constants.POLL_END_TIME_FAILED_MESSAGE
+          });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "POLL_END_TIME_FAILED",
-          payload: err
+          type: actionTypes.POLL_END_TIME_FAILED,
+          payload: err.message
         });
         dispatch({
-          type: "API_ERROR",
-          payload: err
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
 
-export function getVoterBaseDenominator(address) {
-  console.log("get total votes called");
-  return function(dispatch) {
+export const getVoterBaseDenominator = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/totalvotes", { params: { address: address } })
+      .get(`${config.api_base_url}/totalvotes`, { params: { address: address } })
       .then(response => {
-        if (response.data.message === "Success") {
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "TOTAL_VOTES_SUCCESS",
+            type: actionTypes.TOTAL_VOTES_SUCCESS,
             payload: response.data.data.totalvotes
           });
+        } else {
+          dispatch({
+            type: actionTypes.TOTAL_VOTES_FAILED,
+            payload: constants.TOTAL_VOTES_FAILED_MESSAGE
+          });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "TOTAL_VOTES_FAILED",
-          payload: err
+          type: actionTypes.TOTAL_VOTES_FAILED,
+          payload: err.message
         });
         dispatch({
-          type: "API_ERROR",
-          payload: err
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
 
-export function getPollType(address) {
-  return function(dispatch) {
+export const getPollType = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/polltype", { params: { address: address } })
+      .get(`${config.api_base_url}/polltype`, { params: { address: address } })
       .then(response => {
-        if (response.data.message === "Success") {
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "POLL_TYPE_SUCCESS",
+            type: actionTypes.POLL_TYPE_SUCCESS,
             payload: response.data.data.polltype
           });
-        }
-      })
-      .catch(err => {
-        dispatch({
-          type: "POLL_TYPE_FAILED",
-          payload: err
-        });
-      });
-  };
-}
-
-export function getVoterBaseLogic(address) {
-  return function(dispatch) {
-    axios
-      .get(config.api_base_url + "/voterbaselogic", {
-        params: { address: address }
-      })
-      .then(response => {
-        if (response.data.message === "Success") {
+        } else {
           dispatch({
-            type: "VOTER_BASE_LOGIC_SUCCESS",
-            payload: response.data.data.voterbaselogic
+            type: actionTypes.POLL_TYPE_FAILED,
+            payload: constants.POLL_TYPE_FAILED_MESSAGE
           });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "VOTER_BASE_LOGIC_FAILED",
-          payload: err
+          type: actionTypes.POLL_TYPE_FAILED,
+          payload: err.message
+        });
+        dispatch({
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
 
-export function getProposalsWithVotes(address) {
-  return function(dispatch) {
+export const getVoterBaseLogic = address => {
+  return dispatch => {
     axios
-      .get(config.api_base_url + "/proposalswithvotes", {
+      .get(`${config.api_base_url}/voterbaselogic`, {
         params: { address: address }
       })
       .then(response => {
-        if (response.data.message === "Success") {
-          console.log("proposals", response.data);
+        if (response.data.message === constants.SUCCESS) {
           dispatch({
-            type: "PROPOSALS_WITH_VOTES_SUCCESS",
+            type: actionTypes.VOTER_BASE_LOGIC_SUCCESS,
+            payload: response.data.data.voterbaselogic
+          });
+        } else {
+          dispatch({
+            type: actionTypes.VOTER_BASE_LOGIC_FAILED,
+            payload: constants.VOTER_BASE_LOGIC_FAILED_MESSAGE
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: actionTypes.VOTER_BASE_LOGIC_FAILED,
+          payload: err.message
+        });
+        dispatch({
+          type: actionTypes.API_ERROR,
+          payload: err.message
+        });
+      });
+  };
+};
+
+export const getProposalsWithVotes = address => {
+  return dispatch => {
+    axios
+      .get(`${config.api_base_url}/proposalswithvotes`, {
+        params: { address: address }
+      })
+      .then(response => {
+        if (response.data.message === constants.SUCCESS) {
+          dispatch({
+            type: actionTypes.PROPOSALS_WITH_VOTES_SUCCESS,
             proposals: response.data.data.proposalswithvotes,
             totalvotescasted: response.data.data.totalvotescasted
           });
-        }
-      })
-      .catch(err => {
-        dispatch({
-          type: "PROPOSALS_WITH_VOTES_FAILED",
-          payload: err
-        });
-      });
-  };
-}
-
-export function getVoteTalliesWeighted(address) {
-  return function(dispatch) {
-    axios
-      .get(config.api_base_url + "/votetallies", {
-        params: { address: address }
-      })
-      .then(response => {
-        if (response.data.message === "Success") {
+        } else {
           dispatch({
-            type: "PROPOSAL_TALLIES_SUCCESS",
-            payload: response.data.data.votetallies
+            type: actionTypes.PROPOSALS_WITH_VOTES_FAILED,
+            payload: constants.PROPOSALS_WITH_VOTES_FAILED_MESSAGE
           });
         }
       })
       .catch(err => {
+        console.log(err);
         dispatch({
-          type: "PROPOSAL_TALLIES_FAILED",
-          payload: err
+          type: actionTypes.PROPOSALS_WITH_VOTES_FAILED,
+          payload: err.message
+        });
+        dispatch({
+          type: actionTypes.API_ERROR,
+          payload: err.message
         });
       });
   };
-}
+};
+
+export const getVoteTalliesWeighted = address => {
+  return dispatch => {
+    axios
+      .get(`${config.api_base_url}/votetallies`, { params: { address: address } })
+      .then(response => {
+        if (response.data.message === constants.SUCCESS) {
+          dispatch({
+            type: actionTypes.PROPOSAL_TALLIES_SUCCESS,
+            payload: response.data.data.votetallies
+          });
+        } else {
+          dispatch({
+            type: actionTypes.PROPOSAL_TALLIES_FAILED,
+            payload: constants.PROPOSAL_TALLIES_FAILED_MESSAGE
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: actionTypes.PROPOSAL_TALLIES_FAILED,
+          payload: err.message
+        });
+        dispatch({
+          type: actionTypes.API_ERROR,
+          payload: err.message
+        });
+      });
+  };
+};

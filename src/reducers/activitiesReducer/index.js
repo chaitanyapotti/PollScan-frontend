@@ -1,18 +1,19 @@
-export default function reducer(
-  state = {
-    selectedProposalName: "All",
-    selectedProposalId: 0,
-    currentVoterPage: 0,
-    allVoters: [],
-    currentActivityPage: 0,
-    allActivities: [],
-    showActivityLoader: true,
-    allActivitesRetrievedSuccessfully: false
-  },
-  action
-) {
+import actionTypes from "../../action_types";
+
+export const initialStates = {
+  selectedProposalName: "All",
+  selectedProposalId: 0,
+  currentVoterPage: 0,
+  allVoters: [],
+  currentActivityPage: 0,
+  allActivities: [],
+  showActivityLoader: true,
+  allActivitesRetrievedSuccessfully: false
+};
+
+export default function reducer(state = initialStates, action) {
   switch (action.type) {
-    case "SHOW_ALL_VOTES": {
+    case actionTypes.SHOW_ALL_VOTES: {
       let tempAllVoters = [];
       let tempAllActivities = state.allActivities;
       let tempVotersDict = {};
@@ -43,14 +44,13 @@ export default function reducer(
         selectedProposalName: "All"
       };
     }
-    case "PROPOSAL_SELECTED": {
-      console.log("PROPOSAL_SELECTED: ", action);
+
+    case actionTypes.PROPOSAL_SELECTED: {
       let tempAllVoters = [];
       let tempAllActivities = state.allActivities;
-      let tempAllUnVoters = [];
       if ("proposalid" in action) {
         let tempAllVoters = [];
-        let tempAllActivities = state.allActivities;
+        tempAllActivities = state.allActivities;
         let tempVotersDict = {};
         for (let activity of tempAllActivities) {
           if (activity.type !== "TriedToVote") {
@@ -83,16 +83,20 @@ export default function reducer(
         return { ...state, allVoters: tempAllVoters, currentActivityPage: 0, currentVoterPage: 0 };
       }
     }
-    case "PROPOSAL_NAME_SELECTED": {
+
+    case actionTypes.PROPOSAL_NAME_SELECTED: {
       return { ...state, selectedProposalName: action.payload, currentActivityPage: 0, currentVoterPage: 0 };
     }
-    case "VOTERS_PAGE_CHANGED": {
+
+    case actionTypes.VOTERS_PAGE_CHANGED: {
       return { ...state, currentVoterPage: action.payload };
     }
-    case "ACTIVITIES_PAGE_CHANGED": {
+
+    case actionTypes.ACTIVITIES_PAGE_CHANGED: {
       return { ...state, currentActivityPage: action.payload };
     }
-    case "ALL_ACTIVITIES_SUCCESS": {
+
+    case actionTypes.ALL_ACTIVITIES_SUCCESS: {
       let allActivities = action.payload;
       allActivities = allActivities.reverse();
       return {
@@ -103,7 +107,7 @@ export default function reducer(
       };
     }
 
-    case "ALL_ACTIVITIES_LOG_FAILED": {
+    case actionTypes.ALL_ACTIVITIES_LOG_FAILED: {
       return {
         ...state,
         allActivities: [],
@@ -111,9 +115,11 @@ export default function reducer(
         allActivitesRetrievedSuccessfully: false
       };
     }
-    case "SHOW_ACTIVITY_LOADER": {
+
+    case actionTypes.SHOW_ACTIVITY_LOADER: {
       return { ...state, showActivityLoader: true };
     }
+
     default: {
       return { ...state };
     }

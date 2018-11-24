@@ -1,37 +1,42 @@
-export default function reducer(
-  state = {
-    voterBaseLogic: "",
-    startTime: "",
-    endTime: "",
-    pollName: "",
-    pollType: "",
-    denominator: 1,
-    numerators: [],
-    showPollStatsLoader: true,
-    proposals: [],
-    totalVoteCast: 0,
-    pollLeader: { name: "", votes: 0, percent: 0 },
-    showModal: true
-  },
-  action
-) {
+import actionTypes from "../../action_types";
+
+export const initialStates = {
+  voterBaseLogic: "",
+  startTime: "",
+  endTime: "",
+  pollName: "",
+  pollType: "",
+  denominator: 1,
+  numerators: [],
+  showPollStatsLoader: true,
+  proposals: [],
+  totalVoteCast: 0,
+  pollLeader: { name: "", votes: 0, percent: 0 },
+  showModal: true
+};
+
+export default function reducer(state = initialStates, action) {
   switch (action.type) {
-    case "POLL_NAME_SUCCESS": {
+    case actionTypes.POLL_NAME_SUCCESS: {
       return { ...state, pollName: action.payload };
     }
-    case "SHOW_POLLSTAT_LOADER": {
+    case actionTypes.SHOW_POLLSTAT_LOADER: {
       return { ...state, showPollStatsLoader: true };
     }
-    case "POLL_NAME_FAILED": {
+
+    case actionTypes.POLL_NAME_FAILED: {
       return { ...state, showModal: true };
     }
-    case "POLL_TYPE_SUCCESS": {
+
+    case actionTypes.POLL_TYPE_SUCCESS: {
       return { ...state, pollType: action.payload };
     }
-    case "VOTER_BASE_LOGIC_SUCCESS": {
+
+    case actionTypes.VOTER_BASE_LOGIC_SUCCESS: {
       return { ...state, voterBaseLogic: action.payload };
     }
-    case "PROPOSALS_WITH_VOTES_SUCCESS": {
+
+    case actionTypes.PROPOSALS_WITH_VOTES_SUCCESS: {
       let denominator = state.denominator;
       let proposals = action.proposals;
       let numerators = state.numerators;
@@ -59,7 +64,7 @@ export default function reducer(
       };
     }
 
-    case "TOTAL_VOTES_SUCCESS": {
+    case actionTypes.TOTAL_VOTES_SUCCESS: {
       let denominator = parseInt(action.payload);
       let proposals = state.proposals;
       let numerators = state.numerators;
@@ -82,7 +87,7 @@ export default function reducer(
       return { ...state, denominator: action.payload, proposals: tempProposals, pollLeader: pollLeader };
     }
 
-    case "PROPOSAL_TALLIES_SUCCESS": {
+    case actionTypes.PROPOSAL_TALLIES_SUCCESS: {
       let denominator = state.denominator;
       let proposals = state.proposals;
       let tempProposals = [];
@@ -104,11 +109,11 @@ export default function reducer(
       return { ...state, proposals: tempProposals, numerators: action.payload, pollLeader: pollLeader };
     }
 
-    case "POLL_START_TIME_SUCCESS": {
+    case actionTypes.POLL_START_TIME_SUCCESS: {
       return { ...state, startTime: action.payload };
     }
 
-    case "POLL_END_TIME_SUCCESS": {
+    case actionTypes.POLL_END_TIME_SUCCESS: {
       return { ...state, endTime: action.payload };
     }
 

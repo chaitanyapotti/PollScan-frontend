@@ -27,10 +27,6 @@ import back from "../../assets/back.png";
 const Limit = 10;
 
 class Activities extends Component {
-  constructor(props) {
-    super(props);
-    this.handleOnClick = this.handleOnClick.bind(this);
-  }
   componentWillMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
@@ -99,7 +95,7 @@ class Activities extends Component {
     }
   }
 
-  handleOnClick() {
+  handleOnClick = () => {
     this.props.history.push({
       pathname: `/contract`,
       search: "?contract=" + this.props.searchText
@@ -108,7 +104,7 @@ class Activities extends Component {
       type: "SHOW_ACTIVITY_LOADER",
       payload: ""
     });
-  }
+  };
 
   prepareCSVData(allActivities) {
     let data = [];
@@ -175,7 +171,7 @@ class Activities extends Component {
   }
 }
 
-function mapStatesToProps(globalData) {
+const mapStatesToProps = globalData => {
   return {
     allActivities: globalData.allActivities.allActivities,
     currentActivityPage: globalData.allActivities.currentActivityPage,
@@ -183,7 +179,7 @@ function mapStatesToProps(globalData) {
     showActivityLoader: globalData.allActivities.showActivityLoader,
     allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
   };
-}
+};
 
 const myConnector = connect(mapStatesToProps);
 
