@@ -4,7 +4,7 @@ export const initialState = {
   // searchText: '0xce7ab7093a056598c53b5d87082c7019eb2275db'   ,
   // searchText: '0x95d0ffea1400584d85ae2533917db058059d8046',
   showWrongAddressModal: false,
-  searchText: "0x276A65355CeBCe5F26550b42dcce14C61b111069",
+  searchText: "",
   helperModal: true
 };
 

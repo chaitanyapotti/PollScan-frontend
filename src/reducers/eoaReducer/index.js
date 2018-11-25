@@ -4,7 +4,7 @@ export const initialStates = {
   vbsFile: {},
   vbsFileMembershipChecked: false,
   isVbsMember: false,
-  pollAddress: "0x2dA1438388b723B84D8BE82E898443906D728201",
+  pollAddress: "",
   pollActivityFetched: false,
   pollActivity: [],
   entityAddress: "",
@@ -12,6 +12,7 @@ export const initialStates = {
   isEntityMember: false
 };
 
+//http://localhost:2018/eoa/poll/activity?useraddress=0x276A65355CeBCe5F26550b42dcce14C61b111069&polladdress=0x2dA1438388b723B84D8BE82E898443906D728201
 export default function reducer(state = initialStates, action) {
   switch (action.type) {
     case actionTypes.ENTITY_ADDRESS_CHANGED: {

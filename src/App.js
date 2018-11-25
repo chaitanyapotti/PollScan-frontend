@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import PollScanApp from "./PollScanApp";
 import store, { history } from "./store";
-import { HomePage, PollStats, Voters, Activities, EntityAdminActivities, EntityMembers, EOA } from "./pages";
+import { HomePage, PollStats, Voters, Activities, EntityAdminActivities, EntityMembers, EOA, Entity } from "./pages";
 import "./App.css";
 import "./index.css";
 
@@ -15,12 +15,13 @@ class App extends Component {
           <PollScanApp dispatch={store.dispatch} getState={store.getState}>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route path="/contract" component={PollStats} />
-              <Route path="/voters" component={Voters} />
-              <Route path="/events" component={Activities} />
-              <Route path="/entity/adminactivities" component={EntityAdminActivities} />
-              <Route path="/entity/members" component={EntityMembers} />
-              <Route path="/eoa" component={EOA} />
+              <Route exact path="/contract" component={PollStats} />
+              <Route exact path="/voters" component={Voters} />
+              <Route exact path="/events" component={Activities} />
+              <Route exact path="/entity" component={Entity} />
+              <Route exact path="/entity/adminactivities" component={EntityAdminActivities} />
+              <Route exact path="/entity/members" component={EntityMembers} />
+              <Route exact path="/eoa" component={EOA} />
             </Switch>
           </PollScanApp>
         </Router>
