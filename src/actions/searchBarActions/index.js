@@ -6,7 +6,7 @@ import constants from "../../constants";
 export const getName = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/name`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/name`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({
@@ -37,7 +37,7 @@ export const getName = address => {
 export const getStartTime = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/starttime`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/starttime`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({
@@ -68,7 +68,7 @@ export const getStartTime = address => {
 export const getEndTime = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/endtime`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/endtime`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({
@@ -99,7 +99,7 @@ export const getEndTime = address => {
 export const getVoterBaseDenominator = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/totalvotes`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/totalvotes`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({
@@ -130,7 +130,7 @@ export const getVoterBaseDenominator = address => {
 export const getPollType = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/polltype`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/polltype`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({
@@ -161,7 +161,7 @@ export const getPollType = address => {
 export const getVoterBaseLogic = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/voterbaselogic`, {
+      .get(`${config.api_base_url}/pollscan/voterbaselogic`, {
         params: { address: address }
       })
       .then(response => {
@@ -194,7 +194,7 @@ export const getVoterBaseLogic = address => {
 export const getProposalsWithVotes = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/proposalswithvotes`, {
+      .get(`${config.api_base_url}/pollscan/proposalswithvotes`, {
         params: { address: address }
       })
       .then(response => {
@@ -228,7 +228,7 @@ export const getProposalsWithVotes = address => {
 export const getVoteTalliesWeighted = address => {
   return dispatch => {
     axios
-      .get(`${config.api_base_url}/votetallies`, { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/votetallies`, { params: { address: address } })
       .then(response => {
         if (response.data.message === constants.SUCCESS) {
           dispatch({

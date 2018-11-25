@@ -6,7 +6,7 @@ import constants from "../../constants";
 export const getAllActivities = (address, proposalid, proposalname) => {
   return dispatch => {
     axios
-      .get(config.api_base_url + "/events", { params: { address: address } })
+      .get(`${config.api_base_url}/pollscan/events`, { params: { address: address } })
       .then(response => {
         if (response.status === 200 && response.data.message === "Success") {
           dispatch({

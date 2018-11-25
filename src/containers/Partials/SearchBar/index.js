@@ -32,29 +32,7 @@ class SearchBar extends Component {
     });
   };
 
-  enterPressed = event => {
-    var code = event.keyCode || event.which;
-    if (code === 13) {
-      this.props.dispatch({
-        type: "SHOW_POLLSTAT_LOADER",
-        payload: null
-      });
-      this.props.dispatch(getName(this.props.searchText));
-      this.props.dispatch(getPollType(this.props.searchText));
-      this.props.dispatch(getVoterBaseLogic(this.props.searchText));
-      this.props.dispatch(getStartTime(this.props.searchText));
-      this.props.dispatch(getEndTime(this.props.searchText));
-      this.props.dispatch(getVoteTalliesWeighted(this.props.searchText));
-      this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
-      this.props.dispatch(getProposalsWithVotes(this.props.searchText));
-      this.props.history.push({
-        pathname: `/contract`,
-        search: "?contract=" + this.props.searchText
-      });
-    }
-  };
-
-  handleSearchClick = () => {
+  fetchData = () => {
     this.props.dispatch({
       type: "SHOW_POLLSTAT_LOADER",
       payload: null
@@ -71,6 +49,25 @@ class SearchBar extends Component {
       pathname: `/contract`,
       search: "?contract=" + this.props.searchText
     });
+  };
+
+  enterPressed = event => {
+    var code = event.keyCode || event.which;
+    if (code === 13) {
+      this.fetchData();
+    }
+  };
+
+  fetchEntityData = () => {
+    this.props.history.push({
+      pathname: `/entity/adminactivities`,
+      search: "?contract=" + this.props.searchText
+    });
+  };
+
+  handleSearchClick = () => {
+    this.fetchEntityData();
+    // this.fetchData()
   };
 
   handleModalDoneAction = () => {
@@ -92,7 +89,7 @@ class SearchBar extends Component {
   render() {
     return (
       <Grid>
-        {true ? (
+        {false ? (
           <Modal
             open={this.props.helperModal === true}
             header="Hello, welcome to PollScan test version on Rinkeby!"
@@ -144,7 +141,7 @@ class SearchBar extends Component {
             className="search-input"
             spellCheck="false"
             value={this.props.searchText}
-            placeholder="Enter Poll Address"
+            placeholder="Search for any Poll, Entity or externally owned addresses"
             onChange={this.handleSearchTextChange}
             onKeyPress={this.enterPressed}
           />

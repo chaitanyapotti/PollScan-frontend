@@ -2,8 +2,8 @@ body {
   overflow: scroll;
 }
 
-.white{
-  color:white;
+.white {
+  color: white;
 }
 
 .App-logo {
@@ -52,6 +52,25 @@ body {
   height: 50px;
   border-radius: 2.5em;
   margin: 0 auto;
+  position: relative;
+}
+
+.eoa-search-input {
+  color: #777777;
+  font-family: "PT Sans";
+  font-size: 0.6em;
+  font-weight: 100;
+  background-color: #e8e8e8;
+  border: None;
+  border-radius: 2.5em;
+  height: 35px;
+  width: 130%;
+  text-align: center;
+}
+
+.eoa-search {
+  margin-top: 15px;
+  width: 100%;
   position: relative;
 }
 

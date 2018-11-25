@@ -5,28 +5,14 @@ import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
 import { CSVLink } from "react-csv";
-
 import { Table, Loader } from "semantic-ui-react";
 
-import {
-  getName,
-  getPollType,
-  getVoterBaseLogic,
-  getProposalsWithVotes,
-  getStartTime,
-  getEndTime,
-  getVoterBaseDenominator,
-  getVoteTalliesWeighted
-} from "../../actions/searchBarActions";
-import { getAllActivities } from "../../actions/activitiesActions";
-
-import "../../styles/tableFooter.css";
-
+import { getEntityData } from "../../actions/entityActions";
 import back from "../../assets/back.png";
 
 const Limit = 10;
 
-class Activities extends Component {
+class EntityAdminActivities extends Component {
   componentDidMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
@@ -35,15 +21,7 @@ class Activities extends Component {
         type: "SEARCH_TEXT_CHANGED",
         payload: queryUrl.query.contract
       });
-      this.props.dispatch(getName(queryUrl.query.contract));
-      this.props.dispatch(getPollType(queryUrl.query.contract));
-      this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
-      this.props.dispatch(getProposalsWithVotes(queryUrl.query.contract));
-      this.props.dispatch(getStartTime(queryUrl.query.contract));
-      this.props.dispatch(getEndTime(queryUrl.query.contract));
-      this.props.dispatch(getVoterBaseDenominator(queryUrl.query.contract));
-      this.props.dispatch(getVoteTalliesWeighted(queryUrl.query.contract));
-      this.props.dispatch(getAllActivities(queryUrl.query.contract));
+      this.props.dispatch(getEntityData(queryUrl.query.contract));
     }
   }
 
@@ -59,7 +37,7 @@ class Activities extends Component {
         pageRangeDisplayed={5}
         onPageChange={data => {
           this.props.dispatch({
-            type: "ACTIVITIES_PAGE_CHANGED",
+            type: "ENTITY_ACTIVITIES_PAGE_CHANGED",
             payload: parseInt(data.selected)
           });
         }}
@@ -75,14 +53,13 @@ class Activities extends Component {
     if (this.props.allActivities.length > 0) {
       return this.props.allActivities
         .slice(this.props.currentActivityPage * Limit, (this.props.currentActivityPage + 1) * Limit)
-        .map((voter, index) => {
+        .map((activity, index) => {
           return (
             <Table.Row key={index}>
-              <Table.Cell>{voter.address}</Table.Cell>
-              <Table.Cell>{voter.type}</Table.Cell>
-              <Table.Cell> {new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
-              <Table.Cell>{voter.weight}</Table.Cell>
-              <Table.Cell>{voter.value}</Table.Cell>
+              <Table.Cell>{activity.address}</Table.Cell>
+              <Table.Cell> {new Date(parseInt(activity.timeStamp) * 1000).toLocaleString("en-GB")}</Table.Cell>
+              <Table.Cell>{activity.type}</Table.Cell>
+              <Table.Cell>{<a>View</a>}</Table.Cell>
             </Table.Row>
           );
         });
@@ -95,26 +72,13 @@ class Activities extends Component {
     }
   }
 
-  handleOnClick = () => {
-    this.props.history.push({
-      pathname: `/contract`,
-      search: "?contract=" + this.props.searchText
-    });
-    this.props.dispatch({
-      type: "SHOW_ACTIVITY_LOADER",
-      payload: ""
-    });
-  };
-
   prepareCSVData(allActivities) {
     let data = [];
     for (let i = 0; i < allActivities.length; i++) {
       let row = {};
       row["Address"] = allActivities[i].address;
+      row["Timestamp"] = new Date(parseInt(allActivities[i].timeStamp) * 1000).toLocaleString("en-GB");
       row["Type"] = allActivities[i].type;
-      row["Timestamp"] = new Date(parseInt(allActivities[i].datetime) * 1000).toLocaleString("en-GB");
-      row["Size"] = allActivities[i].weight;
-      row["Value"] = allActivities[i].value;
       data.push(row);
     }
     return data;
@@ -125,7 +89,7 @@ class Activities extends Component {
     return (
       <div>
         <div className="back-to-poll" onClick={this.handleOnClick}>
-          <img src={back} /> Back to the Poll
+          <img src={back} /> Back to Entity
         </div>
         {this.props.showActivityLoader ? (
           <Loader active={this.props.showActivityLoader} />
@@ -133,15 +97,14 @@ class Activities extends Component {
           <div>
             <Grid>
               <div className="activities-grid">
-                <div className="activity-log">Activity Log</div>
+                <div className="activity-log">Admin Activity</div>
                 <Table basic>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell width={4}>Address</Table.HeaderCell>
-                      <Table.HeaderCell width={1}>Type</Table.HeaderCell>
-                      <Table.HeaderCell width={3}>Timestamp</Table.HeaderCell>
-                      <Table.HeaderCell width={1}>Size</Table.HeaderCell>
-                      <Table.HeaderCell width={1}>Value</Table.HeaderCell>
+                      <Table.HeaderCell width={3}>Datetime</Table.HeaderCell>
+                      <Table.HeaderCell width={2}>Activity</Table.HeaderCell>
+                      <Table.HeaderCell width={1}>View</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>{this.addTableRowsDynamically()}</Table.Body>
@@ -153,11 +116,16 @@ class Activities extends Component {
             </Grid>
             <Grid>
               <div className="button-grid">
-                <div className="button-float">
+                <div className="button-float" style={{ marginLeft: "10px" }}>
                   <button className="csv-button">
                     <CSVLink data={csvData} filename={"all-activities.csv"}>
                       <div className="white">Download CSV</div>
                     </CSVLink>
+                  </button>
+                </div>
+                <div className="button-float">
+                  <button className="csv-button">
+                    <div className="white">Filter Activities</div>
                   </button>
                 </div>
               </div>
@@ -171,16 +139,17 @@ class Activities extends Component {
   }
 }
 
-const mapStatesToProps = globalData => {
+const mapStatesToProps = states => {
   return {
-    allActivities: globalData.allActivities.allActivities,
-    currentActivityPage: globalData.allActivities.currentActivityPage,
-    searchText: globalData.searchBarData.searchText,
-    showActivityLoader: globalData.allActivities.showActivityLoader,
-    allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
+    allMembers: states.entityData.allMembers,
+    allActivities: states.entityData.allActivities,
+    showActivityLoader: states.entityData.showActivityLoader,
+    allActivitesRetrievedSuccessfully: states.entityData.allActivitesRetrievedSuccessfully,
+    searchText: states.searchBarData.searchText,
+    currentActivityPage: states.entityData.currentActivityPage
   };
 };
 
 const myConnector = connect(mapStatesToProps);
 
-export default withRouter(myConnector(Activities));
+export default withRouter(myConnector(EntityAdminActivities));
