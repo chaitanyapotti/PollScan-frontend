@@ -138,7 +138,7 @@ class Voters extends Component {
 
   handleOnClick = () => {
     this.props.history.push({
-      pathname: `/contract`,
+      pathname: `/poll`,
       search: "?contract=" + this.props.searchText
     });
     this.props.dispatch({

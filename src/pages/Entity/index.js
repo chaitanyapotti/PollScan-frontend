@@ -50,7 +50,7 @@ class Entity extends Component {
   componentDidMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
-    if ("contract" in queryUrl.query && this.props.searchText === "") {
+    if ("contract" in queryUrl.query) {
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
         payload: queryUrl.query.contract
@@ -312,6 +312,20 @@ class Entity extends Component {
     });
   };
 
+  showEntityActivities = () => {
+    this.props.history.push({
+      pathname: `/entity/logs`,
+      search: "?contract=" + this.props.searchText
+    });
+  };
+
+  showEntityMembers = () => {
+    this.props.history.push({
+      pathname: `/entity/members`,
+      search: "?contract=" + this.props.searchText
+    });
+  };
+
   render() {
     let attributeDistributionData = {};
     let pieChartData = {};
@@ -322,10 +336,10 @@ class Entity extends Component {
           if (!(attributeHeader in attributeDistributionData)) {
             attributeDistributionData[attributeHeader] = {};
           }
-          if (!(member.attributes[attributeHeader] in attributeDistributionData[attributeHeader])) {
-            attributeDistributionData[attributeHeader][member.attributes[attributeHeader]] = 1;
+          if (!(member[attributeHeader] in attributeDistributionData[attributeHeader])) {
+            attributeDistributionData[attributeHeader][member[attributeHeader]] = 1;
           } else {
-            attributeDistributionData[attributeHeader][member.attributes[attributeHeader]] += 1;
+            attributeDistributionData[attributeHeader][member[attributeHeader]] += 1;
           }
         }
       }
@@ -354,6 +368,18 @@ class Entity extends Component {
                 style={{ height: "25em", width: "60em", padding: "0px" }}
                 opts={{ renderer: "svg" }}
               />
+              <div className="button-grid">
+                <div className="button-float" style={{ marginLeft: "10px" }}>
+                  <button className="csv-button" onClick={this.showEntityMembers}>
+                    <div className="white">View Members</div>
+                  </button>
+                </div>
+                <div className="button-float">
+                  <button className="csv-button" onClick={this.showEntityActivities}>
+                    <div className="white">Admin Activity</div>
+                  </button>
+                </div>
+              </div>
             </Row>
             {this.populatePieCharts(pieChartData, legendData)}
           </div>

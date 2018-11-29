@@ -16,11 +16,11 @@ class App extends Component {
           <PollScanApp dispatch={store.dispatch} getState={store.getState}>
             <Switch>
               <Route exact path="/" component={HomePage} />
-              <Route exact path="/contract" component={PollStats} />
-              <Route exact path="/voters" component={Voters} />
-              <Route exact path="/events" component={Activities} />
+              <Route exact path="/poll" component={PollStats} />
+              <Route exact path="/poll/voters" component={Voters} />
+              <Route exact path="/poll/logs" component={Activities} />
               <Route exact path="/entity" component={Entity} />
-              <Route exact path="/entity/activities" component={EntityActivities} />
+              <Route exact path="/entity/logs" component={EntityActivities} />
               <Route exact path="/entity/members" component={EntityMembers} />
               <Route exact path="/eoa" component={EOA} />
             </Switch>

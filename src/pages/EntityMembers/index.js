@@ -256,6 +256,13 @@ class EntityMembers extends Component {
     });
   };
 
+  handleBackButtonClick = () => {
+    this.props.history.push({
+      pathname: `/entity`,
+      search: "?contract=" + this.props.searchText
+    });
+  };
+
   render() {
     let csvData = this.prepareCSVData(this.props.memberList, this.props.attributeHeaders);
     return (
@@ -264,7 +271,7 @@ class EntityMembers extends Component {
           <EntityMembersFiltersConnected />
         ) : (
           <div>
-            <div className="back-to-poll" onClick={this.handleOnClick}>
+            <div className="back-to-poll" onClick={this.handleBackButtonClick}>
               <img src={back} /> Back to Entity
             </div>
             {this.props.showAllMembersLoader ? (

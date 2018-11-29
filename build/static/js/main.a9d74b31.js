@@ -4831,7 +4831,7 @@
     function r(e, t, n) {
       return function(r) {
         a.a
-          .get(c.a.api_base_url + "/events", { params: { address: e } })
+          .get(c.a.api_base_url + "/poll/logs", { params: { address: e } })
           .then(function(e) {
             200 === e.status && "Success" === e.data.message
               ? (r({ type: "ALL_ACTIVITIES_SUCCESS", payload: e.data.data.events }),
@@ -10802,7 +10802,7 @@
                   this.props.dispatch(Object(f.f)(this.props.searchText)),
                   this.props.dispatch(Object(f.g)(this.props.searchText)),
                   this.props.dispatch(Object(f.d)(this.props.searchText)),
-                  this.props.history.push({ pathname: "/contract", search: "?contract=" + this.props.searchText }));
+                  this.props.history.push({ pathname: "/poll", search: "?contract=" + this.props.searchText }));
               }
             },
             {
@@ -10818,7 +10818,7 @@
                   this.props.dispatch(Object(f.f)(this.props.searchText)),
                   this.props.dispatch(Object(f.g)(this.props.searchText)),
                   this.props.dispatch(Object(f.d)(this.props.searchText)),
-                  this.props.history.push({ pathname: "/contract", search: "?contract=" + this.props.searchText });
+                  this.props.history.push({ pathname: "/poll", search: "?contract=" + this.props.searchText });
               }
             },
             {
@@ -16776,19 +16776,19 @@
                         }
                       }),
                       s.a.createElement(u.a, {
-                        path: "/voters",
+                        path: "/poll/voters",
                         render: function() {
                           return s.a.createElement("div", null, s.a.createElement(f.a, null), s.a.createElement(h.a, null));
                         }
                       }),
                       s.a.createElement(u.a, {
-                        path: "/contract",
+                        path: "/poll",
                         render: function() {
                           return s.a.createElement("div", null, s.a.createElement(f.a, null), s.a.createElement(v.a, null));
                         }
                       }),
                       s.a.createElement(u.a, {
-                        path: "/events",
+                        path: "/poll/logs",
                         render: function() {
                           return s.a.createElement("div", null, s.a.createElement(f.a, null), s.a.createElement(m.a, null));
                         }
@@ -31383,7 +31383,7 @@
             {
               key: "handleOnClick",
               value: function() {
-                this.props.history.push({ pathname: "/contract", search: "?contract=" + this.props.searchText }),
+                this.props.history.push({ pathname: "/poll", search: "?contract=" + this.props.searchText }),
                   this.props.dispatch({ type: "SHOW_ACTIVITY_LOADER", payload: "" });
               }
             },
@@ -32183,7 +32183,7 @@
             {
               key: "handleOnClick",
               value: function() {
-                this.props.history.push({ pathname: "/contract", search: "?contract=" + this.props.searchText }),
+                this.props.history.push({ pathname: "/poll", search: "?contract=" + this.props.searchText }),
                   this.props.dispatch({ type: "SHOW_ACTIVITY_LOADER", payload: "" });
               }
             },
@@ -32359,7 +32359,7 @@
             (a.handleAllActivities = function() {
               a.props.dispatch(Object(m.a)(a.props.searchText)),
                 a.props.dispatch({ type: "SHOW_ACTIVITY_LOADER", payload: "" }),
-                a.props.history.push({ pathname: "/events", search: "?contract=" + a.props.searchText });
+                a.props.history.push({ pathname: "/poll/logs", search: "?contract=" + a.props.searchText });
             }),
             (i = n),
             o(a, i)
@@ -32391,7 +32391,7 @@
               value: function(e) {
                 this.props.dispatch({ type: "PROPOSAL_SELECTED", proposalid: e, proposalname: this.props.proposals[e].name }),
                   this.props.history.push({
-                    pathname: "/voters",
+                    pathname: "/poll/voters",
                     search: "?contract=" + this.props.searchText + "&id=" + e.toString() + "&name=" + this.props.proposals[e].name
                   });
               }
@@ -32400,7 +32400,7 @@
               key: "handleAllDetailedVoters",
               value: function() {
                 this.props.dispatch({ type: "SHOW_ALL_VOTES", proposalname: "All" }),
-                  this.props.history.push({ pathname: "/voters", search: "?contract=" + this.props.searchText });
+                  this.props.history.push({ pathname: "/poll/voters", search: "?contract=" + this.props.searchText });
               }
             },
             {

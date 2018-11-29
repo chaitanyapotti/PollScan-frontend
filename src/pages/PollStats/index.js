@@ -34,20 +34,20 @@ class PollStats extends Component {
       payload: ""
     });
     this.props.history.push({
-      pathname: `/events`,
+      pathname: `/poll/logs`,
       search: "?contract=" + this.props.searchText
     });
   };
 
   // handleAllActivities() {
   //   this.props.dispatch(getAllActivities(this.props.searchText))
-  //   this.props.history.push({ pathname: `/events`, search: '?contract=' + this.props.searchText })
+  //   this.props.history.push({ pathname: `/poll/logs`, search: '?contract=' + this.props.searchText })
   // }
 
   componentDidMount() {
     console.log(window.location.href);
     const queryUrl = queryString.parseUrl(window.location.href);
-    if ("contract" in queryUrl.query && this.props.searchText === "") {
+    if ("contract" in queryUrl.query) {
       this.props.dispatch(getName(queryUrl.query.contract));
       this.props.dispatch(getPollType(queryUrl.query.contract));
       this.props.dispatch(getVoterBaseLogic(queryUrl.query.contract));
@@ -74,7 +74,7 @@ class PollStats extends Component {
     });
     // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
-      pathname: `/voters`,
+      pathname: `/poll/voters`,
       search: "?contract=" + this.props.searchText + "&id=" + proposalId.toString() + "&name=" + this.props.proposals[proposalId].name
     });
   };
@@ -86,7 +86,7 @@ class PollStats extends Component {
     });
     // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
-      pathname: `/voters`,
+      pathname: `/poll/voters`,
       search: "?contract=" + this.props.searchText
     });
   };

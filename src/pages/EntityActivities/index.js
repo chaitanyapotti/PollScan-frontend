@@ -127,7 +127,7 @@ class EntityActivities extends Component {
   componentDidMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
-    if ("contract" in queryUrl.query) {
+    if ("contract" in queryUrl.query && this.props.searchText === "") {
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
         payload: queryUrl.query.contract
@@ -202,6 +202,13 @@ class EntityActivities extends Component {
     });
   };
 
+  handleBackButtonClick = () => {
+    this.props.history.push({
+      pathname: `/entity`,
+      search: "?contract=" + this.props.searchText
+    });
+  };
+
   render() {
     let csvData = this.prepareCSVData(this.props.allActivities);
     return (
@@ -210,7 +217,7 @@ class EntityActivities extends Component {
           <EntityActivitiesFiltersConnected />
         ) : (
           <div>
-            <div className="back-to-poll" onClick={this.handleOnClick}>
+            <div className="back-to-poll" onClick={this.handleBackButtonClick}>
               <img src={back} /> Back to Entity
             </div>
             {this.props.showActivityLoader ? (

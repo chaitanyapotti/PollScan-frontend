@@ -47,7 +47,7 @@ class SearchBar extends Component {
     this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
     this.props.dispatch(getProposalsWithVotes(this.props.searchText));
     this.props.history.push({
-      pathname: `/contract`,
+      pathname: `/poll`,
       search: "?contract=" + this.props.searchText
     });
   };
@@ -61,7 +61,7 @@ class SearchBar extends Component {
 
   fetchEntityData = () => {
     this.props.history.push({
-      pathname: `/entity/activities`,
+      pathname: `/entity/logs`,
       search: "?contract=" + this.props.searchText
     });
   };
@@ -95,7 +95,7 @@ class SearchBar extends Component {
     // switch(this.props.addressType){
     //   case "poll": {
     //     this.props.history.push({
-    //       pathname: `/contract`,
+    //       pathname: `/poll`,
     //       search: "?contract=" + this.props.searchText
     //     });
     //     break;

@@ -18,7 +18,7 @@ export const checkContractType = address => {
           switch (addressType) {
             case "poll": {
               history.push({
-                pathname: `/contract`,
+                pathname: `/poll`,
                 search: "?contract=" + address
               });
               break;
