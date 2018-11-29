@@ -60,7 +60,7 @@ class SearchBar extends Component {
 
   fetchEntityData = () => {
     this.props.history.push({
-      pathname: `/entity/adminactivities`,
+      pathname: `/entity/activities`,
       search: "?contract=" + this.props.searchText
     });
   };
