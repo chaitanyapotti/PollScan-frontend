@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import PollScanApp from "./PollScanApp";
-import store, { history } from "./store";
+import store from "./store";
+import history from "./history";
 import { HomePage, PollStats, Voters, Activities, EntityActivities, EntityMembers, EOA, Entity } from "./pages";
 import "./App.css";
 import "./index.css";
@@ -11,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <PollScanApp dispatch={store.dispatch} getState={store.getState}>
             <Switch>
               <Route exact path="/" component={HomePage} />

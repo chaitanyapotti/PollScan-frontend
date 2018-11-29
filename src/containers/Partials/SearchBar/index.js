@@ -11,7 +11,8 @@ import {
   getStartTime,
   getEndTime,
   getVoterBaseDenominator,
-  getVoteTalliesWeighted
+  getVoteTalliesWeighted,
+  checkContractType
 } from "../../../actions/searchBarActions";
 import logo from "../../../assets/logo.png";
 import "../../../styles/modalStyle.css";
@@ -66,8 +67,11 @@ class SearchBar extends Component {
   };
 
   handleSearchClick = () => {
-    this.fetchEntityData();
+    // this.fetchEntityData();
     // this.fetchData()
+    if (this.props.searchText.length > 0) {
+      this.props.dispatch(checkContractType(this.props.searchText));
+    }
   };
 
   handleModalDoneAction = () => {
@@ -86,7 +90,38 @@ class SearchBar extends Component {
     textField.remove();
   };
 
+  componentDidUpdate() {
+    console.log("I am being called.");
+    // switch(this.props.addressType){
+    //   case "poll": {
+    //     this.props.history.push({
+    //       pathname: `/contract`,
+    //       search: "?contract=" + this.props.searchText
+    //     });
+    //     break;
+    //   }
+    //   case "entity": {
+    //     this.props.history.push({
+    //       pathname: `/entity`,
+    //       search: "?contract=" + this.props.searchText
+    //     });
+    //     break;
+
+    //   }
+    //   case "eoa": {
+    //     this.props.history.push({
+    //       pathname: `/eoa`,
+    //       search: "?contract=" + this.props.searchText
+    //     });
+    //     break;
+    //   }
+    //   default : {
+    //     break;
+    //   }
+    // }
+  }
   render() {
+    console.log("I am being rendered.");
     return (
       <Grid>
         {false ? (
@@ -157,7 +192,8 @@ class SearchBar extends Component {
 function mapStatesToProps(globalData) {
   return {
     searchText: globalData.searchBarData.searchText,
-    helperModal: globalData.searchBarData.helperModal
+    helperModal: globalData.searchBarData.helperModal,
+    addressType: globalData.searchBarData.addressType
   };
 }
 

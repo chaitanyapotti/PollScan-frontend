@@ -2,6 +2,61 @@ import axios from "axios";
 import config from "../../config";
 import actionTypes from "../../action_types";
 import constants from "../../constants";
+import history from "../../history";
+
+export const checkContractType = address => {
+  return dispatch => {
+    axios
+      .get(`${config.api_base_url}/identify`, { params: { address: address } })
+      .then(response => {
+        if (response.data.message === constants.SUCCESS) {
+          let addressType = response.data.data;
+          dispatch({
+            type: actionTypes.ADDRESS_TYPE_DETECTION_SUCCESS,
+            payload: response.data.data
+          });
+          switch (addressType) {
+            case "poll": {
+              history.push({
+                pathname: `/contract`,
+                search: "?contract=" + address
+              });
+              break;
+            }
+            case "entity": {
+              history.push({
+                pathname: `/entity`,
+                search: "?contract=" + address
+              });
+              break;
+            }
+            case "eoa": {
+              history.push({
+                pathname: `/eoa`,
+                search: "?contract=" + address
+              });
+              break;
+            }
+            default: {
+              break;
+            }
+          }
+        } else {
+          dispatch({
+            type: actionTypes.ADDRESS_TYPE_DETECTION_FAILED,
+            payload: constants.ADDRESS_TYPE_DETECTION_FAILED_MESSAGE
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch({
+          type: actionTypes.ADDRESS_TYPE_DETECTION_FAILED,
+          payload: constants.ADDRESS_TYPE_DETECTION_FAILED_MESSAGE
+        });
+      });
+  };
+};
 
 export const getName = address => {
   return dispatch => {

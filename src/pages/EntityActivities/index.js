@@ -127,7 +127,7 @@ class EntityActivities extends Component {
   componentDidMount() {
     console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
-    if ("contract" in queryUrl.query && this.props.searchText === "") {
+    if ("contract" in queryUrl.query) {
       this.props.dispatch({
         type: "SEARCH_TEXT_CHANGED",
         payload: queryUrl.query.contract

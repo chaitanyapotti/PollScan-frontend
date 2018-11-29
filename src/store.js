@@ -1,6 +1,5 @@
 import { applyMiddleware, createStore, compose } from "redux";
 import thunk from "redux-thunk";
-import createHistory from "history/createBrowserHistory";
 import rootReducer from "./reducers";
 import { loadState, saveState } from "./localStorage";
 
@@ -20,7 +19,5 @@ store.subscribe(() => {
     tabData: store.getState().tabData
   });
 });
-
-export const history = createHistory();
 
 export default store;

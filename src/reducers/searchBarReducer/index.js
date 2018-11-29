@@ -5,13 +5,22 @@ export const initialState = {
   // searchText: '0x95d0ffea1400584d85ae2533917db058059d8046',
   showWrongAddressModal: false,
   searchText: "",
-  helperModal: true
+  helperModal: true,
+  addressType: ""
 };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.SEARCH_TEXT_CHANGED: {
       return { ...state, searchText: action.payload };
+    }
+
+    case actionTypes.ADDRESS_TYPE_DETECTION_SUCCESS: {
+      return { ...state, addressType: action.payload };
+    }
+
+    case actionTypes.ADDRESS_TYPE_DETECTION_FAILED: {
+      return { ...state, addressType: "" };
     }
 
     case actionTypes.POLL_NAME_FAILED: {
