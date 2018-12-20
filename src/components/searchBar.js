@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Grid } from "react-flexbox-grid";
-import { Modal, Button, Grid as SGrid } from "semantic-ui-react";
+import { Modal, Button, Icon, Grid as SGrid } from "semantic-ui-react";
 import {
   getName,
   getPollType,
@@ -11,29 +11,60 @@ import {
   getStartTime,
   getEndTime,
   getVoterBaseDenominator,
-  getVoteTalliesWeighted,
-  checkContractType
-} from "../../../actions/searchBarActions";
-import logo from "../../../assets/logo.png";
-import "../../../styles/modalStyle.css";
+  getVoteTalliesWeighted
+} from "../actions/searchBarActions";
+import logo from "../assets/logo.png";
+import "../styles/modalStyle.css";
 
 class SearchBar extends Component {
-  handleSearchTextChange = event => {
+  constructor(props) {
+    super(props);
+    this.handleSearchTextChange = this.handleSearchTextChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleModalDoneAction = this.handleModalDoneAction.bind(this);
+  }
+
+  handleSearchTextChange(event) {
     this.props.dispatch({
       type: "SEARCH_TEXT_CHANGED",
       payload: event.target.value
     });
-  };
+  }
 
-  handleOnClick = () => {
+  handleOnClick() {
     this.props.history.push({ pathname: "/" });
     this.props.dispatch({
       type: "SEARCH_TEXT_CHANGED",
       payload: ""
     });
-  };
+  }
 
-  fetchData = () => {
+  enterPressed(event) {
+    var code = event.keyCode || event.which;
+    if (code === 13) {
+      this.props.dispatch({
+        type: "SHOW_POLLSTAT_LOADER",
+        payload: null
+      });
+      this.props.dispatch(getName(this.props.searchText));
+      this.props.dispatch(getPollType(this.props.searchText));
+      this.props.dispatch(getVoterBaseLogic(this.props.searchText));
+      this.props.dispatch(getStartTime(this.props.searchText));
+      this.props.dispatch(getEndTime(this.props.searchText));
+      this.props.dispatch(getVoteTalliesWeighted(this.props.searchText));
+      this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
+      this.props.dispatch(getProposalsWithVotes(this.props.searchText));
+      this.props.history.push({
+        pathname: `/contract`,
+        search: "?contract=" + this.props.searchText
+      });
+    }
+  }
+
+  handleSearchClick(event) {
+    console.log("Search button clicked.");
+    // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
     this.props.dispatch({
       type: "SHOW_POLLSTAT_LOADER",
       payload: null
@@ -47,39 +78,17 @@ class SearchBar extends Component {
     this.props.dispatch(getVoterBaseDenominator(this.props.searchText));
     this.props.dispatch(getProposalsWithVotes(this.props.searchText));
     this.props.history.push({
-      pathname: `/poll`,
-      search: `?contract=${this.props.searchText}`
+      pathname: `/contract`,
+      search: "?contract=" + this.props.searchText
     });
-  };
+  }
 
-  enterPressed = event => {
-    const code = event.keyCode || event.which;
-    if (code === 13) {
-      this.fetchData();
-    }
-  };
-
-  fetchEntityData = () => {
-    this.props.history.push({
-      pathname: `/entity/logs`,
-      search: `?contract=${this.props.searchText}`
-    });
-  };
-
-  handleSearchClick = () => {
-    // this.fetchEntityData();
-    // this.fetchData()
-    if (this.props.searchText.length > 0) {
-      this.props.dispatch(checkContractType(this.props.searchText));
-    }
-  };
-
-  handleModalDoneAction = () => {
+  handleModalDoneAction(event) {
     this.props.dispatch({ type: "CLOSE_HELPER_MODAL" });
-  };
+  }
 
   handleCopyButtonClicked = (e, data) => {
-    const textField = document.createElement("textarea");
+    var textField = document.createElement("textarea");
     textField.contentEditable = true;
     textField.readOnly = false;
     textField.setSelectionRange(0, 9999999);
@@ -90,42 +99,10 @@ class SearchBar extends Component {
     textField.remove();
   };
 
-  componentDidUpdate() {
-    console.log("I am being called.");
-    // switch(this.props.addressType){
-    //   case "poll": {
-    //     this.props.history.push({
-    //       pathname: `/poll`,
-    //       search: "?contract=" + this.props.searchText
-    //     });
-    //     break;
-    //   }
-    //   case "entity": {
-    //     this.props.history.push({
-    //       pathname: `/entity`,
-    //       search: "?contract=" + this.props.searchText
-    //     });
-    //     break;
-
-    //   }
-    //   case "eoa": {
-    //     this.props.history.push({
-    //       pathname: `/eoa`,
-    //       search: "?contract=" + this.props.searchText
-    //     });
-    //     break;
-    //   }
-    //   default : {
-    //     break;
-    //   }
-    // }
-  }
-
   render() {
-    console.log("I am being rendered.");
     return (
       <Grid>
-        {false ? (
+        {true ? (
           <Modal
             open={this.props.helperModal === true}
             header="Hello, welcome to PollScan test version on Rinkeby!"
@@ -169,6 +146,7 @@ class SearchBar extends Component {
           />
         ) : null}
         <div className="App-title">
+          {" "}
           <img src={logo} onClick={this.handleOnClick} />{" "}
         </div>
         <div className="search">
@@ -176,9 +154,9 @@ class SearchBar extends Component {
             className="search-input"
             spellCheck="false"
             value={this.props.searchText}
-            placeholder="Search for any Poll, Entity or externally owned addresses"
+            placeholder="Enter Poll Address"
             onChange={this.handleSearchTextChange}
-            onKeyPress={this.enterPressed}
+            onKeyPress={this.enterPressed.bind(this)}
           />
           <button className="search-button" onClick={this.handleSearchClick}>
             Search
@@ -192,8 +170,7 @@ class SearchBar extends Component {
 function mapStatesToProps(globalData) {
   return {
     searchText: globalData.searchBarData.searchText,
-    helperModal: globalData.searchBarData.helperModal,
-    addressType: globalData.searchBarData.addressType
+    helperModal: globalData.searchBarData.helperModal
   };
 }
 

@@ -35,7 +35,7 @@ class PollStats extends Component {
     });
     this.props.history.push({
       pathname: `/poll/logs`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
@@ -75,7 +75,7 @@ class PollStats extends Component {
     // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
       pathname: `/poll/voters`,
-      search: "?contract=" + this.props.searchText + "&id=" + proposalId.toString() + "&name=" + this.props.proposals[proposalId].name
+      search: `?contract=${this.props.searchText}&id=${proposalId.toString()}&name=${this.props.proposals[proposalId].name}`
     });
   };
 
@@ -87,43 +87,42 @@ class PollStats extends Component {
     // this.props.dispatch(getAllActivities(this.props.searchText));
     this.props.history.push({
       pathname: `/poll/voters`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
   populateProposals() {
     if (this.props.proposals.length > 0) {
-      return this.props.proposals.map((proposal, index) => {
-        return (
-          <div key={1000 + index} className="proposal-total-data">
-            <div className="proposal-data">
-              <div className="proposal-name">{proposal.name}</div>
-              <Popup
-                hoverable
-                on={["hover", "click"]}
-                style={style}
-                trigger={
-                  <div
-                    onClick={() => {
-                      this.handleDetailedVoters(index);
-                    }}
-                    className="percent-voters"
-                  >
-                    <div className="proposal-percent">{proposal.percent}%</div>
-                    <div className="voters-count">({proposal.votes} Voters)</div>
-                  </div>
-                }
-                position="top center"
-                content={<h1 className="large">View All Voters</h1>}
-              />
-            </div>
-            <Progress percent={proposal.percent} size="small" />
+      return this.props.proposals.map((proposal, index) => (
+        <div key={1000 + index} className="proposal-total-data">
+          <div className="proposal-data">
+            <div className="proposal-name">{proposal.name}</div>
+            <Popup
+              hoverable
+              on={["hover", "click"]}
+              style={style}
+              trigger={
+                <div
+                  onClick={() => {
+                    this.handleDetailedVoters(index);
+                  }}
+                  className="percent-voters"
+                >
+                  <div className="proposal-percent">{proposal.percent}%</div>
+                  <div className="voters-count">({proposal.votes} Voters)</div>
+                </div>
+              }
+              position="top center"
+              content={<h1 className="large">View All Voters</h1>}
+            />
           </div>
-        );
-      });
+          <Progress percent={proposal.percent} size="small" />
+        </div>
+      ));
     }
   }
-  //Need to change days counter to hr,min,ss
+
+  // Need to change days counter to hr,min,ss
   render() {
     return !this.props.showPollStatsLoader && !this.props.showWrongAddressModal ? (
       <Grid>
@@ -238,22 +237,20 @@ class PollStats extends Component {
   }
 }
 
-const mapStatesToProps = globalData => {
-  return {
-    startTime: globalData.pollStats.startTime,
-    pollName: globalData.pollStats.pollName,
-    pollType: globalData.pollStats.pollType,
-    endTime: globalData.pollStats.endTime,
-    denominator: globalData.pollStats.denominator,
-    proposals: globalData.pollStats.proposals,
-    voterBaseLogic: globalData.pollStats.voterBaseLogic,
-    totalVoteCast: globalData.pollStats.totalVoteCast,
-    pollLeader: globalData.pollStats.pollLeader,
-    searchText: globalData.searchBarData.searchText,
-    showPollStatsLoader: globalData.pollStats.showPollStatsLoader,
-    showWrongAddressModal: globalData.searchBarData.showWrongAddressModals
-  };
-};
+const mapStatesToProps = globalData => ({
+  startTime: globalData.pollStats.startTime,
+  pollName: globalData.pollStats.pollName,
+  pollType: globalData.pollStats.pollType,
+  endTime: globalData.pollStats.endTime,
+  denominator: globalData.pollStats.denominator,
+  proposals: globalData.pollStats.proposals,
+  voterBaseLogic: globalData.pollStats.voterBaseLogic,
+  totalVoteCast: globalData.pollStats.totalVoteCast,
+  pollLeader: globalData.pollStats.pollLeader,
+  searchText: globalData.searchBarData.searchText,
+  showPollStatsLoader: globalData.pollStats.showPollStatsLoader,
+  showWrongAddressModal: globalData.searchBarData.showWrongAddressModals
+});
 
 const myConnector = connect(mapStatesToProps);
 

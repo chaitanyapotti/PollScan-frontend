@@ -51,7 +51,7 @@ class Activities extends Component {
     return (
       <ReactPaginate
         breakLabel={<a href="">...</a>}
-        breakClassName={"BreakView"}
+        breakClassName="BreakView"
         pageCount={Math.ceil(this.props.allActivities.length / Limit)}
         initialPage={this.props.currentActivityPage}
         forcePage={this.props.currentActivityPage}
@@ -63,10 +63,10 @@ class Activities extends Component {
             payload: parseInt(data.selected)
           });
         }}
-        containerClassName={"pagination"}
-        subContainerClassName={"paginationPage"}
-        activeClassName={"active"}
-        previousClassName={"previous"}
+        containerClassName="pagination"
+        subContainerClassName="paginationPage"
+        activeClassName="active"
+        previousClassName="previous"
       />
     );
   }
@@ -75,30 +75,27 @@ class Activities extends Component {
     if (this.props.allActivities.length > 0) {
       return this.props.allActivities
         .slice(this.props.currentActivityPage * Limit, (this.props.currentActivityPage + 1) * Limit)
-        .map((voter, index) => {
-          return (
-            <Table.Row key={index}>
-              <Table.Cell>{voter.address}</Table.Cell>
-              <Table.Cell>{voter.type}</Table.Cell>
-              <Table.Cell> {new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
-              <Table.Cell>{voter.weight}</Table.Cell>
-              <Table.Cell>{voter.value}</Table.Cell>
-            </Table.Row>
-          );
-        });
-    } else {
-      return (
-        <Table.Row key={145} className="reload">
-          Activities could not be retrieved, please try reloading the page.
-        </Table.Row>
-      );
+        .map((voter, index) => (
+          <Table.Row key={index}>
+            <Table.Cell>{voter.address}</Table.Cell>
+            <Table.Cell>{voter.type}</Table.Cell>
+            <Table.Cell> {new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
+            <Table.Cell>{voter.weight}</Table.Cell>
+            <Table.Cell>{voter.value}</Table.Cell>
+          </Table.Row>
+        ));
     }
+    return (
+      <Table.Row key={145} className="reload">
+        Activities could not be retrieved, please try reloading the page.
+      </Table.Row>
+    );
   }
 
   handleOnClick = () => {
     this.props.history.push({
       pathname: `/poll`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
     this.props.dispatch({
       type: "SHOW_ACTIVITY_LOADER",
@@ -107,21 +104,21 @@ class Activities extends Component {
   };
 
   prepareCSVData(allActivities) {
-    let data = [];
+    const data = [];
     for (let i = 0; i < allActivities.length; i++) {
-      let row = {};
-      row["Address"] = allActivities[i].address;
-      row["Type"] = allActivities[i].type;
-      row["Timestamp"] = new Date(parseInt(allActivities[i].datetime) * 1000).toLocaleString("en-GB");
-      row["Size"] = allActivities[i].weight;
-      row["Value"] = allActivities[i].value;
+      const row = {};
+      row.Address = allActivities[i].address;
+      row.Type = allActivities[i].type;
+      row.Timestamp = new Date(parseInt(allActivities[i].datetime) * 1000).toLocaleString("en-GB");
+      row.Size = allActivities[i].weight;
+      row.Value = allActivities[i].value;
       data.push(row);
     }
     return data;
   }
 
   render() {
-    let csvData = this.prepareCSVData(this.props.allActivities);
+    const csvData = this.prepareCSVData(this.props.allActivities);
     return (
       <div>
         <div className="back-to-poll" onClick={this.handleOnClick}>
@@ -155,7 +152,7 @@ class Activities extends Component {
               <div className="button-grid">
                 <div className="button-float">
                   <button className="csv-button">
-                    <CSVLink data={csvData} filename={"all-activities.csv"}>
+                    <CSVLink data={csvData} filename="all-activities.csv">
                       <div className="white">Download CSV</div>
                     </CSVLink>
                   </button>
@@ -171,15 +168,13 @@ class Activities extends Component {
   }
 }
 
-const mapStatesToProps = globalData => {
-  return {
-    allActivities: globalData.allActivities.allActivities,
-    currentActivityPage: globalData.allActivities.currentActivityPage,
-    searchText: globalData.searchBarData.searchText,
-    showActivityLoader: globalData.allActivities.showActivityLoader,
-    allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
-  };
-};
+const mapStatesToProps = globalData => ({
+  allActivities: globalData.allActivities.allActivities,
+  currentActivityPage: globalData.allActivities.currentActivityPage,
+  searchText: globalData.searchBarData.searchText,
+  showActivityLoader: globalData.allActivities.showActivityLoader,
+  allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
+});
 
 const myConnector = connect(mapStatesToProps);
 

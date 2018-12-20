@@ -65,8 +65,8 @@ class EntityMembersFilters extends Component {
   };
 
   prepareOptions = optionList => {
-    let tempList = [];
-    for (let i in optionList) {
+    const tempList = [];
+    for (const i in optionList) {
       tempList.push({ key: optionList[i], value: optionList[i], text: optionList[i] });
     }
     return tempList;
@@ -78,31 +78,28 @@ class EntityMembersFilters extends Component {
       type: "ENTITY_MEMBER_FILTER_OPTIONS_SELECTED",
       payload: null,
       filterIndex: index,
-      attributeName: attributeName,
+      attributeName,
       filterOptions: data.value
     });
   };
 
-  populateFilters = () => {
-    return Object.keys(this.props.attributeDetails).map((attributeName, index) => {
-      return (
-        <Row>
-          {attributeName}
-          <Dropdown
-            key={index}
-            clearable
-            fluid
-            multiple
-            search
-            selection
-            onChange={this.optionsSelected.bind(this, index, attributeName)}
-            options={this.prepareOptions(this.props.attributeDetails[attributeName])}
-            placeholder={`Select ${attributeName}`}
-          />
-        </Row>
-      );
-    });
-  };
+  populateFilters = () =>
+    Object.keys(this.props.attributeDetails).map((attributeName, index) => (
+      <Row>
+        {attributeName}
+        <Dropdown
+          key={index}
+          clearable
+          fluid
+          multiple
+          search
+          selection
+          onChange={this.optionsSelected.bind(this, index, attributeName)}
+          options={this.prepareOptions(this.props.attributeDetails[attributeName])}
+          placeholder={`Select ${attributeName}`}
+        />
+      </Row>
+    ));
 
   render() {
     return (
@@ -169,71 +166,64 @@ class EntityMembers extends Component {
     }
   }
 
-  addPageNumbers = () => {
-    return (
-      <ReactPaginate
-        breakLabel={<a href="">...</a>}
-        breakClassName={"BreakView"}
-        pageCount={Math.ceil(this.props.memberListArray.length / Limit)}
-        initialPage={this.props.currentMemberPage}
-        forcePage={this.props.currentMemberPage}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={data => {
-          this.props.dispatch({
-            type: "ENTITY_MEMBERS_PAGE_CHANGED",
-            payload: parseInt(data.selected)
-          });
-        }}
-        containerClassName={"pagination"}
-        subContainerClassName={"paginationPage"}
-        activeClassName={"active"}
-        previousClassName={"previous"}
-      />
-    );
-  };
+  addPageNumbers = () => (
+    <ReactPaginate
+      breakLabel={<a href="">...</a>}
+      breakClassName="BreakView"
+      pageCount={Math.ceil(this.props.memberListArray.length / Limit)}
+      initialPage={this.props.currentMemberPage}
+      forcePage={this.props.currentMemberPage}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={data => {
+        this.props.dispatch({
+          type: "ENTITY_MEMBERS_PAGE_CHANGED",
+          payload: parseInt(data.selected)
+        });
+      }}
+      containerClassName="pagination"
+      subContainerClassName="paginationPage"
+      activeClassName="active"
+      previousClassName="previous"
+    />
+  );
 
   addAttributesDynamically = row => {
-    let temp = row.slice();
+    const temp = row.slice();
     temp.splice(0, 3);
     temp.pop();
-    return temp.map((elements, index) => {
-      return <Table.Cell>{elements}</Table.Cell>;
-    });
+    return temp.map((elements, index) => <Table.Cell>{elements}</Table.Cell>);
   };
 
   addTableRowsDynamically = () => {
     if (this.props.memberListArray.length > 0) {
       return this.props.memberListArray
         .slice(this.props.currentMemberPage * Limit, (this.props.currentMemberPage + 1) * Limit)
-        .map((member, index) => {
-          return (
-            <Table.Row key={index}>
-              <Table.Cell>{member[0]}</Table.Cell>
-              <Table.Cell> {new Date(parseInt(member[1]) * 1000).toLocaleString("en-GB")}</Table.Cell>
-              {this.addAttributesDynamically(member)}
-            </Table.Row>
-          );
-        });
-    } else {
-      return (
-        <Table.Row key={145} className="reload">
-          Activities could not be retrieved, please try reloading the page.
-        </Table.Row>
-      );
+        .map((member, index) => (
+          <Table.Row key={index}>
+            <Table.Cell>{member[0]}</Table.Cell>
+            <Table.Cell> {new Date(parseInt(member[1]) * 1000).toLocaleString("en-GB")}</Table.Cell>
+            {this.addAttributesDynamically(member)}
+          </Table.Row>
+        ));
     }
+    return (
+      <Table.Row key={145} className="reload">
+        Activities could not be retrieved, please try reloading the page.
+      </Table.Row>
+    );
   };
 
   prepareCSVData = (memberList, attributeHeaders) => {
-    let data = [];
+    const data = [];
     for (let i = 0; i < memberList.length; i++) {
-      let row = {};
-      row["Address"] = memberList[i].address;
-      row["Timestamp"] = new Date(parseInt(memberList[i].timeStamp) * 1000).toLocaleString("en-GB");
+      const row = {};
+      row.Address = memberList[i].address;
+      row.Timestamp = new Date(parseInt(memberList[i].timeStamp) * 1000).toLocaleString("en-GB");
       for (let j = 0; j < attributeHeaders.length; j++) {
         row[attributeHeaders[j]] = memberList[i][attributeHeaders[j]];
       }
-      row["revoked"] = memberList[i].revoked.toString();
+      row.revoked = memberList[i].revoked.toString();
       data.push(row);
     }
     return data;
@@ -241,12 +231,9 @@ class EntityMembers extends Component {
 
   populateHeaders = () => {
     if (this.props.attributeHeaders.length > 0) {
-      return this.props.attributeHeaders.map((attributeName, index) => {
-        return <Table.HeaderCell width={2}>{attributeName}</Table.HeaderCell>;
-      });
-    } else {
-      return null;
+      return this.props.attributeHeaders.map((attributeName, index) => <Table.HeaderCell width={2}>{attributeName}</Table.HeaderCell>);
     }
+    return null;
   };
 
   showEntityMembersFilterClicked = () => {
@@ -259,12 +246,12 @@ class EntityMembers extends Component {
   handleBackButtonClick = () => {
     this.props.history.push({
       pathname: `/entity`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
   render() {
-    let csvData = this.prepareCSVData(this.props.memberList, this.props.attributeHeaders);
+    const csvData = this.prepareCSVData(this.props.memberList, this.props.attributeHeaders);
     return (
       <div>
         {this.props.showMemberFilters ? (
@@ -300,7 +287,7 @@ class EntityMembers extends Component {
                   <div className="button-grid">
                     <div className="button-float" style={{ marginLeft: "10px" }}>
                       <button className="csv-button">
-                        <CSVLink data={csvData} filename={"all-members.csv"}>
+                        <CSVLink data={csvData} filename="all-members.csv">
                           <div className="white">Download CSV</div>
                         </CSVLink>
                       </button>
@@ -323,21 +310,19 @@ class EntityMembers extends Component {
   }
 }
 
-const mapStatesToProps = states => {
-  return {
-    memberList: states.entityData.memberList,
-    memberListArray: states.entityData.memberListArray,
-    showAllMembersLoader: states.entityData.showAllMembersLoader,
-    memberListRetrievedSuccessfully: states.entityData.memberListRetrievedSuccessfully,
-    searchText: states.searchBarData.searchText,
-    currentMemberPage: states.entityData.currentMemberPage,
-    attributeHeaders: states.entityData.attributeHeaders,
-    showMemberFilters: states.entityData.showMemberFilters,
-    memberFilterStartDate: states.entityData.memberFilterStartDate,
-    memberFilterEndDate: states.entityData.memberFilterEndDate,
-    attributeDetails: states.entityData.attributeDetails
-  };
-};
+const mapStatesToProps = states => ({
+  memberList: states.entityData.memberList,
+  memberListArray: states.entityData.memberListArray,
+  showAllMembersLoader: states.entityData.showAllMembersLoader,
+  memberListRetrievedSuccessfully: states.entityData.memberListRetrievedSuccessfully,
+  searchText: states.searchBarData.searchText,
+  currentMemberPage: states.entityData.currentMemberPage,
+  attributeHeaders: states.entityData.attributeHeaders,
+  showMemberFilters: states.entityData.showMemberFilters,
+  memberFilterStartDate: states.entityData.memberFilterStartDate,
+  memberFilterEndDate: states.entityData.memberFilterEndDate,
+  attributeDetails: states.entityData.attributeDetails
+});
 
 const myConnector = connect(mapStatesToProps);
 const EntityMembersFiltersConnected = myConnector(EntityMembersFilters);

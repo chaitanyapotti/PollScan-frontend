@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import queryString from "query-string";
 import { Grid, Row, Col } from "react-flexbox-grid";
-import { getEntityData } from "../../actions/entityActions";
 import ReactEcharts from "echarts-for-react";
+import { getEntityData } from "../../actions/entityActions";
 
 const Colors = i => {
   const Palette = [
@@ -61,30 +61,30 @@ class Entity extends Component {
 
   getMembersChartOptions = () => {
     const colors = ["#4ca9fc", "#ff89a0", "#f7c34f", "#8d8d8d"];
-    let dateDict = {};
-    let dates = [];
-    let allMembers = [];
-    let removedMembers = [];
-    let removedMembersDict = {};
-    let existingRemovedAddresses = [];
+    const dateDict = {};
+    const dates = [];
+    const allMembers = [];
+    const removedMembers = [];
+    const removedMembersDict = {};
+    const existingRemovedAddresses = [];
 
     this.props.allActivities.map(activity => {
-      let date = new Date(activity.timeStamp * 1000);
-      let formattedDate = `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
+      const date = new Date(activity.timeStamp * 1000);
+      const formattedDate = `${date.getUTCFullYear()}-${date.getUTCMonth() + 1}-${date.getUTCDate()}`;
       if (!(formattedDate in dateDict)) {
         dateDict[formattedDate] = {};
       }
       if (activity.type === "Assigned") {
         if ("assignedMembers" in dateDict[formattedDate]) {
-          dateDict[formattedDate]["assignedMembers"] += 1;
+          dateDict[formattedDate].assignedMembers += 1;
         } else {
-          dateDict[formattedDate]["assignedMembers"] = 1;
+          dateDict[formattedDate].assignedMembers = 1;
         }
         if (existingRemovedAddresses.indexOf(activity.address) !== -1) {
           if ("revokedMembers" in dateDict[formattedDate]) {
-            dateDict[formattedDate]["revokedMembers"] -= 1;
+            dateDict[formattedDate].revokedMembers -= 1;
           } else {
-            dateDict[formattedDate]["revokedMembers"] = -1;
+            dateDict[formattedDate].revokedMembers = -1;
           }
         }
       }
@@ -93,26 +93,26 @@ class Entity extends Component {
           existingRemovedAddresses.push(activity.address);
         }
         if ("assignedMembers" in dateDict[formattedDate]) {
-          dateDict[formattedDate]["assignedMembers"] -= 1;
+          dateDict[formattedDate].assignedMembers -= 1;
         } else {
-          dateDict[formattedDate]["assignedMembers"] = -1;
+          dateDict[formattedDate].assignedMembers = -1;
         }
         if ("revokedMembers" in dateDict[formattedDate]) {
-          dateDict[formattedDate]["revokedMembers"] += 1;
+          dateDict[formattedDate].revokedMembers += 1;
         } else {
-          dateDict[formattedDate]["revokedMembers"] = 1;
+          dateDict[formattedDate].revokedMembers = 1;
         }
       }
     });
 
     let totalMembers = 0;
     let totalRemovedMembers = 0;
-    for (let date in dateDict) {
+    for (const date in dateDict) {
       dates.push(date);
-      totalMembers += dateDict[date]["assignedMembers"];
+      totalMembers += dateDict[date].assignedMembers;
       allMembers.push(totalMembers);
       if ("revokedMembers" in dateDict[date]) {
-        totalRemovedMembers += dateDict[date]["revokedMembers"];
+        totalRemovedMembers += dateDict[date].revokedMembers;
       }
       removedMembers.push(totalRemovedMembers);
     }
@@ -261,78 +261,73 @@ class Entity extends Component {
     };
   };
 
-  getAttributeDistributionOptions = (dataArray, attributeHeader, legendArray) => {
-    return {
-      color: Colors(dataArray.length - 3),
-      tooltip: {
-        trigger: "item",
-        //   formatter(params) {
-        //     const seriesI =
-        //       params.seriesIndex === 2 || params.seriesIndex === 0
-        //         ? `$${formatCurrencyNumber(params.value, 0)}`
-        //         : `${formatCurrencyNumber(params.value, 0)}`;
-        //     const seriesEther = params.seriesIndex === 2 ? `<br/>${significantDigits(params.value / etherPrice)} ETH` : ``;
-        //     return `${params.seriesName} <br/>${params.name}: ${seriesI} (${params.percent}%)${seriesEther}`;
-        //   },
-        textStyle: { fontFamily: "Montserrat", fontSize: "14" }
-      },
-      legend: {
-        show: true,
-        orient: "vertical",
-        x: "left",
-        data: legendArray
-      },
-      series: [
-        {
-          name: attributeHeader,
-          type: "pie",
-          radius: ["55%", "80%"],
-          label: {
-            show: false
-          },
-          data: dataArray
-        }
-      ]
-    };
-  };
+  getAttributeDistributionOptions = (dataArray, attributeHeader, legendArray) => ({
+    color: Colors(dataArray.length - 3),
+    tooltip: {
+      trigger: "item",
+      //   formatter(params) {
+      //     const seriesI =
+      //       params.seriesIndex === 2 || params.seriesIndex === 0
+      //         ? `$${formatCurrencyNumber(params.value, 0)}`
+      //         : `${formatCurrencyNumber(params.value, 0)}`;
+      //     const seriesEther = params.seriesIndex === 2 ? `<br/>${significantDigits(params.value / etherPrice)} ETH` : ``;
+      //     return `${params.seriesName} <br/>${params.name}: ${seriesI} (${params.percent}%)${seriesEther}`;
+      //   },
+      textStyle: { fontFamily: "Montserrat", fontSize: "14" }
+    },
+    legend: {
+      show: true,
+      orient: "vertical",
+      x: "left",
+      data: legendArray
+    },
+    series: [
+      {
+        name: attributeHeader,
+        type: "pie",
+        radius: ["55%", "80%"],
+        label: {
+          show: false
+        },
+        data: dataArray
+      }
+    ]
+  });
 
-  populatePieCharts = (pieChartData, legendData) => {
-    return Object.keys(pieChartData).map((attribute, index) => {
-      return (
-        <Row>
-          <ReactEcharts
-            option={this.getAttributeDistributionOptions(pieChartData[attribute], attribute, legendData[attribute])}
-            notMerge
-            lazyUpdate
-            style={{ height: "30em", width: "60em", padding: "0px" }}
-            opts={{ renderer: "svg" }}
-          />
-        </Row>
-      );
-    });
-  };
+  populatePieCharts = (pieChartData, legendData) =>
+    Object.keys(pieChartData).map((attribute, index) => (
+      <Row>
+        <ReactEcharts
+          option={this.getAttributeDistributionOptions(pieChartData[attribute], attribute, legendData[attribute])}
+          notMerge
+          lazyUpdate
+          style={{ height: "30em", width: "60em", padding: "0px" }}
+          opts={{ renderer: "svg" }}
+        />
+      </Row>
+    ));
 
   showEntityActivities = () => {
     this.props.history.push({
       pathname: `/entity/logs`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
   showEntityMembers = () => {
     this.props.history.push({
       pathname: `/entity/members`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
   render() {
-    let attributeDistributionData = {};
-    let pieChartData = {};
-    let legendData = {};
-    for (let member of this.props.memberList) {
+    const attributeDistributionData = {};
+    const pieChartData = {};
+    const legendData = {};
+    for (const member of this.props.memberList) {
       if (!member.revoked) {
-        for (let attributeHeader of this.props.attributeHeaders) {
+        for (const attributeHeader of this.props.attributeHeaders) {
           if (!(attributeHeader in attributeDistributionData)) {
             attributeDistributionData[attributeHeader] = {};
           }
@@ -345,10 +340,10 @@ class Entity extends Component {
       }
     }
     console.log(attributeDistributionData);
-    for (let attributeHeader in attributeDistributionData) {
-      let temp = [];
-      let legendTemp = [];
-      for (let attribute in attributeDistributionData[attributeHeader]) {
+    for (const attributeHeader in attributeDistributionData) {
+      const temp = [];
+      const legendTemp = [];
+      for (const attribute in attributeDistributionData[attributeHeader]) {
         temp.push({ value: attributeDistributionData[attributeHeader][attribute], name: attribute, selected: false });
         legendTemp.push(attribute);
       }
@@ -389,17 +384,15 @@ class Entity extends Component {
   }
 }
 
-const mapStatesToProps = states => {
-  return {
-    memberList: states.entityData.memberList,
-    showAllMembersLoader: states.entityData.showAllMembersLoader,
-    memberListRetrievedSuccessfully: states.entityData.memberListRetrievedSuccessfully,
-    searchText: states.searchBarData.searchText,
-    currentMemberPage: states.entityData.currentMemberPage,
-    attributeHeaders: states.entityData.attributeHeaders,
-    allActivities: states.entityData.allActivities
-  };
-};
+const mapStatesToProps = states => ({
+  memberList: states.entityData.memberList,
+  showAllMembersLoader: states.entityData.showAllMembersLoader,
+  memberListRetrievedSuccessfully: states.entityData.memberListRetrievedSuccessfully,
+  searchText: states.searchBarData.searchText,
+  currentMemberPage: states.entityData.currentMemberPage,
+  attributeHeaders: states.entityData.attributeHeaders,
+  allActivities: states.entityData.allActivities
+});
 
 const myConnector = connect(mapStatesToProps);
 

@@ -7,33 +7,33 @@
     "echarts": "^4.2.0-rc.2",
     "echarts-for-react": "^2.0.15-beta.0",
     "history": "^4.7.2",
-    "moment": "^2.22.2",
-    "query-string": "5.1.1",
-    "react": "^16.5.0",
-    "react-csv": "^1.0.15-RC2",
+    "moment": "^2.23.0",
+    "query-string": "6.2.0",
+    "react": "^16.7.0",
+    "react-csv": "^1.0.19",
     "react-datepicker": "^2.0.0",
-    "react-dom": "^16.5.0",
+    "react-dom": "^16.7.0",
     "react-flexbox-grid": "^2.1.2",
-    "react-paginate": "^5.2.4",
-    "react-redux": "^5.0.7",
+    "react-paginate": "^6.0.0",
+    "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.5",
-    "redux": "^4.0.0",
+    "react-scripts": "2.1.1",
+    "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
-    "semantic-ui-css": "^2.4.0",
-    "semantic-ui-react": "^0.82.5",
-    "truffle-hdwallet-provider": "0.0.6",
-    "web3": "^1.0.0-beta.36"
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.84.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "precommit": "lint-staged",
-    "prettier": "prettier --write \"**/*.{js,json,css,md}\"",
-    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
-    "lint:js": "eslint test/**/*.js"
+    "lint": "eslint src",
+    "lint:ci": "eslint src --max-warnings 0",
+    "fix": "eslint --fix src",
+    "q": "eslint --quiet --fix src/index.js $(git diff --cached --name-only --diff-filter=d HEAD | grep .js$)",
+    "size:why": "node tools/stats.js",
+    "size": "size-limit"
   },
   "lint-staged": {
     "**/*.{js,json,css,md}": [
@@ -42,18 +42,26 @@
     ]
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.0",
-    "eslint": "^5.6.0",
-    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-config-standard": "^12.0.0",
+    "eslint-config-react-app": "^3.0.5",
+    "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.11.1",
     "eslint-plugin-mocha": "^5.2.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "husky": "^0.14.3",
-    "lint-staged": "^7.2.2",
-    "prettier": "^1.14.3"
-  }
+    "prettier": "^1.15.2",
+    "webpack-bundle-analyzer": "^3.0.3"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

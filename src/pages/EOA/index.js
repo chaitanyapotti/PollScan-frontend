@@ -15,7 +15,7 @@ class EOA extends Component {
   };
 
   enterPressedEntityMembershipCheck = event => {
-    var code = event.keyCode || event.which;
+    const code = event.keyCode || event.which;
     if (code === 13) {
       if (this.props.entityAddress.length > 0) {
         this.props.dispatch(checkEntityMembership(this.props.searchText, this.props.entityAddress));
@@ -24,7 +24,7 @@ class EOA extends Component {
   };
 
   enterPressedPollActivity = event => {
-    var code = event.keyCode || event.which;
+    const code = event.keyCode || event.which;
     if (code === 13) {
       if (this.props.pollAddress.length > 0) {
         this.props.dispatch(fetchUserPollActivity(this.props.searchText, this.props.pollAddress));
@@ -45,8 +45,8 @@ class EOA extends Component {
     }
   };
 
-  populatePollActivities = () => {
-    return this.props.pollActivity.map((activity, index) => {
+  populatePollActivities = () =>
+    this.props.pollActivity.map((activity, index) => {
       if (activity.event === "CastVote") {
         return (
           <div>
@@ -56,7 +56,8 @@ class EOA extends Component {
             </div>
           </div>
         );
-      } else if (activity.event === "RevokedVote") {
+      }
+      if (activity.event === "RevokedVote") {
         return (
           <div>
             <div>Unvoted from:</div>
@@ -67,7 +68,6 @@ class EOA extends Component {
         );
       }
     });
-  };
 
   render() {
     return (
@@ -122,16 +122,14 @@ class EOA extends Component {
   }
 }
 
-const mapStatesToProps = states => {
-  return {
-    searchText: states.searchBarData.searchText,
-    entityAddress: states.eoaData.entityAddress,
-    pollAddress: states.eoaData.pollAddress,
-    isEntityMember: states.eoaData.isEntityMember,
-    isVbsMember: states.eoaData.isVbsMember,
-    pollActivity: states.eoaData.pollActivity
-  };
-};
+const mapStatesToProps = states => ({
+  searchText: states.searchBarData.searchText,
+  entityAddress: states.eoaData.entityAddress,
+  pollAddress: states.eoaData.pollAddress,
+  isEntityMember: states.eoaData.isEntityMember,
+  isVbsMember: states.eoaData.isVbsMember,
+  pollActivity: states.eoaData.pollActivity
+});
 
 const myConnector = connect(mapStatesToProps);
 

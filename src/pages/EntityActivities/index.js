@@ -136,60 +136,55 @@ class EntityActivities extends Component {
     }
   }
 
-  addPageNumbers = () => {
-    return (
-      <ReactPaginate
-        breakLabel={<a href="">...</a>}
-        breakClassName={"BreakView"}
-        pageCount={Math.ceil(this.props.allActivitiesArray.length / Limit)}
-        initialPage={this.props.currentActivityPage}
-        forcePage={this.props.currentActivityPage}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={data => {
-          this.props.dispatch({
-            type: "ENTITY_ACTIVITIES_PAGE_CHANGED",
-            payload: parseInt(data.selected)
-          });
-        }}
-        containerClassName={"pagination"}
-        subContainerClassName={"paginationPage"}
-        activeClassName={"active"}
-        previousClassName={"previous"}
-      />
-    );
-  };
+  addPageNumbers = () => (
+    <ReactPaginate
+      breakLabel={<a href="">...</a>}
+      breakClassName="BreakView"
+      pageCount={Math.ceil(this.props.allActivitiesArray.length / Limit)}
+      initialPage={this.props.currentActivityPage}
+      forcePage={this.props.currentActivityPage}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={5}
+      onPageChange={data => {
+        this.props.dispatch({
+          type: "ENTITY_ACTIVITIES_PAGE_CHANGED",
+          payload: parseInt(data.selected)
+        });
+      }}
+      containerClassName="pagination"
+      subContainerClassName="paginationPage"
+      activeClassName="active"
+      previousClassName="previous"
+    />
+  );
 
   addTableRowsDynamically = () => {
     if (this.props.allActivities.length > 0) {
       return this.props.allActivitiesArray
         .slice(this.props.currentActivityPage * Limit, (this.props.currentActivityPage + 1) * Limit)
-        .map((activity, index) => {
-          return (
-            <Table.Row key={index}>
-              <Table.Cell>{activity[0]}</Table.Cell>
-              <Table.Cell> {new Date(parseInt(activity[1]) * 1000).toUTCString("en-GB")}</Table.Cell>
-              <Table.Cell>{activity[2]}</Table.Cell>
-              <Table.Cell>{<a>View</a>}</Table.Cell>
-            </Table.Row>
-          );
-        });
-    } else {
-      return (
-        <Table.Row key={145} className="reload">
-          Activities could not be retrieved, please try reloading the page.
-        </Table.Row>
-      );
+        .map((activity, index) => (
+          <Table.Row key={index}>
+            <Table.Cell>{activity[0]}</Table.Cell>
+            <Table.Cell> {new Date(parseInt(activity[1]) * 1000).toUTCString("en-GB")}</Table.Cell>
+            <Table.Cell>{activity[2]}</Table.Cell>
+            <Table.Cell>{<a>View</a>}</Table.Cell>
+          </Table.Row>
+        ));
     }
+    return (
+      <Table.Row key={145} className="reload">
+        Activities could not be retrieved, please try reloading the page.
+      </Table.Row>
+    );
   };
 
   prepareCSVData = allActivities => {
-    let data = [];
+    const data = [];
     for (let i = 0; i < allActivities.length; i++) {
-      let row = {};
-      row["Address"] = allActivities[i].address;
-      row["Timestamp"] = new Date(parseInt(allActivities[i].timeStamp) * 1000).toUTCString("en-GB");
-      row["Type"] = allActivities[i].type;
+      const row = {};
+      row.Address = allActivities[i].address;
+      row.Timestamp = new Date(parseInt(allActivities[i].timeStamp) * 1000).toUTCString("en-GB");
+      row.Type = allActivities[i].type;
       data.push(row);
     }
     return data;
@@ -205,12 +200,12 @@ class EntityActivities extends Component {
   handleBackButtonClick = () => {
     this.props.history.push({
       pathname: `/entity`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
   };
 
   render() {
-    let csvData = this.prepareCSVData(this.props.allActivities);
+    const csvData = this.prepareCSVData(this.props.allActivities);
     return (
       <div>
         {this.props.showActivityFilters ? (
@@ -247,7 +242,7 @@ class EntityActivities extends Component {
                   <div className="button-grid">
                     <div className="button-float" style={{ marginLeft: "10px" }}>
                       <button className="csv-button">
-                        <CSVLink data={csvData} filename={"all-activities.csv"}>
+                        <CSVLink data={csvData} filename="all-activities.csv">
                           <div className="white">Download CSV</div>
                         </CSVLink>
                       </button>
@@ -270,22 +265,20 @@ class EntityActivities extends Component {
   }
 }
 
-const mapStatesToProps = states => {
-  return {
-    allActivities: states.entityData.allActivities,
-    allActivitiesArray: states.entityData.allActivitiesArray,
-    showActivityLoader: states.entityData.showActivityLoader,
-    allActivitesRetrievedSuccessfully: states.entityData.allActivitesRetrievedSuccessfully,
-    searchText: states.searchBarData.searchText,
-    currentActivityPage: states.entityData.currentActivityPage,
-    showActivityFilters: states.entityData.showActivityFilters,
-    startDate: states.entityData.startDate,
-    endDate: states.entityData.endDate,
-    assignedCheckBoxStatus: states.entityData.assignedCheckBoxStatus,
-    approvedCheckBoxStatus: states.entityData.approvedCheckBoxStatus,
-    revokedCheckBoxStatus: states.entityData.revokedCheckBoxStatus
-  };
-};
+const mapStatesToProps = states => ({
+  allActivities: states.entityData.allActivities,
+  allActivitiesArray: states.entityData.allActivitiesArray,
+  showActivityLoader: states.entityData.showActivityLoader,
+  allActivitesRetrievedSuccessfully: states.entityData.allActivitesRetrievedSuccessfully,
+  searchText: states.searchBarData.searchText,
+  currentActivityPage: states.entityData.currentActivityPage,
+  showActivityFilters: states.entityData.showActivityFilters,
+  startDate: states.entityData.startDate,
+  endDate: states.entityData.endDate,
+  assignedCheckBoxStatus: states.entityData.assignedCheckBoxStatus,
+  approvedCheckBoxStatus: states.entityData.approvedCheckBoxStatus,
+  revokedCheckBoxStatus: states.entityData.revokedCheckBoxStatus
+});
 
 const myConnector = connect(mapStatesToProps);
 

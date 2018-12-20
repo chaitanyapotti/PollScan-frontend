@@ -30,10 +30,10 @@ class Voters extends Component {
     return (
       <div>
         <ReactPaginate
-          previousLabel={"previous"}
-          nextLabel={"next"}
+          previousLabel="previous"
+          nextLabel="next"
           breakLabel={<a href="">...</a>}
-          breakClassName={"BreakView"}
+          breakClassName="BreakView"
           pageCount={Math.ceil(this.props.allVoters.length / Limit)}
           initialPage={this.props.currentVoterPage}
           forcePage={this.props.currentVoterPage}
@@ -45,9 +45,9 @@ class Voters extends Component {
               payload: parseInt(data.selected)
             });
           }}
-          containerClassName={"pagination"}
-          subContainerClassName={"paginationPage"}
-          activeClassName={"active"}
+          containerClassName="pagination"
+          subContainerClassName="paginationPage"
+          activeClassName="active"
         />
       </div>
     );
@@ -118,28 +118,25 @@ class Voters extends Component {
 
   addTableRowsDynamically() {
     if (this.props.allVoters.length > 0) {
-      return this.props.allVoters.slice(this.props.currentVoterPage * Limit, (this.props.currentVoterPage + 1) * Limit).map((voter, index) => {
-        return (
-          <Table.Row key={index}>
-            <Table.Cell>{voter.address}</Table.Cell>
-            <Table.Cell>{new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
-            <Table.Cell>{voter.weight}</Table.Cell>
-          </Table.Row>
-        );
-      });
-    } else {
-      return this.props.showActivityLoader ? null : (
-        <Table.Row key={145} className="reload">
-          Voters list could not be retrieved, please try reloading the page.
+      return this.props.allVoters.slice(this.props.currentVoterPage * Limit, (this.props.currentVoterPage + 1) * Limit).map((voter, index) => (
+        <Table.Row key={index}>
+          <Table.Cell>{voter.address}</Table.Cell>
+          <Table.Cell>{new Date(parseInt(voter.datetime) * 1000).toLocaleString("en-GB")}</Table.Cell>
+          <Table.Cell>{voter.weight}</Table.Cell>
         </Table.Row>
-      );
+      ));
     }
+    return this.props.showActivityLoader ? null : (
+      <Table.Row key={145} className="reload">
+        Voters list could not be retrieved, please try reloading the page.
+      </Table.Row>
+    );
   }
 
   handleOnClick = () => {
     this.props.history.push({
       pathname: `/poll`,
-      search: "?contract=" + this.props.searchText
+      search: `?contract=${this.props.searchText}`
     });
     this.props.dispatch({
       type: "SHOW_ACTIVITY_LOADER",
@@ -148,19 +145,19 @@ class Voters extends Component {
   };
 
   prepareCSVData(allVoters) {
-    let data = [];
+    const data = [];
     for (let i = 0; i < allVoters.length; i++) {
-      let row = {};
-      row["Address"] = allVoters[i].address;
-      row["Timestamp"] = new Date(parseInt(allVoters[i].datetime) * 1000).toLocaleString("en-GB");
-      row["Weight"] = allVoters[i].weight;
+      const row = {};
+      row.Address = allVoters[i].address;
+      row.Timestamp = new Date(parseInt(allVoters[i].datetime) * 1000).toLocaleString("en-GB");
+      row.Weight = allVoters[i].weight;
       data.push(row);
     }
     return data;
   }
 
   render() {
-    let csvData = this.prepareCSVData(this.props.allVoters);
+    const csvData = this.prepareCSVData(this.props.allVoters);
     return (
       <div>
         <div className="back-to-poll" onClick={this.handleOnClick}>
@@ -208,16 +205,14 @@ class Voters extends Component {
   }
 }
 
-const mapStatesToProps = globalData => {
-  return {
-    allVoters: globalData.allActivities.allVoters,
-    selectedProposalName: globalData.allActivities.selectedProposalName,
-    currentVoterPage: globalData.allActivities.currentVoterPage,
-    searchText: globalData.searchBarData.searchText,
-    showActivityLoader: globalData.allActivities.showActivityLoader,
-    allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
-  };
-};
+const mapStatesToProps = globalData => ({
+  allVoters: globalData.allActivities.allVoters,
+  selectedProposalName: globalData.allActivities.selectedProposalName,
+  currentVoterPage: globalData.allActivities.currentVoterPage,
+  searchText: globalData.searchBarData.searchText,
+  showActivityLoader: globalData.allActivities.showActivityLoader,
+  allActivitesRetrievedSuccessfully: globalData.allActivities.allActivitesRetrievedSuccessfully
+});
 
 const myConnector = connect(mapStatesToProps);
 
