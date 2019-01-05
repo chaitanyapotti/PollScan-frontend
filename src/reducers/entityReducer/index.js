@@ -27,11 +27,9 @@ export const initialStates = {
 export default function reducer(state = initialStates, action) {
   switch (action.type) {
     case actionTypes.ENTITY_DATA_SUCCESS: {
-      console.log(action.payload);
       const { allActivities, memberList, attributeHeaders, attributeDetails } = action.payload || [];
-      let allActivitiesArray = allActivities.map(Object.values);
-      let memberListArray = memberList.map(Object.values);
-      console.log(memberListArray, attributeDetails);
+      const allActivitiesArray = allActivities.map(Object.values);
+      const memberListArray = memberList.map(Object.values);
       return {
         ...state,
         showActivityLoader: false,
@@ -90,23 +88,22 @@ export default function reducer(state = initialStates, action) {
     }
 
     case actionTypes.ENTITY_MEMBER_FILTER_OPTIONS_SELECTED: {
-      let entityMemberFilters = state.entityMemberFilters;
+      const entityMemberFilters = state.entityMemberFilters;
       entityMemberFilters[action.filterIndex] = action.filterOptions;
-      console.log(entityMemberFilters);
       return { ...state, entityMemberFilters };
     }
 
     case actionTypes.PROCESS_ENTITY_MEMBERS_FILTERS: {
       let memberListArray = state.memberList.map(Object.values);
-      let entityMemberFilters = state.entityMemberFilters;
+      const entityMemberFilters = state.entityMemberFilters;
       if (state.memberFilterStartDate !== null && state.memberFilterEndDate !== null) {
-        memberListArray = memberListArray.filter(row => {
-          return state.memberFilterStartDate.getTime() / 1000 <= row[1] && row[1] <= state.memberFilterEndDate.getTime() / 1000;
-        });
+        memberListArray = memberListArray.filter(
+          row => state.memberFilterStartDate.getTime() / 1000 <= row[1] && row[1] <= state.memberFilterEndDate.getTime() / 1000
+        );
       }
 
       memberListArray = memberListArray.filter(row => {
-        for (let key in entityMemberFilters) {
+        for (const key in entityMemberFilters) {
           if (entityMemberFilters[key].length > 0 && entityMemberFilters[key].indexOf(row[3 + parseInt(key)]) === -1) {
             return false;
           }
@@ -129,19 +126,19 @@ export default function reducer(state = initialStates, action) {
     case actionTypes.PROCESS_ENTITY_ACTIVITIES_FILTERS: {
       let allActivitiesArray = state.allActivities.map(Object.values);
       if (state.startDate !== null && state.endDate !== null) {
-        allActivitiesArray = allActivitiesArray.filter(row => {
-          // console.log(  (state.startDate).getTime()/1000, row[1], (state.endDate).getTime()/1000,   (state.startDate).getTime()/1000 <= row[1] && row[1]<= (state.endDate).getTime()/1000)
-          return state.startDate.getTime() / 1000 <= row[1] && row[1] <= state.endDate.getTime() / 1000;
-        });
+        allActivitiesArray = allActivitiesArray.filter(
+          row =>
+            // console.log(  (state.startDate).getTime()/1000, row[1], (state.endDate).getTime()/1000,   (state.startDate).getTime()/1000 <= row[1] && row[1]<= (state.endDate).getTime()/1000)
+            state.startDate.getTime() / 1000 <= row[1] && row[1] <= state.endDate.getTime() / 1000
+        );
       }
       if (state.assignedCheckBoxStatus || state.approvedCheckBoxStatus || state.revokedCheckBoxStatus) {
-        allActivitiesArray = allActivitiesArray.filter(row => {
-          return (
+        allActivitiesArray = allActivitiesArray.filter(
+          row =>
             (row[2] === "Assigned" && state.assignedCheckBoxStatus) ||
             (row[2] === "Approved" && state.approvedCheckBoxStatus) ||
             (row[2] === "Revoked" && state.revokedCheckBoxStatus)
-          );
-        });
+        );
       }
 
       return { ...state, showActivityFilters: false, allActivitiesArray };

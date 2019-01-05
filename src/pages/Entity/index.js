@@ -48,7 +48,6 @@ const Colors = i => {
 
 class Entity extends Component {
   componentDidMount() {
-    console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query) {
       this.props.dispatch({
@@ -339,7 +338,6 @@ class Entity extends Component {
         }
       }
     }
-    console.log(attributeDistributionData);
     for (const attributeHeader in attributeDistributionData) {
       const temp = [];
       const legendTemp = [];
@@ -350,7 +348,6 @@ class Entity extends Component {
       pieChartData[attributeHeader] = temp;
       legendData[attributeHeader] = legendTemp;
     }
-    console.log(pieChartData);
     return (
       <div>
         <Grid>

@@ -73,7 +73,6 @@ class EntityMembersFilters extends Component {
   };
 
   optionsSelected = (index, attributeName, event, data) => {
-    console.log("logging: ", index, attributeName, data.value);
     this.props.dispatch({
       type: "ENTITY_MEMBER_FILTER_OPTIONS_SELECTED",
       payload: null,
@@ -155,7 +154,6 @@ class EntityMembersFilters extends Component {
 
 class EntityMembers extends Component {
   componentDidMount() {
-    console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && this.props.searchText === "") {
       this.props.dispatch({

@@ -28,7 +28,6 @@ const Limit = 10;
 
 class Activities extends Component {
   componentDidMount() {
-    console.log(window.location.href, this.props.searchText);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query && this.props.searchText === "") {
       this.props.dispatch({

@@ -63,7 +63,6 @@ class SearchBar extends Component {
   }
 
   handleSearchClick(event) {
-    console.log("Search button clicked.");
     // this.props.history.push({pathname:`/voters`, search: '?contract='+this.props.searchText })
     this.props.dispatch({
       type: "SHOW_POLLSTAT_LOADER",

@@ -91,7 +91,6 @@ class SearchBar extends Component {
   };
 
   componentDidUpdate() {
-    console.log("I am being called.");
     // switch(this.props.addressType){
     //   case "poll": {
     //     this.props.history.push({
@@ -106,7 +105,6 @@ class SearchBar extends Component {
     //       search: "?contract=" + this.props.searchText
     //     });
     //     break;
-
     //   }
     //   case "eoa": {
     //     this.props.history.push({
@@ -122,7 +120,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log("I am being rendered.");
     return (
       <Grid>
         {false ? (

@@ -45,7 +45,6 @@ class PollStats extends Component {
   // }
 
   componentDidMount() {
-    console.log(window.location.href);
     const queryUrl = queryString.parseUrl(window.location.href);
     if ("contract" in queryUrl.query) {
       this.props.dispatch(getName(queryUrl.query.contract));
